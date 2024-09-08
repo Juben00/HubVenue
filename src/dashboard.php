@@ -1,6 +1,10 @@
 <?php
 require_once './authmiddleware.php';
+require_once './classes/property.class.php';
 // session_start(); // Start the session
+$property = new Property();
+
+$properties = $property->viewProp(); // Get all properties
 
 checkAuth(); // Check if the user is logged in
 
@@ -14,6 +18,11 @@ checkAuth(); // Check if the user is logged in
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="../output.css" rel="stylesheet">
+    <style>
+        .custom-gradient {
+            background: linear-gradient(to top, rgba(71, 69, 69, 0.9), rgba(75, 85, 99, 0));
+        }
+    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const carousel = document.getElementById('carousel');
@@ -74,10 +83,10 @@ checkAuth(); // Check if the user is logged in
 
 <body class="bg-neutral-700 text-neutral-100">
     <?php require_once './components/Navbar.php'; ?>
+
     <section class="container mx-auto flex flex-col items-center h-[90vh] md:h-[85vh] mb-4 md:mb-8">
         <div class="w-full grid grid-cols-1 sm:grid-cols-2 h-screen sm:h-fit shadow-lg shadow-neutral-200/5">
-            <div
-                class=" relative overflow-hidden w-full mt-2 sm:mt-0 mx-auto border-2 sm:border-0 z-30 h-full md:h-[85vh]">
+            <div class=" relative overflow-hidden w-full mt-2 sm:mt-0 mx-auto  z-30 h-full md:h-[85vh]">
                 <!-- Image Container -->
                 <div id="carousel" class="flex transition-transform duration-500 h-full md:h-[85vh]">
                     <img class="h-full w-full flex-shrink-0 opacity-90 object-cover"
@@ -115,6 +124,64 @@ checkAuth(); // Check if the user is logged in
                         and let us be the host to your next cherished moment.</p>
                 </span>
             </div>
+        </div>
+    </section>
+
+    <section class="properties-list container mx-auto flex flex-col items-center mb-4 md:mb-8">
+        <h2 class="text-3xl font-semibold mt-8">For Rents</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+            <?php if (!empty($properties)): ?>
+                <?php foreach ($properties as $property): ?>
+                    <div class="property-item bg-neutral-200/20 p-4 rounded-lg shadow-lg">
+                        <div class="h-full w-full relative">
+                            <img class="object-cover" src="<?php echo htmlspecialchars($property['image']); ?>"
+                                alt="Property Image">
+                            <div class="hover:opacity-100 cursor-pointer duration-150 opacity-0 flex gap-2 flex-col items-center justify-center absolute custom-gradient h-full top-0 w-full"
+                                style={{ background: 'linear-gradient(to top, rgba(75, 85, 99, 0.5), rgba(75, 85, 99, 0))' , }}>
+                                <h2 class="text-3xl font-semibold text-red-500">
+                                    <?php echo htmlspecialchars($property['property_name']); ?>
+                                </h2>
+                                <span class="px-4">
+                                    <h1 class="text-center text-xl font-semibold text-white">Location</h1>
+                                    <p class="text-neutral-200 text-center mx-4">
+                                        <?php echo htmlspecialchars($property['location']); ?>
+                                    </p>
+                                </span>
+                                <span class="px-4">
+                                    <h1 class="text-center text-xl font-semibold text-white">Description</h1>
+                                    <p class="text-neutral-200 text-center mx-4">
+                                        <?php echo htmlspecialchars($property['description']); ?>
+                                    </p>
+                                </span>
+                                <button
+                                    class="underline hover:text-red-500 underline-offset-2 text-xl p-2 rounded-lg font-semibold">View
+                                    Details</button>
+                                <!-- <p>Price: <?php echo htmlspecialchars($property['price']); ?></p>
+                                <p>Booked Date: <?php echo htmlspecialchars($property['booked_date']); ?></p> -->
+                                <!-- <div class="amenities">
+                                    <strong>Amenities:</strong>
+                                    <?php
+                                    // Decode JSON amenities
+                                    $amenities = json_decode($property['amenities'], true);
+                                    if (is_array($amenities)) {
+                                        echo '<ul>';
+                                        foreach ($amenities as $key => $value) {
+                                            echo '<li>' . htmlspecialchars($value) . '</li>';
+                                        }
+                                        echo '</ul>';
+                                    } else {
+                                        echo '<p>No amenities listed.</p>';
+                                    }
+                                    ?>
+                                </div> -->
+                            </div>
+
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No properties found.</p>
+            <?php endif; ?>
         </div>
     </section>
 

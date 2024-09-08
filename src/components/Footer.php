@@ -1,7 +1,18 @@
-<footer class="bg-neutral-800 text-neutral-100 shadow-xl grid min-h-[150px] grid-cols-1 md:grid-cols-3">
+<footer class="bg-neutral-800 text-neutral-100 shadow-xl grid min-h-[150px] grid-cols-1 md:grid-cols-4">
     <!-- Logo Section -->
     <div class="flex flex-col items-center  ">
         <img src="../public/images/white_transparent.png" alt="HubVenue Logo" style="height: 200px;">
+    </div>
+
+    <div class="flex flex-col items-center justify-center p-2">
+        <h3 class="text-xl font-semibold mb-2">© 2024 HubVenue. All rights reserved.</h3>
+
+        <p class="text-center  "><span class="text-red-500 italic">HubVenue</span> and its logo
+            are
+            trademarks of
+            HubVenue, Inc. All other trademarks,
+            logos, and brands are the
+            property of their respective owners.</p>
     </div>
 
     <!-- Quick Links Section -->

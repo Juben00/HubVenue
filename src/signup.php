@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $userObj->password = $password;
 
         if ($userObj->register()) {
-            header("Location: index.php");
+            header("Location: .././index.php");
         } else {
             $message = $userObj->message;
         }
@@ -89,12 +89,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </span>
             <div class="flex gap-2">
                 <span class="flex items-center">
-                    <input type="radio" name="user" id="User" value="User" <?php echo ($usertype === 'User') ? 'checked' : ''; ?>>
-                    <label for="User">User</label>
+                    <input type="radio" name="user" id="user" value="user" <?php echo ($usertype === 'user') ? 'checked' : ''; ?>>
+                    <label for="user">User</label>
                 </span>
                 <span class="flex items-center">
-                    <input type="radio" name="user" id="Client" value="Client" <?php echo ($usertype === 'Client') ? 'checked' : ''; ?>>
-                    <label for="Client">Client</label>
+                    <input type="radio" name="user" id="client" value="client" <?php echo ($usertype === 'client') ? 'checked' : ''; ?>>
+                    <label for="client">Client</label>
                 </span>
             </div>
         </div>
@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="flex justify-around gap-2 mt-2">
             <button type="submit" class="px-3 py-2 border-2 bg-blue-700 font-semibold text-white rounded-md">SIGN
                 UP</button>
-            <a href="index.php"
+            <a href=".././index.php"
                 class="px-3 py-2 border border-black bg-neutral-400 font-semibold text-neutral-800 rounded-md">LOGIN</a>
         </div>
     </form>

@@ -1,3 +1,11 @@
+<?php
+require_once './authmiddleware.php';
+// session_start(); // Start the session
+
+checkAuth(); // Check if the user is logged in
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

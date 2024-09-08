@@ -130,7 +130,8 @@ checkAuth(); // Check if the user is logged in
 
     <section class="properties-list container mx-auto flex flex-col items-center mb-4 md:mb-8">
         <h2 class="text-3xl font-semibold mt-4">For Rents</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-2 m-4 bg-neutral-200/20 p-4">
+        <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-2 m-4 bg-neutral-200/20 p-4 rounded-xl">
             <?php if (!empty($properties)): ?>
                 <?php foreach ($properties as $property): ?>
                     <div

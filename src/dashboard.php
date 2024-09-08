@@ -16,7 +16,8 @@ checkAuth(); // Check if the user is logged in
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>HubVenue</title>
+    <link rel="icon" href="../public/images/white_transparent.png">
     <link href="../output.css" rel="stylesheet">
     <style>
         .custom-gradient {
@@ -84,9 +85,9 @@ checkAuth(); // Check if the user is logged in
 <body class="bg-neutral-700 text-neutral-100">
     <?php require_once './components/Navbar.php'; ?>
 
-    <section class="container mx-auto flex flex-col items-center h-[90vh] md:h-[85vh] mb-4 md:mb-8">
+    <section class="mx-auto flex flex-col items-center h-[90vh] md:h-[85vh] mb-4 md:mb-8">
         <div class="w-full grid grid-cols-1 sm:grid-cols-2 h-screen sm:h-fit shadow-lg shadow-neutral-200/5">
-            <div class=" relative overflow-hidden w-full mt-2 sm:mt-0 mx-auto  z-30 h-full md:h-[85vh]">
+            <div class=" relative overflow-hidden w-full sm:mt-0 mx-auto z-30 h-full md:h-[85vh] ">
                 <!-- Image Container -->
                 <div id="carousel" class="flex transition-transform duration-500 h-full md:h-[85vh]">
                     <img class="h-full w-full flex-shrink-0 opacity-90 object-cover"
@@ -110,7 +111,7 @@ checkAuth(); // Check if the user is logged in
                     <div class="dot w-4 h-4 bg-neutral-800 rounded-full cursor-pointer"></div>
                 </div>
             </div>
-            <div class="flex flex-col items-center bg-neutral-200/20 p-4">
+            <div class="flex flex-col items-center bg-neutral-200/20 p-2">
                 <span class="text-center my-auto flex flex-col gap-2">
                     <h1 class="text-3xl font-semibold md:text-4xl ">Welcome to <span
                             class="text-red-500 italic">HubVenue!</span></h1>
@@ -128,34 +129,59 @@ checkAuth(); // Check if the user is logged in
     </section>
 
     <section class="properties-list container mx-auto flex flex-col items-center mb-4 md:mb-8">
-        <h2 class="text-3xl font-semibold mt-8">For Rents</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <h2 class="text-3xl font-semibold mt-4">For Rents</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-2 m-4 bg-neutral-200/20 p-4">
             <?php if (!empty($properties)): ?>
                 <?php foreach ($properties as $property): ?>
-                    <div class="property-item bg-neutral-200/20 p-4 rounded-lg shadow-lg">
-                        <div class="h-full w-full relative">
-                            <img class="object-cover" src="<?php echo htmlspecialchars($property['image']); ?>"
-                                alt="Property Image">
-                            <div class="hover:opacity-100 cursor-pointer duration-150 opacity-0 flex gap-2 flex-col items-center justify-center absolute custom-gradient h-full top-0 w-full"
+                    <div
+                        class="property-item shadow-sm hover:bottom-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 hover:shadow-md hover:shadow-red-500 duration-700">
+                        <div class=" w-full relative overflow-hidden flex items-center" style="height: 350px;">
+                            <img class="" src="<?php echo htmlspecialchars($property['image']); ?>" alt="Property Image">
+
+                            <div class="cursor-pointer flex gap-2 flex-col items-start p-4 absolute custom-gradient h-full top-0 w-full justify-between"
                                 style={{ background: 'linear-gradient(to top, rgba(75, 85, 99, 0.5), rgba(75, 85, 99, 0))' , }}>
-                                <h2 class="text-3xl font-semibold text-red-500">
-                                    <?php echo htmlspecialchars($property['property_name']); ?>
-                                </h2>
-                                <span class="px-4">
-                                    <h1 class="text-center text-xl font-semibold text-white">Location</h1>
-                                    <p class="text-neutral-200 text-center mx-4">
-                                        <?php echo htmlspecialchars($property['location']); ?>
+                                <div class="bg-neutral-200 rounded-full flex items-center p-1">
+                                    <div class="bg-green-700 rounded-full p-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-tag-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                        </svg>
+                                    </div>
+                                    <p class="font-semibold text-neutral-600/70 text-sm p-1">
+                                        Starts at ₱<?php echo htmlspecialchars($property['price']); ?>
                                     </p>
-                                </span>
-                                <span class="px-4">
+                                </div>
+
+
+                                <div>
+                                    <h2 class="text-3xl font-semibold text-red-500">
+                                        <?php echo htmlspecialchars($property['property_name']); ?>
+                                    </h2>
+                                    <span class="flex">
+                                        <p class="text-neutral-200 flex-1">
+                                            <?php echo htmlspecialchars($property['location']); ?>
+                                        </p>
+                                        <button
+                                            class="bg-neutral-500 rounded-full border p-3 hover:text-red-600/80 duration-200  text-neutral-200">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill=" currentColor"
+                                                class="bi bi-search-heart-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M6.5 13a6.47 6.47 0 0 0 3.845-1.258h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1A6.47 6.47 0 0 0 13 6.5 6.5 6.5 0 0 0 6.5 0a6.5 6.5 0 1 0 0 13m0-8.518c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </div>
+
+                                <!-- <span class="px-4">
                                     <h1 class="text-center text-xl font-semibold text-white">Description</h1>
-                                    <p class="text-neutral-200 text-center mx-4">
+                                    <p class="text-neutral-200 text-center ">
                                         <?php echo htmlspecialchars($property['description']); ?>
                                     </p>
                                 </span>
                                 <button
                                     class="underline hover:text-red-500 underline-offset-2 text-xl p-2 rounded-lg font-semibold">View
-                                    Details</button>
+                                    Details</button> -->
                                 <!-- <p>Price: <?php echo htmlspecialchars($property['price']); ?></p>
                                 <p>Booked Date: <?php echo htmlspecialchars($property['booked_date']); ?></p> -->
                                 <!-- <div class="amenities">
@@ -185,21 +211,21 @@ checkAuth(); // Check if the user is logged in
         </div>
     </section>
 
-    <section class="container mx-auto flex flex-col items-center mb-4 md:mb-8">
-        <h2 class="text-3xl font-semibold mt-8">Our Services</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-            <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg">
+    <section class="container mx-auto flex flex-col items-center mb-4 md:mb-8 ">
+        <h2 class="text-3xl font-semibold mt-4">Our Services</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-2">
+            <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg m-4">
                 <img src="../public/serviceimages/pexels-pixabay-267569.jpg" alt="Rent Space" class="w-full">
                 <h3 class="text-xl font-semibold mt-2">Space Rentals</h3>
                 <p class="text-center">Discover unique spaces for any event, from intimate gatherings to large-scale
                     functions.</p>
             </div>
-            <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg">
+            <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg m-4">
                 <img src="../public/serviceimages/pexels-rdne-7414284.jpg" alt="Post Listings" class="w-full">
                 <h3 class="text-xl font-semibold mt-2">Post Your Space</h3>
                 <p class="text-center">Earn money by listing your home or commercial space for event rentals.</p>
             </div>
-            <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg">
+            <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg m-4">
                 <img src="../public/serviceimages/pexels-tima-miroshnichenko-6694575.jpg" alt="Book Event"
                     class="w-full">
                 <h3 class="text-xl font-semibold mt-2">Book an Event Space</h3>
@@ -210,7 +236,7 @@ checkAuth(); // Check if the user is logged in
 
     <section class="container mx-auto flex flex-col items-center mb-8 ">
         <h2 class="text-3xl font-semibold mt-8">About Us</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 m-4">
             <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg">
                 <h3 class="text-xl font-semibold  text-red-500 italic">Our Mission</h3>
                 <p class="text-center">

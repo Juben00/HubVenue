@@ -85,9 +85,10 @@ checkAuth(); // Check if the user is logged in
 <body class="bg-neutral-700 text-neutral-100">
     <?php require_once './components/Navbar.php'; ?>
 
-    <section class="mx-auto flex flex-col items-center h-[90vh] md:h-[85vh] mb-4 md:mb-8">
-        <div class="w-full grid grid-cols-1 sm:grid-cols-2 h-screen sm:h-fit shadow-lg shadow-neutral-200/5">
-            <div class=" relative overflow-hidden w-full sm:mt-0 mx-auto z-30 h-full md:h-[85vh] ">
+    <section
+        class="mx-auto flex flex-col items-center mb-4 md:mb-8 min-h-[800px] lg:min-h-0 lg:h-[85vh] overflow-hidden">
+        <div class="w-full grid grid-cols-1 sm:grid-cols-2 shadow-lg shadow-neutral-200/5 flex-1">
+            <div class="relative overflow-hidden w-full sm:mt-0 mx-auto z-30 lg:h-[85vh]">
                 <!-- Image Container -->
                 <div id="carousel" class="flex transition-transform duration-500 h-full md:h-[85vh]">
                     <img class="h-full w-full flex-shrink-0 opacity-90 object-cover"
@@ -135,7 +136,7 @@ checkAuth(); // Check if the user is logged in
             <?php if (!empty($properties)): ?>
                 <?php foreach ($properties as $property): ?>
                     <div
-                        class="property-item shadow-sm hover:bottom-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 hover:shadow-md hover:shadow-red-500 duration-700">
+                        class="property-item shadow-sm hover:bottom-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 hover:shadow-md hover:shadow-red-500 duration-1000">
                         <div class=" w-full relative overflow-hidden flex items-center" style="height: 350px;">
                             <img class="" src="<?php echo htmlspecialchars($property['image']); ?>" alt="Property Image">
 
@@ -155,7 +156,7 @@ checkAuth(); // Check if the user is logged in
                                 </div>
 
 
-                                <div>
+                                <div class="w-full">
                                     <h2 class="text-3xl font-semibold text-red-500">
                                         <?php echo htmlspecialchars($property['property_name']); ?>
                                     </h2>
@@ -264,33 +265,36 @@ checkAuth(); // Check if the user is logged in
                 <h3 class="text-xl font-semibold text-red-500 italic text-center">FAQs</h3>
                 <div class="w-full ">
                     <div class="faq-item mb-4">
-                        <button class="faq-header text-lg font-semibold text-neutral-200 w-full text-left">
+                        <button class="faq-header text-neutral-200 w-full text-left">
                             1. How do I book a space?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300">To book a space, simply look for your desired location and
+                            <p class="text-neutral-300 text-xs">To book a space, simply look for your desired location
+                                and
                                 date on our platform. Browse
                                 through the available options, select the space that suits your needs, and follow the
                                 booking process to confirm your reservation.</p>
                         </div>
                     </div>
                     <div class="faq-item mb-4">
-                        <button class="faq-header text-lg font-semibold text-neutral-200 w-full text-left">
+                        <button class="faq-header text-neutral-200 w-full text-left">
                             2. Can I list my own space on HubVenue?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300">Yes, you can list your space on HubVenue. Create an account,
+                            <p class="text-neutral-300 text-xs">Yes, you can list your space on HubVenue. Create an
+                                account,
                                 provide details about your
                                 space, upload photos, and set your availability and pricing. Once your listing is
                                 approved, it will be visible to potential renters.</p>
                         </div>
                     </div>
                     <div class="faq-item mb-4">
-                        <button class="faq-header text-lg font-semibold text-neutral-200 w-full text-left">
+                        <button class="faq-header text-neutral-200 w-full text-left">
                             3. What types of spaces can I list?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300">You can list a variety of spaces including residential homes,
+                            <p class="text-neutral-300 text-xs">You can list a variety of spaces including residential
+                                homes,
                                 commercial venues, event
                                 halls, and more. The platform is designed to accommodate all types of spaces that can be
                                 used for events and gatherings.</p>
@@ -308,11 +312,12 @@ checkAuth(); // Check if the user is logged in
                         </div>
                     </div> -->
                     <div class="faq-item mb-4">
-                        <button class="faq-header text-lg font-semibold text-neutral-200 w-full text-left">
+                        <button class="faq-header text-neutral-200 w-full text-left">
                             4. Are there any fees associated with booking or listing a space?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300">Yes, there may be fees associated with both booking and listing
+                            <p class="text-neutral-300 text-xs">Yes, there may be fees associated with both booking and
+                                listing
                                 spaces. Booking fees are
                                 typically a percentage of the total rental cost, while listing fees may vary based on
                                 the type of space and duration of the listing. Detailed information about fees will be
@@ -320,11 +325,12 @@ checkAuth(); // Check if the user is logged in
                         </div>
                     </div>
                     <div class="faq-item mb-4">
-                        <button class="faq-header text-lg font-semibold text-neutral-200 w-full text-left">
+                        <button class="faq-header text-neutral-200 w-full text-left">
                             5. How can I contact customer support?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300">If you need assistance, you can contact our customer support
+                            <p class="text-neutral-300 text-xs">If you need assistance, you can contact our customer
+                                support
                                 team via the contact form on
                                 our website, or by email at info@hubvenue.com. Our team is available to help you with
                                 any questions or issues you may have.</p>

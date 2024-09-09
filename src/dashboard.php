@@ -105,11 +105,11 @@ checkAuth(); // Check if the user is logged in
 
                 <!-- Dots Navigation -->
                 <div class="absolute bottom-4 left-1/2 transform z-30 -translate-x-1/2 flex space-x-2">
-                    <div class="dot w-4 h-4 bg-neutral-800 rounded-full cursor-pointer"></div>
-                    <div class="dot w-4 h-4 bg-neutral-800 rounded-full cursor-pointer"></div>
-                    <div class="dot w-4 h-4 bg-neutral-800 rounded-full cursor-pointer"></div>
-                    <div class="dot w-4 h-4 bg-neutral-800 rounded-full cursor-pointer"></div>
-                    <div class="dot w-4 h-4 bg-neutral-800 rounded-full cursor-pointer"></div>
+                    <div class="dot w-2 h-2 bg-neutral-800 rounded-full cursor-pointer"></div>
+                    <div class="dot w-2 h-2 bg-neutral-800 rounded-full cursor-pointer"></div>
+                    <div class="dot w-2 h-2 bg-neutral-800 rounded-full cursor-pointer"></div>
+                    <div class="dot w-2 h-2 bg-neutral-800 rounded-full cursor-pointer"></div>
+                    <div class="dot w-2 h-2 bg-neutral-800 rounded-full cursor-pointer"></div>
                 </div>
             </div>
             <div class="flex flex-col items-center bg-neutral-200/20 p-2">

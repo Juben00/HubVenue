@@ -5,6 +5,9 @@ module.exports = {
     "./**/*.php",    // Scan all PHP files in the project
     "./src/**/*.{html,js,php}", // You can add more paths as needed
     "./src/components/*.{html,js,php}",
+    './src/**/*.php',     // Adjust paths as needed
+    './components/**/*.php',
+    './**/*.html',
   ],
   theme: {
     extend: {},

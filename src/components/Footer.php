@@ -5,14 +5,17 @@
     </div>
 
     <div class="flex flex-col items-center justify-center p-2">
-        <h3 class="text-xl font-semibold mb-2">© 2024 HubVenue. All rights reserved.</h3>
+        <h3 class="text-xl text-center font-semibold mb-2">© 2024 HubVenue. All rights reserved.</h3>
 
-        <p class="text-center  "><span class="text-red-500 italic">HubVenue</span> and its logo
+        <p class="text-center  ">
+            <span class="text-red-500 italic">HubVenue</span>
+            and its logo
             are
             trademarks of
             HubVenue, Inc. All other trademarks,
             logos, and brands are the
-            property of their respective owners.</p>
+            property of their respective owners.
+        </p>
     </div>
 
     <!-- Quick Links Section -->

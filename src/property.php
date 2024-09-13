@@ -22,13 +22,13 @@ checkAuth(); // Check if the user is logged in
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Focus</title>
     <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.3"> <!-- Increment version number -->
+    <link rel="stylesheet" href="../output.css?v=1.4"> <!-- Increment version number -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> <!-- Leaflet CSS -->
 </head>
 
 <body class="bg-neutral-700 text-neutral-100 relative h-screen">
     <div
-        class="absolute left-1/2 rounded-md max-h-[600px] max-w-[1000px] top-1/2 -translate-x-1/2 -translate-y-1/2 container mx-auto flex flex-col md:grid grid-cols-2 w-full border-2 overflow-hidden">
+        class="absolute left-1/2 rounded-md max-h-[600px] max-w-[1000px] top-1/2 -translate-x-1/2 -translate-y-1/2 container mx-auto min-h-screen md:min-h-0 flex flex-col md:grid grid-cols-2 w-full border-2 overflow-hidden">
 
         <div
             class=" h-[380px] object-cover overflow-hidden order-1 md:order-2 md:h-[1000px] relative max-h-[600px] max-w-[1000px]">
@@ -88,7 +88,7 @@ checkAuth(); // Check if the user is logged in
                     </div>
 
                     <div class="mt-2 flex flex-col w-full">
-                        <h1 class="text-center font-semibold">DESCRIPTION</h1>
+                        <!-- <h1 class="text-center font-semibold">DESCRIPTION</h1> -->
                         <p class="text-sm">
                             <?= $item['description'] ?>
                         </p>
@@ -115,16 +115,19 @@ checkAuth(); // Check if the user is logged in
                         <h1 class="text-center font-semibold">BOOKING INFO</h1>
                         <div class="flex items-center gap-1">
                             <label for="date" class="text-sm">Select Date</label>
-                            <input type="date" name="date" id="date" class="p-2 border rounded-md flex-1">
+                            <input type="date" name="date" id="date"
+                                class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
                         </div>
                         <div class="flex flex-row justify-around gap-2">
                             <div class="flex items-center gap-1  w-full">
                                 <label for="starttime" class="text-xs">Start Time</label>
-                                <input type="time" name="starttime" id="starttime" class="p-2 border rounded-md flex-1">
+                                <input type="time" name="starttime" id="starttime"
+                                    class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
                             </div>
                             <div class="flex items-center gap-1 w-full">
                                 <label for="endtime" class="text-xs">End Time</label>
-                                <input type="time" name="endtime" id="endtime" class="p-2 border rounded-md flex-1">
+                                <input type="time" name="endtime" id="endtime"
+                                    class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
                             </div>
                         </div>
                         <button type="submit" class="bg-neutral-900 text-neutral-50 p-2 rounded-md">Book Now</button>

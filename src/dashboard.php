@@ -14,12 +14,12 @@ $search = '';
 $properties = []; // Initialize an empty array for properties
 
 // Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Sanitize and assign form input values
-    $location = htmlentities($_POST['location'] ?? '');
-    $price = htmlentities($_POST['price'] ?? '');
-    $search = htmlentities($_POST['search'] ?? '');
-}
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//     // Sanitize and assign form input values
+//     $location = htmlentities($_POST['location'] ?? '');
+//     $price = htmlentities($_POST['price'] ?? '');
+//     $search = htmlentities($_POST['search'] ?? '');
+// }
 
 // Fetch properties based on user input
 $properties = $propertyObj->viewProp($location, $price, $search);
@@ -41,62 +41,6 @@ $properties = $propertyObj->viewProp($location, $price, $search);
             background: linear-gradient(to top, rgba(71, 69, 69, 0.9), rgba(75, 85, 99, 0));
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const carousel = document.getElementById('carousel');
-            const dots = Array.from(document.querySelectorAll('.dot'));
-            let currentIndex = 0;
-
-            // Function to update the slide position
-            function updateCarousel() {
-                const slideWidth = carousel.children[0].clientWidth;
-                carousel.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-                // Update active dot
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('bg-red-500', index === currentIndex);
-                });
-            }
-
-            // Function to move to the next slide
-            function nextSlide() {
-                if (currentIndex < carousel.children.length - 1) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0; // Loop back to first slide
-                }
-                updateCarousel();
-            }
-
-            setInterval(nextSlide, 4000);
-
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateCarousel();
-                });
-            });
-
-            // Initialize the carousel position
-            updateCarousel();
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const faqHeaders = document.querySelectorAll('.faq-header');
-
-            faqHeaders.forEach(header => {
-                header.addEventListener('click', function () {
-                    const faqContent = this.nextElementSibling;
-
-                    if (faqContent.classList.contains('hidden')) {
-                        faqContent.classList.remove('hidden');
-                    } else {
-                        faqContent.classList.add('hidden');
-                    }
-                });
-            });
-        });
-    </script>
 </head>
 
 <body class="bg-neutral-700 text-neutral-100">
@@ -187,7 +131,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
         <div class="flex flex-col gap-4 md:gap-8 bg-neutral-200/20 p-4 lg:p-8 m-4 rounded-lg w-full min-h-30">
 
             <!-- HTML form to search properties -->
-            <form method="POST" class="text-neutral-900 flex gap-2 justify-center w-full">
+            <form id="searchForm" class="text-neutral-900 flex gap-2 justify-center w-full">
                 <div class="flex">
                     <select class="p-1 py-2 w-20 lg:w-36 bg-neutral-300 rounded-lg text-neutral-900" name="location"
                         id="location">
@@ -225,7 +169,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
                 <div class="flex w-1/2 relative">
                     <input placeholder="Search for a Unit" class="outline-0 p-1 py-2 bg-neutral-300 rounded-lg w-full"
                         type="text" id="search" name="search" value="<?= htmlspecialchars($search) ?>">
-                    <input type="submit" value="Search"
+                    <input id="submit" type="submit" value="Search"
                         class="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer">
                 </div>
 
@@ -234,7 +178,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
 
             <hr>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6  rounded-xl">
+            <div id="result" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6  rounded-xl">
 
                 <?php if (!empty($properties)): ?>
                     <?php foreach ($properties as $property): ?>
@@ -459,6 +403,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
 
     <?php require_once './components/Footer.php' ?>
 
+    <script src="./submit.js"></script>
 </body>
 
 </html>

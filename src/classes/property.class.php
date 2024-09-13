@@ -102,5 +102,5 @@ class Property
 $property = new Property();
 
 // Call the viewProp method using the instance and print the result
-// var_dump($property->viewProp('', ''));
+// var_dump($property->viewProp('', '', ''));
 // var_dump($property->fetchfocus(6));

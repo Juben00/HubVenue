@@ -33,7 +33,7 @@ checkAuth(); // Check if the user is logged in
         <div
             class=" h-[380px] object-cover overflow-hidden order-1 md:order-2 md:h-[1000px] relative max-h-[600px] max-w-[1000px]">
             <div class="absolute top-0 w-full h-full bg-gradient-to-b from-transparent to-neutral-900 opacity-50">
-                <button onclick="window.location.href = '/'" class="absolute right-0">
+                <button onclick="window.history.back()" class="absolute right-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-x"
                         viewBox="0 0 16 16">
                         <path

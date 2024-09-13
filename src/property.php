@@ -39,7 +39,7 @@ checkAuth(); // Check if the user is logged in
             style="max-width: 1000px; max-height: 600px;">
             <div class="flex flex-col gap-1">
                 <!-- Map container -->
-                <div id="map" class=" h-[200px] w-full rounded-md border hidden md:block border" style="height: 180px;">
+                <div id="map" class=" h-[200px] w-full rounded-md border-2 hidden md:block " style="height: 180px;">
                 </div>
 
                 <div class="">
@@ -142,7 +142,7 @@ checkAuth(); // Check if the user is logged in
     }).addTo(map);
 
     // Fetch the address from the PHP variable
-    const address = "44 Luyahan Pasonanca, Zamboanga City, Philippines";
+    const address = `<?= $item['location'] ?>`;
 
     // Use Nominatim API to geocode the address
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)

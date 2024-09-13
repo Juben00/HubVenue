@@ -22,21 +22,30 @@ checkAuth(); // Check if the user is logged in
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Focus</title>
     <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.2"> <!-- Increment version number -->
+    <link rel="stylesheet" href="../output.css?v=1.3"> <!-- Increment version number -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> <!-- Leaflet CSS -->
 </head>
 
 <body class="bg-neutral-700 text-neutral-100 relative h-screen">
-    <div class="absolute left-1/2 rounded-md max-h-[600px] max-w-[1000px] top-1/2 -translate-x-1/2 -translate-y-1/2 container mx-auto min-h-screen md:min-h-[80vh] flex flex-col md:grid grid-cols-2 w-full border-2 overflow-hidden"
-        style="max-width: 1000px; max-height: 600px;">
+    <div
+        class="absolute left-1/2 rounded-md max-h-[600px] max-w-[1000px] top-1/2 -translate-x-1/2 -translate-y-1/2 container mx-auto flex flex-col md:grid grid-cols-2 w-full border-2 overflow-hidden">
 
-        <div class="h-[380px] object-cover overflow-hidden order-1 md:order-2 md:h-[1000px]"
-            style="max-width: 1000px; max-height: 600px;">
+        <div
+            class=" h-[380px] object-cover overflow-hidden order-1 md:order-2 md:h-[1000px] relative max-h-[600px] max-w-[1000px]">
+            <div class="absolute top-0 w-full h-full bg-gradient-to-b from-transparent to-neutral-900 opacity-50">
+                <button onclick="window.location.href = '/'" class="absolute right-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg>
+                </button>
+            </div>
             <img src="<?= $item['image'] ?>" alt="Property Image" class="w-full h-full">
         </div>
 
-        <div class="flex-1 flex flex-col bg-neutral-50 p-6 pt-4 text-neutral-800 order-2 md:order-1  overflow-y-scroll"
-            style="max-width: 1000px; max-height: 600px;">
+        <div
+            class="max-h-[600px] max-w-[1000px]  flex-1 flex flex-col bg-neutral-100 p-6 pt-4 text-neutral-800 order-2 md:order-1  overflow-y-scroll">
             <div class="flex flex-col gap-1">
                 <!-- Map container -->
                 <div id="map" class=" h-[200px] w-full rounded-md border-2 hidden md:block " style="height: 180px;">

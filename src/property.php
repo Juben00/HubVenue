@@ -1,0 +1,124 @@
+<?php
+require_once __DIR__ . '/authmiddleware.php';
+require_once __DIR__ . '/classes/property.class.php';
+
+$property = new Property();
+
+$item = [];
+
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    $id = $_GET['id'];
+    $item = $property->fetchfocus($id);
+}
+
+checkAuth(); // Check if the user is logged in
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus</title>
+    <link rel="icon" href="../public/images/white_transparent.png">
+    <link rel="stylesheet" href="../output.css?v=1.2"> <!-- Increment version number -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> <!-- Leaflet CSS -->
+</head>
+
+<body class="bg-neutral-700 text-neutral-100 relative h-screen">
+    <div class="absolute left-1/2 rounded-md max-h-[600px] max-w-[1000px] top-1/2 -translate-x-1/2 -translate-y-1/2 container mx-auto min-h-screen md:min-h-[80vh] flex flex-col md:grid grid-cols-2 w-full border-2 overflow-hidden"
+        style="max-width: 1000px; max-height: 600px;">
+
+        <div class="h-[380px] object-cover overflow-hidden order-1 md:order-2 md:h-full">
+            <img src="<?= $item['image'] ?>" alt="Property Image" class="w-full h-full">
+        </div>
+
+        <div class="flex-1 flex flex-col bg-neutral-50 p-6 pt-4 text-neutral-800 order-2 md:order-1">
+            <div class="flex flex-col gap-1">
+                <div class="flex items-center justify-between w-full">
+                    <span class="flex items-center gap-2">
+                        <p class="text-red-500 flex-1 text-2xl truncate">
+                            <?= $item['property_name'] ?>
+                        </p>
+                    </span>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-1">
+                    <p class="text-sm font-semibold p-1 border bg-neutral-200 rounded-full px-2">Php
+                        <?= $item['price'] ?>
+                    </p>
+                    <p class="text-green-500 p-1 rounded-md">Available</p>
+                </div>
+
+                <div class="flex gap-1 items-center w-[90%]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
+                        class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                    </svg>
+                    <a href="https://www.google.com/maps/search/?api=1&query=<?= urlencode($item['location']) ?>"
+                        target="_blank" class="text-neutral-600 underline underline-offset-1 text-sm truncate">
+                        <?= $item['location'] ?>
+                    </a>
+                </div>
+
+                <div class="mt-2 flex flex-col w-full">
+                    <h1 class="text-center font-semibold">DESCRIPTION</h1>
+                    <p class="text-sm">
+                        <?= $item['description'] ?>
+                    </p>
+                </div>
+
+                <div class="mt-2 flex flex-col w-full">
+                    <h1 class="text-center font-semibold">AMENITIES</h1>
+                    <?php
+                    $amenities = json_decode($item['amenities'], true);
+
+                    if (is_array($amenities)) {
+                        echo '<ul class="list-disc list-inside ">';
+                        foreach ($amenities as $key => $value) {
+                            echo '<li>' . htmlspecialchars($value) . '</li>';
+                        }
+                        echo '</ul>';
+                    } else {
+                        echo '<p class="text-center">No amenities listed.</p>';
+                    }
+                    ?>
+                </div>
+
+                <form class="mt-2 flex flex-col w-full gap-2">
+                    <h1 class="text-center font-semibold">BOOKING INFO</h1>
+                    <div class="flex items-center gap-1">
+                        <label for="date" class="text-sm">Select Date</label>
+                        <input type="date" name="date" id="date" class="p-2 border rounded-md flex-1">
+                    </div>
+                    <div class="flex flex-row justify-around gap-2">
+                        <div class="flex items-center gap-1  w-full">
+                            <label for="starttime" class="text-xs">Start Time</label>
+                            <input type="time" name="starttime" id="starttime" class="p-2 border rounded-md flex-1">
+                        </div>
+                        <div class="flex items-center gap-1 w-full">
+                            <label for="endtime" class="text-xs">End Time</label>
+                            <input type="time" name="endtime" id="endtime" class="p-2 border rounded-md flex-1">
+                        </div>
+                    </div>
+                    <button type="submit" class="bg-neutral-900 text-neutral-50 p-2 rounded-md">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</body>
+
+
+</html>

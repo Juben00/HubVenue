@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "tailwindcss": "^3.4.10"
+    "tailwindcss": "^3.4.11"
   },
   "name": "hub",
   "version": "1.0.0",
@@ -97,7 +97,7 @@
     "yaml": "^2.5.1"
   },
   "scripts": {
-    "build:css": "npx tailwindcss -i input.css -o output.css --watch"
+    "build": "npx tailwindcss -i input.css -o output.css --watch"
   },
   "keywords": [],
   "author": "",

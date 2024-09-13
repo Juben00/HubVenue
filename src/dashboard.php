@@ -1,15 +1,31 @@
 <?php
 require_once './authmiddleware.php';
 require_once './classes/property.class.php';
-// session_start(); // Start the session
-$property = new Property();
+// Initialize the Property object
+$propertyObj = new Property();
 
-$properties = $property->viewProp(); // Get all properties
+// Check if the user is logged in
+checkAuth();
 
-checkAuth(); // Check if the user is logged in
+// Initialize variables for the form data
+$location = '';
+$price = '';
+$search = '';
+$properties = []; // Initialize an empty array for properties
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Sanitize and assign form input values
+    $location = htmlentities($_POST['location'] ?? '');
+    $price = htmlentities($_POST['price'] ?? '');
+    $search = htmlentities($_POST['search'] ?? '');
+}
+
+// Fetch properties based on user input
+$properties = $propertyObj->viewProp($location, $price, $search);
+
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,12 +141,16 @@ checkAuth(); // Check if the user is logged in
                     <h1 class="text-3xl font-semibold md:text-4xl ">Welcome to <span
                             class="text-red-500 italic">HubVenue!</span></h1>
                     <h3 class="sm:text-xl">"Discover Our Venue: A Perfect Setting <br> for Every Occasion"</h3>
-                    <p class="sm:block hidden md:text-lg md:px-4">Discover the perfect setting for your most memorable
+                    <p class="sm:block hidden md:text-lg md:px-4">Discover the perfect setting for your most
+                        memorable
                         events.
-                        At HubVenue, we believe every occasion deserves a beautiful backdrop, whether it's a wedding,
+                        At HubVenue, we believe every occasion deserves a beautiful backdrop, whether it's a
+                        wedding,
                         corporate gathering, or an intimate celebration. Nestled in a picturesque location. With
-                        customizable spaces, state-of-the-art facilities, and a dedicated team to assist you, HubVenue
-                        is more than just a place—it's where your dreams come to life. Come explore our versatile venue
+                        customizable spaces, state-of-the-art facilities, and a dedicated team to assist you,
+                        HubVenue
+                        is more than just a place—it's where your dreams come to life. Come explore our versatile
+                        venue
                         and let us be the host to your next cherished moment.</p>
                 </span>
             </div>
@@ -164,48 +184,67 @@ checkAuth(); // Check if the user is logged in
         <h2 class="text-3xl lg:text-5xl font-bold mt-4 mb-2">Rental Properties</h2>
 
 
-        <div class="flex flex-col gap-4 lg:gap-8 bg-neutral-200/20 p-4 lg:p-8 m-4 rounded-lg">
+        <div class="flex flex-col gap-4 md:gap-8 bg-neutral-200/20 p-4 lg:p-8 m-4 rounded-lg w-full min-h-30">
 
-            <form action="" method="POST" class="text-neutral-900 flex gap-2 justify-center w-full">
+            <!-- HTML form to search properties -->
+            <form method="POST" class="text-neutral-900 flex gap-2 justify-center w-full">
                 <div class="flex">
-                    <select class="p-1 w-20 md:w-auto bg-neutral-300 rounded-lg text-neutral-900" name="location"
+                    <select class="p-1 py-2 w-20 lg:w-36 bg-neutral-300 rounded-lg text-neutral-900" name="location"
                         id="location">
                         <option value="">Select Location</option>
-                        <!-- php script to select all from the db -->
+                        <?php
+                        $locationlist = $propertyObj->fetchlocation();
+                        foreach ($locationlist as $loc) {
+                            ?>
+                            <option value="<?= $loc['location'] ?>" <?= ($location == $loc['location']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($loc['location']) ?>
+                            </option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </div>
+
                 <div class="flex">
-                    <select class="p-1 w-20 md:w-auto bg-neutral-300 rounded-lg text-neutral-900" name="price"
+                    <select class="p-1 py-2 w-20 md:w-36 bg-neutral-300 rounded-lg text-neutral-900" name="price"
                         id="price">
                         <option value="">Select Price</option>
-                        <!-- php script to select all from the db -->
+                        <?php
+                        $pricelist = $propertyObj->fetchprice();
+                        foreach ($pricelist as $pri) {
+                            ?>
+                            <option value="<?= $pri['price'] ?>" <?= ($price == $pri['price']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($pri['price']) ?>
+                            </option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </div>
-                <div class="flex w-1/2 relative ">
-                    <input placeholder="Search for a Unit" class="outline-0 p-1 bg-neutral-300 rounded-lg w-full"
-                        type="text">
-                    <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                            class="bi bi-search" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                        </svg>
-                    </button>
+
+                <div class="flex w-1/2 relative">
+                    <input placeholder="Search for a Unit" class="outline-0 p-1 py-2 bg-neutral-300 rounded-lg w-full"
+                        type="text" id="search" name="search" value="<?= htmlspecialchars($search) ?>">
+                    <input type="submit" value="Search"
+                        class="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer">
                 </div>
+
             </form>
+
+
             <hr>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6  rounded-xl">
 
                 <?php if (!empty($properties)): ?>
                     <?php foreach ($properties as $property): ?>
                         <div
                             class="property-item shadow-sm hover:bottom-1 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-1000">
-                            <div class=" w-full relative overflow-hidden flex items-center" style="height: 350px;">
+                            <div class="w-full relative overflow-hidden flex items-center" style="height: 350px;">
                                 <img class="" src="<?php echo htmlspecialchars($property['image']); ?>" alt="Property Image">
 
                                 <div class="cursor-pointer flex gap-2 flex-col items-start p-4 absolute custom-gradient h-full top-0 w-full justify-between"
-                                    style={{ background: 'linear-gradient(to top, rgba(75, 85, 99, 0.5), rgba(75, 85, 99, 0))' ,
-                                    }}>
+                                    style="background: linear-gradient(to top, rgba(75, 85, 99, 0.5), rgba(75, 85, 99, 0));">
 
                                     <div class="flex justify-between items-center w-full">
                                         <div class="bg-neutral-200 rounded-full flex items-center p-1">
@@ -229,7 +268,6 @@ checkAuth(); // Check if the user is logged in
                                         </div>
                                     </div>
 
-
                                     <div class="w-full">
                                         <div class="flex justify-center items-center ">
                                             <div class="flex-1 flex flex-col gap-1">
@@ -241,8 +279,8 @@ checkAuth(); // Check if the user is logged in
                                                 </p>
                                             </div>
 
-                                            <button
-                                                class="bg-neutral-500 rounded-full border p-3 hover:text-red-600/80 duration-200  text-neutral-200">
+                                            <a class="bg-neutral-500 rounded-full border p-3 hover:text-red-600/80 duration-200 text-neutral-200"
+                                                href="./property.php?id=<?php echo $property['p_id']; ?>">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                     fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                     <path
@@ -250,44 +288,15 @@ checkAuth(); // Check if the user is logged in
                                                     <path
                                                         d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
                                                 </svg>
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
-
-                                    <!-- <span class="px-4">
-                                                <h1 class="text-center text-xl font-semibold text-white">Description</h1>
-                                                <f class="text-neutral-200 text-center ">
-                                                    <?php echo htmlspecialchars($property['description']); ?>
-                                                </f
-                                            </span>
-                                            <button
-                                                class="underline hover:text-red-500 underline-offset-2 text-xl p-2 rounded-lg font-semibold">View
-                                                Details</button> -->
-                                    <!-- <p>Price: <?php echo htmlspecialchars($property['price']); ?></p>
-                                            <p>Booked Date: <?php echo htmlspecialchars($property['booked_date']); ?></p> -->
-                                    <!-- <div class="amenities">
-                                                <strong>Amenities:</strong>
-                                                <?php
-                                                // Decode JSON amenities
-                                                $amenities = json_decode($property['amenities'], true);
-                                                if (is_array($amenities)) {
-                                                    echo '<ul>';
-                                                    foreach ($amenities as $key => $value) {
-                                                        echo '<li>' . htmlspecialchars($value) . '</li>';
-                                                    }
-                                                    echo '</ul>';
-                                                } else {
-                                                    echo '<p>No amenities listed.</p>';
-                                                }
-                                                ?>
-                                            </div> -->
                                 </div>
-
                             </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <p>No properties found.</p>
+                    <p class="text-red-500">No properties found.</p>
                 <?php endif; ?>
             </div>
 
@@ -308,7 +317,8 @@ checkAuth(); // Check if the user is logged in
                 <p>
                     Hubvenue was born out of the need to streamline the often complex and time-consuming process of
                     f event
-                    planning. The journey began when our founders, faced with the daunting task of organizing multiple
+                    planning. The journey began when our founders, faced with the daunting task of organizing
+                    multiple
                     events, realized how fragmented the venue and catering service industry was. From endless phone
                     calls to
                     lengthy negotiations, the process was anything but easy. Inspired by the vision of a one-stop
@@ -317,7 +327,8 @@ checkAuth(); // Check if the user is logged in
                     creating memorable experiences instead of logistics.
                 </p>
                 <br>
-                <p>Throughout our journey, we faced challenges, such as integrating diverse services and building trust
+                <p>Throughout our journey, we faced challenges, such as integrating diverse services and building
+                    trust
                     within the community. However, these obstacles only strengthened our commitment to innovation.
                     Hubvenue
                     continues to grow, expanding our network of partners and refining our platform based on user
@@ -330,14 +341,17 @@ checkAuth(); // Check if the user is logged in
                 <div class="flex flex-col items-center bg-neutral-200/20 p-4 lg:p-8 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold  text-red-500 italic">Our Mission</h3>
                     <p class="text-center">
-                        Our mission is to revolutionize the way people find and book event spaces by providing a dynamic
+                        Our mission is to revolutionize the way people find and book event spaces by providing a
+                        dynamic
                         platform that seamlessly connects event organizers with unique venues. We aim to empower
                         property
                         owners to maximize their earning potential by offering their homes, commercial spaces, and
                         creative
-                        environments as venues for a diverse range of events. Whether it's a wedding, corporate meeting,
+                        environments as venues for a diverse range of events. Whether it's a wedding, corporate
+                        meeting,
                         or
-                        a casual gathering, we strive to offer a variety of spaces that cater to every occasion, helping
+                        a casual gathering, we strive to offer a variety of spaces that cater to every occasion,
+                        helping
                         make each event truly memorable.
                     </p>
                 </div>
@@ -345,14 +359,19 @@ checkAuth(); // Check if the user is logged in
                 <div class="flex flex-col items-center bg-neutral-200/20 p-4 lg:p-8 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold  text-red-500 italic">Our Vision</h3>
                     <p class="text-center">
-                        Our vision is to be the leading platform that bridges the gap between event organizers and space
-                        owners, creating a global community where finding the perfect venue is as easy as a few clicks.
+                        Our vision is to be the leading platform that bridges the gap between event organizers and
+                        space
+                        owners, creating a global community where finding the perfect venue is as easy as a few
+                        clicks.
                         We
-                        envision a future where every space, from cozy homes to grand commercial venues, is accessible
+                        envision a future where every space, from cozy homes to grand commercial venues, is
+                        accessible
                         to
-                        those looking to create extraordinary experiences. By fostering a collaborative environment, we
+                        those looking to create extraordinary experiences. By fostering a collaborative environment,
+                        we
                         aim
-                        to inspire creativity and enable hosts and organizers to come together, turning any space into a
+                        to inspire creativity and enable hosts and organizers to come together, turning any space
+                        into a
                         potential stage for unforgettable moments.
                     </p>
                 </div>
@@ -367,10 +386,12 @@ checkAuth(); // Check if the user is logged in
                             1. How do I book a space?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300 text-xs">To book a space, simply look for your desired location
+                            <p class="text-neutral-300 text-xs">To book a space, simply look for your desired
+                                location
                                 and
                                 date on our platform. Browse
-                                through the available options, select the space that suits your needs, and follow the
+                                through the available options, select the space that suits your needs, and follow
+                                the
                                 booking process to confirm your reservation.</p>
                         </div>
                     </div>
@@ -391,34 +412,28 @@ checkAuth(); // Check if the user is logged in
                             3. What types of spaces can I list?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300 text-xs">You can list a variety of spaces including residential
+                            <p class="text-neutral-300 text-xs">You can list a variety of spaces including
+                                residential
                                 homes,
                                 commercial venues, event
-                                halls, and more. The platform is designed to accommodate all types of spaces that can be
+                                halls, and more. The platform is designed to accommodate all types of spaces that
+                                can be
                                 used for events and gatherings.</p>
                         </div>
                     </div>
-                    <!-- <div class="faq-item mb-4">
-                    <button class="faq-header text-lg font-semibold text-neutral-200 w-full text-left">
-                        4. How do I cancel a booking?
-                    </button>
-                    <div class="faq-content hidden text-center">
-                        <p class="text-neutral-300">To cancel a booking, log in to your account and navigate to your
-                            bookings. Select the
-                            booking you wish to cancel and follow the instructions provided. Note that cancellation
-                            policies may vary depending on the space owner's terms.</p>
-                    </div>
-                </div> -->
                     <div class="faq-item mb-4">
                         <button class="faq-header text-neutral-200 w-full text-left">
                             4. Are there any fees associated with booking or listing a space?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300 text-xs">Yes, there may be fees associated with both booking and
+                            <p class="text-neutral-300 text-xs">Yes, there may be fees associated with both booking
+                                and
                                 listing
                                 spaces. Booking fees are
-                                typically a percentage of the total rental cost, while listing fees may vary based on
-                                the type of space and duration of the listing. Detailed information about fees will be
+                                typically a percentage of the total rental cost, while listing fees may vary based
+                                on
+                                the type of space and duration of the listing. Detailed information about fees will
+                                be
                                 provided during the booking or listing process.</p>
                         </div>
                     </div>
@@ -430,7 +445,8 @@ checkAuth(); // Check if the user is logged in
                             <p class="text-neutral-300 text-xs">If you need assistance, you can contact our customer
                                 support
                                 team via the contact form on
-                                our website, or by email at info@hubvenue.com. Our team is available to help you with
+                                our website, or by email at info@hubvenue.com. Our team is available to help you
+                                with
                                 any questions or issues you may have.</p>
                         </div>
                     </div>

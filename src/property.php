@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 }
 
 checkAuth(); // Check if the user is logged in
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +32,7 @@ checkAuth(); // Check if the user is logged in
         class="absolute left-1/2 rounded-md max-h-[600px] max-w-[1000px] top-1/2 -translate-x-1/2 -translate-y-1/2 container mx-auto min-h-screen md:min-h-0 flex flex-col md:grid grid-cols-2 w-full border-2 overflow-hidden">
 
         <div
-            class=" h-[380px] object-cover overflow-hidden order-1 md:order-2 md:h-[1000px] relative max-h-[600px] max-w-[1000px]">
+            class="h-[380px] object-cover overflow-hidden order-1 md:order-2 md:h-[1000px] relative max-h-[600px] max-w-[1000px]">
             <div class="absolute top-0 w-full h-full bg-gradient-to-b from-transparent to-neutral-900 opacity-50">
                 <button onclick="window.history.back()" class="absolute right-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-x"
@@ -45,13 +46,14 @@ checkAuth(); // Check if the user is logged in
         </div>
 
         <div
-            class="max-h-[600px] max-w-[1000px]  flex-1 flex flex-col bg-neutral-100 p-6 pt-4 text-neutral-800 order-2 md:order-1  overflow-y-scroll">
-            <div class="flex flex-col gap-1">
+            class="flex flex-col bg-neutral-100 p-6  pt-4 text-neutral-800 order-2 md:order-1 overflow-y-scroll flex-1">
+            <div class="flex flex-col gap-1 h-full">
                 <!-- Map container -->
-                <div id="map" class=" h-[200px] w-full rounded-md border-2 hidden md:block " style="height: 180px;">
-                </div>
+                <div>
+                    <div id="map" class="h-[200px] w-full rounded-md border-2 mb-2 hidden md:block"
+                        style="height: 180px;">
+                    </div>
 
-                <div class="">
                     <div class="flex items-center justify-between w-full">
                         <span class="flex items-center gap-2">
                             <p class="text-red-500 flex-1 text-2xl truncate">
@@ -74,8 +76,7 @@ checkAuth(); // Check if the user is logged in
                         <p class="text-green-500 p-1 rounded-md">Available</p>
                     </div>
 
-                    <!-- Optional location -->
-                    <div class="flex gap-1 items-center w-[90%] md:hidden">
+                    <div class="flex gap-1 items-center my-1 w-[90%]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
                             class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                             <path
@@ -88,10 +89,7 @@ checkAuth(); // Check if the user is logged in
                     </div>
 
                     <div class="mt-2 flex flex-col w-full">
-                        <!-- <h1 class="text-center font-semibold">DESCRIPTION</h1> -->
-                        <p class="text-sm">
-                            <?= $item['description'] ?>
-                        </p>
+                        <p class="text-sm"><?= $item['description'] ?></p>
                     </div>
 
                     <div class="mt-2 flex flex-col w-full">
@@ -100,7 +98,7 @@ checkAuth(); // Check if the user is logged in
                         $amenities = json_decode($item['amenities'], true);
 
                         if (is_array($amenities)) {
-                            echo '<ul class="list-disc list-inside ">';
+                            echo '<ul class="list-disc list-inside">';
                             foreach ($amenities as $key => $value) {
                                 echo '<li>' . htmlspecialchars($value) . '</li>';
                             }
@@ -111,34 +109,17 @@ checkAuth(); // Check if the user is logged in
                         ?>
                     </div>
 
-                    <form class="mt-2 flex flex-col w-full gap-2">
-                        <h1 class="text-center font-semibold">BOOKING INFO</h1>
-                        <div class="flex items-center gap-1">
-                            <label for="date" class="text-sm">Select Date</label>
-                            <input type="date" name="date" id="date"
-                                class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
-                        </div>
-                        <div class="flex flex-row justify-around gap-2">
-                            <div class="flex items-center gap-1  w-full">
-                                <label for="starttime" class="text-xs">Start Time</label>
-                                <input type="time" name="starttime" id="starttime"
-                                    class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
-                            </div>
-                            <div class="flex items-center gap-1 w-full">
-                                <label for="endtime" class="text-xs">End Time</label>
-                                <input type="time" name="endtime" id="endtime"
-                                    class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
-                            </div>
-                        </div>
-                        <button type="submit" class="bg-neutral-900 text-neutral-50 p-2 rounded-md">Book Now</button>
-                    </form>
+
+                </div>
+                <div class="mt-auto flex flex-col w-full">
+                    <a href="./payment.php?id=<?php echo $item['p_id']; ?>"
+                        class="bg-neutral-900 text-neutral-50 px-2 py-3 rounded-md text-center">Proceed To
+                        Payment</a>
                 </div>
             </div>
         </div>
 
-
     </div>
-
 
 </body>
 
@@ -146,7 +127,8 @@ checkAuth(); // Check if the user is logged in
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     // Initialize i map
-    const map = L.map('map').setView([14.5995, 120.9842], 13); // Default center: Manila, Philippines
+    const map = L.map('map').setView([6.9121, 122.0790], 13); // Default center: Zamboanga City Hall
+
 
     // Add the OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

@@ -37,7 +37,7 @@
             <div class="hidden flex-col w-48 gap-2 bg-neutral-800 absolute top-16 right-0 rounded-md border border-red-500 p-4"
                 id="options">
                 <div class="flex items-center ">
-                    <div class="flex items-end gap-2 flex-1">
+                    <div class="flex items-center gap-2 flex-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                             class="bi bi-person" viewBox="0 0 16 16">
                             <path

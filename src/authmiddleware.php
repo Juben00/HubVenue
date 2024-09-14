@@ -25,3 +25,14 @@ function logout()
     header("Location: .././index.php");
     exit();
 }
+
+//  * Redirects the user to the dashboard if they are already logged in.
+function redirectIfAuth()
+{
+    // Check if the user session variables are set
+    if (isset($_SESSION['id']) && isset($_SESSION['email'])) {
+        // If logged in, redirect to the dashboard
+        header("Location: ./src/dashboard.php");
+        exit();
+    }
+}

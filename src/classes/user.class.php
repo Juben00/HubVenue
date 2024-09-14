@@ -69,15 +69,15 @@ class User
                 if (password_verify($this->password, $row['password'])) {
                     session_start();
                     $_SESSION['id'] = $row['id'];
-                    $_SESSION['usertype'] = $row['usertype'];
-                    $_SESSION['username'] = $row['username'];
+                    // $_SESSION['usertype'] = $row['usertype'];
+                    // $_SESSION['username'] = $row['username'];
                     $_SESSION['email'] = $row['email'];
                     return true;
                 } else {
                     $this->message = "Invalid credentials!";
                 }
             } else {
-                $this->message = "Invalid credentials!";
+                $this->message = "User Doesn't Exist!";
             }
         } catch (PDOException $e) {
             $this->message = "Database error: " . $e->getMessage();

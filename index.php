@@ -1,6 +1,9 @@
 <?php
 require_once './src/classes/user.class.php';
 require_once './src/sanitize.php';
+require_once './src/authmiddleware.php';
+
+redirectIfAuth();
 
 $userObj = new User();
 $message = '';
@@ -27,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($userObj->login()) {
             header("Location: ./src/dashboard.php");
-            exit(); // Make sure to exit after redirect
+            exit();
         } else {
             $message = $userObj->message;
         }

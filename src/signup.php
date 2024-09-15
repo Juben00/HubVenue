@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </style>
 </head>
 
-<body class="bg flex justify-center items-center min-h-screen relative">
+<body class="bg flex justify-center items-center min-h-screen relative box-border">
     <form method="POST"
         class="flex flex-col items-center py-4 px-6 overflow-hidden border-2 rounded-2xl border-neutral-600 bg-neutral-200/80 gap-2 shadow-2xl"
         style="width: 400px; ">

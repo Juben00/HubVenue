@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../output.css?v=1.4"> <!-- Increment version number -->
 </head>
 
-<body class="bg-neutral-700 text-neutral-100 relative h-screen">
+<body class="bg-neutral-700 text-neutral-100 relative h-screen box-border">
     <div
         class="absolute left-1/2 rounded-md max-h-[600px] max-w-[1000px] top-1/2 -translate-x-1/2 -translate-y-1/2 container mx-auto min-h-screen md:min-h-0 flex flex-col md:grid grid-cols-2 w-full border-2 overflow-hidden">
 

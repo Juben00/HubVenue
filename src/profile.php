@@ -17,7 +17,7 @@ checkAuth();
     <link rel="stylesheet" href="../output.css?v=1.4">
 </head>
 
-<body class="bg-neutral-700 text-neutral-100 flex justify-center items-center">
+<body class="bg-neutral-700 text-neutral-100 flex justify-center items-center box-border">
 
     <div class="border p-4 h-screen w-full flex flex-col">
         <div class="border border-green-500 h-[40%] p-4 flex flex-col items-center justify-center space-y-4">

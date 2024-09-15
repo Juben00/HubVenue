@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Content-Type: text/html');
     if (!empty($properties)) {
         foreach ($properties as $property) {
-            echo '<div class="property-item shadow-sm hover:bottom-1 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-1000">
+            echo '<div class="property-item shadow-sm hover:-translate-y-4 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-1000">
                 <div class="w-full relative overflow-hidden flex items-center" style="height: 350px;">
                     <img class="" src="' . htmlspecialchars($property['image']) . '" alt="Property Image">
                     <div class="cursor-pointer flex gap-2 flex-col items-start p-4 absolute custom-gradient h-full top-0 w-full justify-between" style="background: linear-gradient(to top, rgba(75, 85, 99, 0.5), rgba(75, 85, 99, 0));">

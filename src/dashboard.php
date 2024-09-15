@@ -43,7 +43,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
     </style>
 </head>
 
-<body class="bg-neutral-700 text-neutral-100">
+<body class="bg-neutral-700 text-neutral-100 box-border">
     <?php require_once './components/Navbar.php'; ?>
 
     <section
@@ -183,7 +183,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
                 <?php if (!empty($properties)): ?>
                     <?php foreach ($properties as $property): ?>
                         <div
-                            class="property-item shadow-sm hover:bottom-1 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-1000">
+                            class="property-item shadow-sm hover:-translate-y-4 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-1000">
                             <div class="w-full relative overflow-hidden flex items-center" style="height: 350px;">
                                 <img class="" src="<?php echo htmlspecialchars($property['image']); ?>" alt="Property Image">
 

@@ -34,7 +34,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HubVenue</title>
     <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.0">
+    <link rel="stylesheet" href="../output.css?v=1.5">
 
     <style>
         .custom-gradient {
@@ -81,7 +81,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
                 </div>
             </div>
             <div class="flex flex-col items-center bg-neutral-200/20 p-2">
-                <span class="text-center my-auto flex flex-col gap-2">
+                <span class="text-center my-auto flex flex-col gap-2 ">
                     <h1 class="text-3xl font-semibold md:text-4xl ">Welcome to <span
                             class="text-red-500 italic">HubVenue!</span></h1>
                     <h3 class="sm:text-xl">"Discover Our Venue: A Perfect Setting <br> for Every Occasion"</h3>
@@ -106,19 +106,19 @@ $properties = $propertyObj->viewProp($location, $price, $search);
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-2">
             <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg m-4">
                 <img src="../public/serviceimages/pexels-pixabay-267569.jpg" alt="Rent Space" class="w-full">
-                <h3 class="text-xl font-semibold mt-2">Space Rentals</h3>
+                <h3 class="text-xl font-semibold mt-2 text-center">Space Rentals</h3>
                 <p class="text-center">Discover unique spaces for any event, from intimate gatherings to large-scale
                     functions.</p>
             </div>
             <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg m-4">
                 <img src="../public/serviceimages/pexels-rdne-7414284.jpg" alt="Post Listings" class="w-full">
-                <h3 class="text-xl font-semibold mt-2">Post Your Space</h3>
+                <h3 class="text-xl font-semibold mt-2 text-center">Post Your Space</h3>
                 <p class="text-center">Earn money by listing your home or commercial space for event rentals.</p>
             </div>
             <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg m-4">
                 <img src="../public/serviceimages/pexels-tima-miroshnichenko-6694575.jpg" alt="Book Event"
                     class="w-full">
-                <h3 class="text-xl font-semibold mt-2">Book an Event Space</h3>
+                <h3 class="text-xl font-semibold mt-2 text-center">Book an Event Space</h3>
                 <p class="text-center">Easily browse and book spaces for weddings, meetings, parties, and more.</p>
             </div>
         </div>
@@ -214,7 +214,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
 
                                     <div class="w-full">
                                         <div class="flex justify-center items-center ">
-                                            <div class="flex-1 flex flex-col gap-1">
+                                            <div class="flex-1 flex flex-col">
                                                 <h2 class="text-3xl font-semibold text-red-500">
                                                     <?php echo htmlspecialchars($property['property_name']); ?>
                                                 </h2>

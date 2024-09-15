@@ -644,6 +644,10 @@ video {
   top: 4rem;
 }
 
+.top-20 {
+  top: 5rem;
+}
+
 .z-30 {
   z-index: 30;
 }
@@ -861,6 +865,12 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .list-inside {
@@ -1478,6 +1488,10 @@ video {
 
 .hover\:underline-offset-2:hover {
   text-underline-offset: 2px;
+}
+
+.hover\:accent-red-500:hover {
+  accent-color: #ef4444;
 }
 
 .focus\:outline-none:focus {

@@ -94,7 +94,7 @@
 
         <!-- Mobile Menu (hidden by default, shown when the hamburger icon is clicked) -->
         <ul id="mobile-menu"
-            class="hidden flex-col space-y-2 bg-neutral-800 p-4 z-50 absolute top-16 left-0 right-0 lg:hidden text-center">
+            class="hidden flex-col space-y-2 bg-neutral-800 p-4 z-50 absolute top-20 left-0 right-0 lg:hidden text-center">
             <li>
                 <div class="flex items-center w-fit gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"

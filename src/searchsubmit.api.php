@@ -1,6 +1,7 @@
 <?php
 require_once './authmiddleware.php';
 require_once './classes/property.class.php';
+require_once './sanitize.php';
 
 // Initialize the Property object
 $propertyObj = new Property();
@@ -17,9 +18,9 @@ $properties = []; // Initialize an empty array for properties
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize and assign form input values
-    $location = htmlentities($_POST['location'] ?? '');
-    $price = htmlentities($_POST['price'] ?? '');
-    $search = htmlentities($_POST['search'] ?? '');
+    $location = sanitizeInput($_POST['location'] ?? '');
+    $price = sanitizeInput($_POST['price'] ?? '');
+    $search = sanitizeInput($_POST['search'] ?? '');
 
     // Fetch properties based on user input
     $properties = $propertyObj->viewProp($location, $price, $search);

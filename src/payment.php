@@ -1,17 +1,43 @@
 <?php
 require_once __DIR__ . '/authmiddleware.php';
 require_once __DIR__ . '/classes/property.class.php';
+require_once __DIR__ . '/classes/booking.class.php';
+require_once __DIR__ . '/sanitize.php';
 
 $property = new Property();
-
+$message = '';
 $item = [];
 
+checkAuth(); // Check if the user is logged in
+
+$id = $_GET['id'];
+$item = $property->fetchfocus($id);
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $id = $_GET['id'];
     $item = $property->fetchfocus($id);
 }
 
-checkAuth(); // Check if the user is logged in
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $bookingObj = new Booking();
+
+    $bookingObj->userId = sanitizeInput($_SESSION['id']);
+    $bookingObj->propertyId = sanitizeInput($_POST['p_id']);
+    $bookingObj->date = sanitizeInput($_POST['date']);
+    $bookingObj->check_in = sanitizeInput($_POST['starttime']);
+    $bookingObj->check_out = sanitizeInput($_POST['endtime']);
+    //payment table
+    $bookingObj->amount = sanitizeInput($_POST['price']);
+    $bookingObj->payment_method = sanitizeInput($_POST['payment']);
+    $bookingObj->payment_info = sanitizeInput($_POST['paymentinfo']);
+
+    if ($bookingObj->book()) {
+        // echo "Booking successful!";
+        $message = "Booking successful!";
+    } else {
+        // echo "Booking failed!";
+        $message = "Booking failed!";
+    }
+}
 
 ?>
 
@@ -29,6 +55,21 @@ checkAuth(); // Check if the user is logged in
 <body class="bg-neutral-700 text-neutral-100 relative h-screen">
     <div
         class="absolute left-1/2 rounded-md max-h-[600px] max-w-[1000px] top-1/2 -translate-x-1/2 -translate-y-1/2 container mx-auto min-h-screen md:min-h-0 flex flex-col md:grid grid-cols-2 w-full border-2 overflow-hidden">
+
+        <?php
+        if ($message) {
+            ?>
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+                <div class="bg-green-500 p-6 text-neutral-50 text-center rounded-lg shadow-lg">
+                    <p class="text-lg font-semibold mb-4"><?= htmlspecialchars($message) ?></p>
+                    <a href="dashboard.php"
+                        class="bg-neutral-800 text-neutral-50 px-4 py-2 rounded-md hover:bg-neutral-900 transition-all">OK</a>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
+
 
         <div class="h-[380px] object-cover overflow-hidden order-1  md:h-[1000px] max-h-[600px] max-w-[1000px]">
 
@@ -67,33 +108,44 @@ checkAuth(); // Check if the user is logged in
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-1">
+                    <!-- <div class="flex items-center gap-1">
                         <p class="text-green-500 p-1 rounded-md">Available</p>
-                    </div>
+                    </div> -->
 
 
-
-                    <div class="mt-2 flex flex-col w-full">
+                    <!-- <div class="mt-2 flex flex-col w-full">
                         <p class="text-sm"><?= $item['description'] ?></p>
-                    </div>
+                    </div> -->
 
                 </div>
 
-                <form class="mt-auto flex flex-col w-full gap-2 h-full">
+                <form method="POST" class="mt-auto flex flex-col w-full gap-2 h-full">
                     <h1 class="text-center font-semibold">BOOKING INFORMATION</h1>
 
-                    <!-- Number of Attendees -->
+
+                    <!-- Hidden inputs to pass $item data to POST request -->
+                    <input type="hidden" name="p_id" value="<?= $item['p_id'] ?>">
+                    <input type="hidden" name="price" id="priceoutputprice" value="<?= $item['price'] ?>">
+
+                    <!-- Day Selection -->
                     <div class="flex flex-col gap-1">
-                        <label for="attendees" class="text-sm">Number of Attendees</label>
-                        <input type="number" name="attendees" id="attendees" placeholder="Enter Number of Attendees"
-                            class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
+                        <label for="day" class="text-xs">Number of Day/s</label>
+                        <input type="number" id="day" name="day" min="1"
+                            class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                     </div>
 
                     <!-- Date selection -->
-                    <div class="flex flex-col gap-1">
-                        <label for="date" class="text-sm">Select Date</label>
-                        <input type="date" name="date" id="date"
-                            class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
+                    <div class="flex flex-row justify-around gap-2">
+                        <div class="flex flex-col gap-1 w-full">
+                            <label for="date" class="text-xs">Start Date</label>
+                            <input type="date" name="startdate" id="startdate"
+                                class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
+                        </div>
+                        <div class="flex-col gap-1 w-full hidden">
+                            <label for="date" class="text-xs">End Date</label>
+                            <input type="date" name="enddate" id="enddate"
+                                class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
+                        </div>
                     </div>
 
                     <!-- Time selection -->
@@ -101,12 +153,12 @@ checkAuth(); // Check if the user is logged in
                         <div class="flex flex-col gap-1 w-full">
                             <label for="starttime" class="text-xs">Start Time</label>
                             <input type="time" name="starttime" id="starttime"
-                                class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
+                                class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                         </div>
                         <div class="flex flex-col gap-1 w-full">
                             <label for="endtime" class="text-xs">End Time</label>
                             <input type="time" name="endtime" id="endtime"
-                                class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
+                                class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                         </div>
                     </div>
 
@@ -114,7 +166,7 @@ checkAuth(); // Check if the user is logged in
                     <div class="flex flex-col gap-1">
                         <label for="payment" class="text-sm">Payment Method</label>
                         <select name="payment" id="payment"
-                            class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
+                            class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                             <option value="" class="text-neutral-800/50">Specify Your Payment Method</option>
                             <option value="Bank Transfer">Bank Transfer</option>
                             <option value="Gcash">Gcash</option>
@@ -123,15 +175,32 @@ checkAuth(); // Check if the user is logged in
                         </select>
                     </div>
 
-                    <!-- Payment credentials container -->
                     <div id="paymentCredentials"></div>
 
-                    <!-- Book Now Button -->
-                    <div class="mt-auto flex">
-                        <button type="submit" class="bg-neutral-900 text-neutral-50 p-2 rounded-md w-full">
-                            Book Now
-                        </button>
+                    <div class="flex justify-between gap-1">
+                        <h1 class="text-xs">Subtotal:</h1>
+                        <p class="text-sm" id="outputprice" name="outputprice">Php <?= $item['price'] ?></p>
                     </div>
+
+                    <div class="flex justify-between gap-1">
+                        <h1 class="text-xs">Number of Day/s:</h1>
+                        <p class="text-sm" id="outputday" name="outputday">
+
+                        </p>
+                    </div>
+
+                    <div class="flex justify-between gap-1">
+                        <h1 class="text-xs">Grand Total:</h1>
+                        <p class="text-sm" id="grandtotal" name="grandtotal">
+                        </p>
+                    </div>
+
+                    <div class="mt-auto flex">
+                        <button type="submit" class="bg-neutral-900 text-neutral-50 p-2 rounded-md w-full">Book
+                            Now</button>
+                    </div>
+
+
                 </form>
 
             </div>
@@ -141,47 +210,76 @@ checkAuth(); // Check if the user is logged in
 
 
     <script>
-        // check the type of payment method
-        document.getElementById("payment").addEventListener("change", function () {
+        // Handle payment method selection
+        document.getElementById("payment").addEventListener("change", () => {
             let payment = document.getElementById("payment").value;
             let paymentCredentials = document.getElementById("paymentCredentials");
 
             if (payment == "Bank Transfer") {
                 paymentCredentials.innerHTML = `
-                    <div class="flex flex-col gap-1">
-                        <label for="paymentinfo" class="text-sm">Account Number</label>
-                        <input type="text" name="paymentinfo" id="paymentinfo" placeholder="Enter Bank Account Number"
-                            class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
-                    </div>
-                `;
+            <div class="flex flex-col gap-1">
+                <label for="paymentinfo" class="text-sm">Account Number</label>
+                <input type="text" name="paymentinfo" id="paymentinfo" placeholder="Enter Bank Account Number"
+                    class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
+            </div>
+        `;
             } else if (payment == "Gcash") {
                 paymentCredentials.innerHTML = `
-                    <div class="flex flex-col gap-1">
-                        <label for="paymentinfo" class="text-sm">Gcash Number</label>
-                        <input type="text" name="paymentinfo" id="paymentinfo" placeholder="Enter Account Gcash Number"
-                            class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
-                    </div>
-                `;
+            <div class="flex flex-col gap-1">
+                <label for="paymentinfo" class="text-sm">Gcash Number</label>
+                <input type="text" name="paymentinfo" id="paymentinfo" placeholder="Enter Account Gcash Number"
+                    class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
+            </div>
+        `;
             } else if (payment == "PayMaya") {
                 paymentCredentials.innerHTML = `
-                    <div class="flex flex-col gap-1">
-                        <label for="paymentinfo" class="text-sm">PayMaya Number</label>
-                        <input type="text" name="paymentinfo" id="paymentinfo" placeholder="Enter PayMaya Account Number"
-                            class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
-                    </div>
-                `;
+            <div class="flex flex-col gap-1">
+                <label for="paymentinfo" class="text-sm">PayMaya Number</label>
+                <input type="text" name="paymentinfo" id="paymentinfo" placeholder="Enter PayMaya Account Number"
+                    class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
+            </div>
+        `;
             } else if (payment == "PayPal") {
                 paymentCredentials.innerHTML = `
-                    <div class="flex flex-col gap-1">
-                        <label for="paymentinfo" class="text-sm">PayPal Email</label>
-                        <input type="email" name="paymentinfo" id="paymentinfo" placeholder="Enter PayPal Account Number"
-                            class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
-                    </div>
-                `;
+            <div class="flex flex-col gap-1">
+                <label for="paymentinfo" class="text-sm">PayPal Email</label>
+                <input type="email" name="paymentinfo" id="paymentinfo" placeholder="Enter PayPal Account Number"
+                    class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1">
+            </div>
+        `;
             } else {
                 paymentCredentials.innerHTML = "";
             }
         });
+
+        // Handle day and end date visibility
+        const day = document.getElementById('day');
+        const enddate = document.getElementById('enddate').parentElement;
+        const sdate = document.getElementById('startdate');
+
+        function toggleEndDateVisibility() {
+            if (parseInt(day.value) > 1) {
+                enddate.classList.remove('hidden');
+                enddate.classList.add('flex');
+            } else {
+                enddate.classList.remove('flex');
+                enddate.classList.add('hidden');
+            }
+        }
+
+        day.addEventListener('input', toggleEndDateVisibility);
+        sdate.addEventListener('input', toggleEndDateVisibility);
+
+        // Update output for number of days and calculate total
+        day.addEventListener('input', () => {
+            let dayCount = parseInt(day.value) || 1; // Default to 1 day if empty or invalid
+            let price = parseFloat(document.getElementById('priceoutputprice').value);
+            let total = dayCount * price;
+
+            document.getElementById('outputday').innerHTML = dayCount;
+            document.getElementById('grandtotal').innerHTML = `Php ${total.toFixed(2)}`;
+        });
+
     </script>
 </body>
 

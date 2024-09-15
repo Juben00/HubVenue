@@ -1,7 +1,7 @@
-<nav class="bg-neutral-800 text-neutral-100 shadow-xl sticky top-0 z-50" style="position: sticky; top: 0px ;">
-    <div class="container mx-auto px-8 flex items-center justify-between ">
+<nav class="bg-neutral-800 text-neutral-100 shadow-xl sticky top-0 z-50">
+    <div class=" container mx-auto px-8 flex items-center justify-between ">
         <!-- Logo -->
-        <a href="#" class="flex items-center">
+        <a href=" #" class="flex items-center">
             <img src="../public/images/white_transparent (1).ico" alt="Logo" class="h-24">
         </a>
 

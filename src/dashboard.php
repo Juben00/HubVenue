@@ -183,8 +183,8 @@ $properties = $propertyObj->viewProp($location, $price, $search);
                 <?php if (!empty($properties)): ?>
                     <?php foreach ($properties as $property): ?>
                         <div
-                            class="property-item shadow-sm hover:-translate-y-4 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-1000">
-                            <div class="w-full relative overflow-hidden flex items-center" style="height: 350px;">
+                            class="property-item shadow-sm hover:-translate-y-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-500">
+                            <div class="w-full relative overflow-hidden flex items-center h-[350px]" style="height: 350px;">
                                 <img class="" src="<?php echo htmlspecialchars($property['image']); ?>" alt="Property Image">
 
                                 <div class="cursor-pointer flex gap-2 flex-col items-start p-4 absolute custom-gradient h-full top-0 w-full justify-between"
@@ -223,7 +223,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
                                                 </p>
                                             </div>
 
-                                            <a class="bg-neutral-500 rounded-full border p-3 hover:text-red-600/80 duration-200 text-neutral-200"
+                                            <a class="bg-neutral-500/50 rounded-full border p-3 hover:text-red-600/80 duration-200 text-neutral-200"
                                                 href="./property.php?id=<?php echo $property['p_id']; ?>">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                     fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">

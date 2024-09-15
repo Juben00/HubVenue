@@ -143,9 +143,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <input type="date" name="startdate" id="startdate"
                                 class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                         </div>
-                        <div class="flex-col gap-1 w-full hidden">
+                        <div class="flex-col gap-1 w-full flex">
                             <label for="date" class="text-xs">End Date</label>
-                            <input type="date" name="enddate" id="enddate"
+                            <input type="date" name="enddate" id="enddate" readonly
                                 class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                         </div>
                     </div>
@@ -158,9 +158,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                         </div>
                         <div class="flex flex-col gap-1 w-full">
-                            <label for="endtime" class="text-xs">End Time</label>
-                            <input type="time" name="endtime" id="endtime"
-                                class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
+                            <div class="flex flex-col gap-1 w-full">
+                                <label for="endtime" class="text-xs">End Time</label>
+                                <input type="time" name="endtime" id="endtime"
+                                    class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1"
+                                    required>
+                            </div>
                         </div>
                     </div>
 
@@ -256,21 +259,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Handle day and end date visibility
         const day = document.getElementById('day');
-        const enddate = document.getElementById('enddate').parentElement;
+        const enddate = document.getElementById('enddate');
         const sdate = document.getElementById('startdate');
 
-        function toggleEndDateVisibility() {
-            if (parseInt(day.value) > 1) {
-                enddate.classList.remove('hidden');
-                enddate.classList.add('flex');
-            } else {
-                enddate.classList.remove('flex');
-                enddate.classList.add('hidden');
-            }
-        }
+        // function toggleEndDateVisibility() {
+        //     if (parseInt(day.value) > 1) {
+        //         enddate.classList.remove('hidden');
+        //         enddate.classList.add('flex');
+        //     } else {
+        //         enddate.classList.remove('flex');
+        //         enddate.classList.add('hidden');
+        //     }
+        // }
 
-        day.addEventListener('input', toggleEndDateVisibility);
-        sdate.addEventListener('input', toggleEndDateVisibility);
+        // day.addEventListener('input', toggleEndDateVisibility);
+        // sdate.addEventListener('input', toggleEndDateVisibility);
+
+        // automatically calculate the end date
+        sdate.addEventListener('input', () => {
+            let startDate = new Date(sdate.value);
+            let endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + parseInt(day.value) || 1);
+            enddate.value = endDate.toISOString().split('T')[0];
+        }
+        )
+
+        day.addEventListener('input', () => {
+            let startDate = new Date(sdate.value);
+            let endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + parseInt(day.value) || 1);
+            enddate.value = endDate.toISOString().split('T')[0];
+        }
+        )
 
         // Update output for number of days and calculate total
         day.addEventListener('input', () => {

@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <!-- Day Selection -->
                     <div class="flex flex-col gap-1">
                         <label for="day" class="text-xs">Number of Day/s</label>
-                        <input type="number" id="day" name="day" min="1" max="31"
+                        <input type="number" id="day" name="day" min="1" max="31" step="1"
                             class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                     </div>
 

@@ -22,11 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $bookingObj->userId = sanitizeInput($_SESSION['id']);
     $bookingObj->propertyId = sanitizeInput($_POST['p_id']);
-    $bookingObj->date = sanitizeInput($_POST['date']);
+    $bookingObj->day = sanitizeInput($_POST['day']);
+    $bookingObj->startdate = sanitizeInput($_POST['startdate']);
+    $bookingObj->enddate = sanitizeInput($_POST['enddate']);
     $bookingObj->check_in = sanitizeInput($_POST['starttime']);
     $bookingObj->check_out = sanitizeInput($_POST['endtime']);
     //payment table
-    $bookingObj->amount = sanitizeInput($_POST['price']);
+    $bookingObj->amount = sanitizeInput($_POST['grandtotal']);
     $bookingObj->payment_method = sanitizeInput($_POST['payment']);
     $bookingObj->payment_info = sanitizeInput($_POST['paymentinfo']);
 
@@ -130,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <!-- Day Selection -->
                     <div class="flex flex-col gap-1">
                         <label for="day" class="text-xs">Number of Day/s</label>
-                        <input type="number" id="day" name="day" min="1"
+                        <input type="number" id="day" name="day" min="1" max="31"
                             class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                     </div>
 
@@ -191,8 +193,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="flex justify-between gap-1">
                         <h1 class="text-xs">Grand Total:</h1>
-                        <p class="text-sm" id="grandtotal" name="grandtotal">
-                        </p>
+                        <input type="hidden" id="grandtotal" name="grandtotal" value="">
+                        <p class="text-sm" id="gtotal"></p>
                     </div>
 
                     <div class="mt-auto flex">
@@ -277,7 +279,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             let total = dayCount * price;
 
             document.getElementById('outputday').innerHTML = dayCount;
-            document.getElementById('grandtotal').innerHTML = `Php ${total.toFixed(2)}`;
+            document.getElementById('gtotal').innerHTML = `Php ${total.toFixed(2)}`;
+            document.getElementById('grandtotal').value = total;
         });
 
     </script>

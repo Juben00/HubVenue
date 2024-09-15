@@ -7,7 +7,9 @@ class Booking
     public $b_id;
     public $userId;
     public $propertyId;
-    public $date;
+    public $day;
+    public $startdate;
+    public $enddate;
     public $check_in;
     public $check_out;
 
@@ -35,12 +37,14 @@ class Booking
             $this->dbConnection->beginTransaction();
 
             // Insert booking data
-            $query = "INSERT INTO bookings (userId, propertyId, date, check_in, check_out) 
-                      VALUES (:userId, :propertyId, :date, :check_in, :check_out)";
+            $query = "INSERT INTO bookings (userId, propertyId, day, start_date, end_date, check_in, check_out) 
+                      VALUES (:userId, :propertyId, :day, :start_date, :end_date , :check_in, :check_out)";
             $stmt = $this->dbConnection->prepare($query);
             $stmt->bindParam(':userId', $this->userId);
             $stmt->bindParam(':propertyId', $this->propertyId);
-            $stmt->bindParam(':date', $this->date);
+            $stmt->bindParam(':day', $this->day);
+            $stmt->bindParam(':start_date', $this->startdate);
+            $stmt->bindParam(':end_date', $this->enddate);
             $stmt->bindParam(':check_in', $this->check_in);
             $stmt->bindParam(':check_out', $this->check_out);
 

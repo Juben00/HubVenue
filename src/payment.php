@@ -73,14 +73,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
 
 
-        <div class="h-[380px] object-cover overflow-hidden order-1  md:h-[1000px] max-h-[600px] max-w-[1000px]">
-
+        <div class="h-[380px] object-cover overflow-hidden order-1 relative md:h-[1000px] max-h-[600px] max-w-[1000px]">
+            <div class="absolute top-0 right-1 md:hidden block">
+                <button onclick="window.history.back()" class="absolute right-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg>
+                </button>
+            </div>
             <img src="<?= $item['image'] ?>" alt="Property Image" class="w-full h-full">
         </div>
 
         <div
             class="flex flex-col bg-neutral-100 p-6 relative overflow-x-hidden pt-4 text-neutral-800 order-2 md:order-1 overflow-y-scroll flex-1">
-            <div class="absolute top-0  right-1">
+            <div class="absolute top-0 right-1 hidden md:block">
                 <button onclick="window.history.back()" class="absolute right-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-x"
                         viewBox="0 0 16 16">
@@ -91,9 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="flex flex-col h-full mt-2">
                 <div>
+                    <h1 class="text-center font-semibold">BOOKING INFORMATION</h1>
                     <div class="flex items-center justify-between w-full">
                         <span class="flex items-center gap-2">
-                            <p class="text-red-500 flex-1 text-2xl truncate">
+                            <p class="text-red-500 flex-1 text-lg truncate">
                                 <?= $item['property_name'] ?>
                             </p>
                         </span>
@@ -109,21 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </a>
                         </div>
                     </div>
-
-                    <!-- <div class="flex items-center gap-1">
-                        <p class="text-green-500 p-1 rounded-md">Available</p>
-                    </div> -->
-
-
-                    <!-- <div class="mt-2 flex flex-col w-full">
-                        <p class="text-sm"><?= $item['description'] ?></p>
-                    </div> -->
-
                 </div>
 
-                <form method="POST" class="mt-auto flex flex-col w-full gap-2 h-full">
-                    <h1 class="text-center font-semibold">BOOKING INFORMATION</h1>
-
+                <form method="POST" class="mt-2 flex flex-col w-full gap-2 h-full">
 
                     <!-- Hidden inputs to pass $item data to POST request -->
                     <input type="hidden" name="p_id" value="<?= $item['p_id'] ?>">

@@ -45,8 +45,7 @@ checkAuth(); // Check if the user is logged in
             <img src="<?= $item['image'] ?>" alt="Property Image" class="w-full h-full">
         </div>
 
-        <div
-            class="flex flex-col bg-neutral-100 p-6  pt-4 text-neutral-800 order-2 md:order-1 overflow-y-scroll flex-1">
+        <div class="flex flex-col bg-neutral-100 p-6 pt-4 text-neutral-800 order-2 md:order-1 overflow-y-scroll flex-1">
             <div class="flex flex-col gap-1 h-full">
                 <!-- Map container -->
                 <div>
@@ -111,11 +110,11 @@ checkAuth(); // Check if the user is logged in
 
 
                 </div>
-                <div class="mt-auto flex flex-col w-full">
-                    <a href="./payment.php?id=<?php echo $item['p_id']; ?>"
-                        class="bg-neutral-900 text-neutral-50 px-2 py-3 rounded-md text-center">Proceed To
-                        Payment</a>
-                </div>
+            </div>
+            <div class="mt-auto flex flex-col w-full">
+                <a href="./payment.php?id=<?php echo $item['p_id']; ?>"
+                    class="bg-neutral-900 text-neutral-50 px-2 py-3 rounded-md text-center">Proceed To
+                    Payment</a>
             </div>
         </div>
 

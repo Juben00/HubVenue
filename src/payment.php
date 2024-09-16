@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message = "Booking successful!";
     } else {
         // echo "Booking failed!";
-        $message = "Booking failed!";
+        // $message = "Booking failed!";
     }
 }
 

@@ -4,7 +4,14 @@ require_once __DIR__ . '/../dbconnection.php';
 
 class Booking
 {
-    public $b_id;
+    // payment table
+
+    public $amount;
+    public $payment_method;
+    public $payment_info;
+
+    // booking table
+
     public $userId;
     public $propertyId;
     public $day;
@@ -12,12 +19,8 @@ class Booking
     public $enddate;
     public $check_in;
     public $check_out;
+    public $paymentId;
 
-    // payment table
-
-    public $amount;
-    public $payment_method;
-    public $payment_info;
 
     protected $db;
     protected $dbConnection;
@@ -36,9 +39,27 @@ class Booking
             // Begin transaction
             $this->dbConnection->beginTransaction();
 
+            // Insert payment data
+            $query = "INSERT INTO payments (amount, payment_method, payment_info) 
+                  VALUES (:amount, :payment_method, :payment_info)";
+            $stmt = $this->dbConnection->prepare($query);
+            $stmt->bindParam(":amount", $this->amount);
+            $stmt->bindParam(":payment_method", $this->payment_method);
+            $stmt->bindParam(":payment_info", $this->payment_info);
+
+
+            if (!$stmt->execute()) {
+                // throw new Exception("Error inserting booking: " . implode(", ", $stmt->errorInfo()));
+                echo "Error inserting payments: " . implode(", ", $stmt->errorInfo());
+                exit();
+            }
+
+            // Get the generated booking ID
+            $this->paymentId = $this->dbConnection->lastInsertId();
+
             // Insert booking data
-            $query = "INSERT INTO bookings (userId, propertyId, day, start_date, end_date, check_in, check_out) 
-                      VALUES (:userId, :propertyId, :day, :start_date, :end_date , :check_in, :check_out)";
+            $query = "INSERT INTO bookings (userId, propertyId, day, start_date, end_date, check_in, check_out, paymentId) 
+                  VALUES (:userId, :propertyId, :day, :start_date, :end_date, :check_in, :check_out, :paymentId)";
             $stmt = $this->dbConnection->prepare($query);
             $stmt->bindParam(':userId', $this->userId);
             $stmt->bindParam(':propertyId', $this->propertyId);
@@ -47,29 +68,12 @@ class Booking
             $stmt->bindParam(':end_date', $this->enddate);
             $stmt->bindParam(':check_in', $this->check_in);
             $stmt->bindParam(':check_out', $this->check_out);
+            $stmt->bindParam(':paymentId', $this->paymentId);
 
             if (!$stmt->execute()) {
-                throw new Exception("Error inserting booking: " . implode(", ", $stmt->errorInfo()));
-                // echo "Error inserting booking: " . implode(", ", $stmt->errorInfo());
-                // exit();
-            }
-
-            // Get the generated booking ID
-            $this->b_id = $this->dbConnection->lastInsertId();
-
-            // Insert payment data
-            $query = "INSERT INTO payments (b_id, amount, payment_method, payment_info) 
-                      VALUES (:b_id, :amount, :payment_method, :payment_info)";
-            $stmt = $this->dbConnection->prepare($query);
-            $stmt->bindParam(":b_id", $this->b_id);
-            $stmt->bindParam(":amount", $this->amount);
-            $stmt->bindParam(":payment_method", $this->payment_method);
-            $stmt->bindParam(":payment_info", $this->payment_info);
-
-            if (!$stmt->execute()) {
-                throw new Exception("Error inserting payment: " . implode(", ", $stmt->errorInfo()));
-                // echo "Error inserting payment: " . implode(", ", $stmt->errorInfo());
-                // exit();
+                // throw new Exception("Error inserting payment: " . implode(", ", $stmt->errorInfo()));
+                echo "Error inserting bookings: " . implode(", ", $stmt->errorInfo());
+                exit();
             }
 
             // Commit the transaction
@@ -79,8 +83,8 @@ class Booking
         } catch (Exception $e) {
             // Rollback transaction if something goes wrong
             $this->dbConnection->rollBack();
-            error_log($e->getMessage()); // Log the error for debugging
-            // echo $e->getMessage();
+            // error_log($e->getMessage()); // Log the error for debugging
+            echo $e->getMessage();
             return false;
         }
     }

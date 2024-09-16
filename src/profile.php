@@ -1,8 +1,15 @@
 <?php
 
 require_once './authmiddleware.php';
+require_once './classes/profile.class.php';
+
+$profileobj = new Profile();
+
+$profileinfo = $profileobj->fetchprofile();
 
 checkAuth();
+
+
 
 ?>
 
@@ -41,8 +48,8 @@ checkAuth();
                     class="object-cover w-full h-full" id="profilePicture">
             </div>
             <div class="text-center">
-                <p class="text-lg font-bold">Sample Name</p>
-                <p class="text-neutral-200">User</p>
+                <p class="text-lg font-bold"><?= $profileinfo['username'] ?></p>
+                <p class="text-neutral-200" id="usertype"><?= $profileinfo['usertype'] ?></p>
             </div>
             <div class="flex flex-col w-full items-center">
                 <p class="w-[90%] text-center text-neutral-200">Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -61,38 +68,15 @@ checkAuth();
         <!-- Rents and Saved section -->
         <div>
             <div class="bg-neutral-500 px-2 py-1 flex justify-center space-x-2">
-                <h1 class="text-lg font-semibold text-center flex-1">Posted</h1>
-                <h1 class="text-lg font-semibold text-center flex-1">Rents</h1>
-                <h1 class="text-lg font-semibold text-center flex-1">Saved</h1>
+                <button id="posted" class="text-lg font-semibold text-center flex-1">Posted</button>
+                <button id="rents" class="text-lg font-semibold text-center flex-1">Rents</button>
+                <button id="saved" class="text-lg font-semibold text-center flex-1">Saved</button>
             </div>
             <div class="flex flex-col lg:h-[530px] lg:overflow-y-auto">
 
                 <!-- Inner container without fixed height -->
-                <div class="mt-2 flex flex-col gap-2  px-4">
-                    <div class="border-2 flex justify-center items-center rounded-md h-[250px]">
-                        <p>Item 1</p>
-                    </div>
-                    <div class="border-2 flex justify-center items-center rounded-md h-[250px]">
-                        <p>Item 2</p>
-                    </div>
-                    <div class="border-2 flex justify-center items-center rounded-md h-[250px]">
-                        <p>Item 3</p>
-                    </div>
-                    <div class="border-2 flex justify-center items-center rounded-md h-[250px]">
-                        <p>Item 3</p>
-                    </div>
-                    <div class="border-2 flex justify-center items-center rounded-md h-[250px]">
-                        <p>Item 3</p>
-                    </div>
-                    <div class="border-2 flex justify-center items-center rounded-md h-[250px]">
-                        <p>Item 3</p>
-                    </div>
-                    <div class="border-2 flex justify-center items-center rounded-md h-[250px]">
-                        <p>Item 3</p>
-                    </div>
-                    <div class="border-2 flex justify-center items-center rounded-md h-[250px]">
-                        <p>Item 3</p>
-                    </div>
+                <div id="profiledisp" class="mt-2 flex flex-col gap-4 px-4">
+
                 </div>
             </div>
         </div>
@@ -101,12 +85,7 @@ checkAuth();
 
     </div>
 
-    <script>
-        // Trigger file input on button click
-        // document.getElementById('uploadButton').addEventListener('click', function () {
-        //     document.getElementById('profilePictureInput').click();
-        // });
-    </script>
+    <script src="./profile.js"></script>
 </body>
 
 </html>

@@ -38,7 +38,7 @@ if (!empty($rented)) {
                         <p class="text-neutral-200 text-xs">Amount: Php ' . htmlspecialchars($rent['amount']) . '</p>
                         <p class="text-neutral-200 text-xs">Payment Method: ' . htmlspecialchars($rent['payment_method']) . '</p>
                         <p class="text-neutral-200 text-xs">Date and Time: ' . htmlspecialchars($rent['start_date']) . " at " . date("h:i A", strtotime($rent['check_in'])) . '</p>
-                        <p class="text-neutral-200 text-xs">Ends On: ' . htmlspecialchars($rent['end_date']) . " at " . date("h:i A", strtotime($rent['check_out'])) . '</p>
+                        <p class="text-neutral-200 text-xs"><span class="text-red-500">Ends On</span>: ' . htmlspecialchars($rent['end_date']) . " at " . date("h:i A", strtotime($rent['check_out'])) . '</p>
                     </div>
                 </div>
             </div>';

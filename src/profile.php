@@ -21,7 +21,7 @@ checkAuth();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.9">
+    <link rel="stylesheet" href="../output.css?v=1.10">
 </head>
 
 <body
@@ -67,10 +67,10 @@ checkAuth();
 
         <!-- Rents and Saved section -->
         <div>
-            <div class="bg-neutral-500 px-2 py-1 flex justify-center space-x-2">
-                <button id="posted" class="text-lg font-semibold text-center flex-1">Posted</button>
-                <button id="rents" class="text-lg font-semibold text-center flex-1">Rents</button>
-                <button id="saved" class="text-lg font-semibold text-center flex-1">Saved</button>
+            <div class="bg-neutral-500 rounded-md overflow-hidden flex justify-center">
+                <button id="posted" class="text-lg font-semibold text-center flex-1 w-full h-full">Posted</button>
+                <button id="rents" class="text-lg font-semibold text-center flex-1 w-full h-full">Rents</button>
+                <button id="saved" class="text-lg font-semibold text-center flex-1 w-full h-full">Saved</button>
             </div>
             <div class="flex flex-col lg:h-[530px] lg:overflow-y-auto">
 

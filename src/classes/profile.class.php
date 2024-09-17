@@ -50,7 +50,8 @@ class Profile
                 FROM bookings b 
                 JOIN payments p ON b.paymentId = p.pay_id 
                 JOIN properties pr ON b.propertyId = pr.p_id 
-                WHERE b.userId = :id;
+                WHERE b.userId = :id
+                ORDER BY b.b_id DESC;
                 ";
 
             // "SELECT b.*, p.amount, p.payment_method, p.payment_info FROM bookings b JOIN payments p ON b.paymentId = p.pay_id WHERE b.userId = :id"

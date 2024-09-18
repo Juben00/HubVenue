@@ -1,14 +1,17 @@
 <?php
 require_once __DIR__ . '/authmiddleware.php';
 require_once __DIR__ . '/classes/property.class.php';
+require_once __DIR__ . '/classes/booking.class.php';
 
 $property = new Property();
+$bookedobj = new Booking();
 
 $item = [];
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $id = $_GET['id'];
     $item = $property->fetchfocus($id);
+
 }
 
 checkAuth(); // Check if the user is logged in
@@ -160,6 +163,7 @@ checkAuth(); // Check if the user is logged in
             console.error('Error:', error);
             alert('Failed to fetch location. Please try again.');
         });
+
 </script>
 
 </html>

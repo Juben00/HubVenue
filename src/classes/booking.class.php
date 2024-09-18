@@ -88,5 +88,42 @@ class Booking
             return false;
         }
     }
+
+    function fetchbookeddate($id)
+    {
+        try {
+            $query = "SELECT start_date, day FROM bookings WHERE propertyId = :propertyId";
+            $stmt = $this->dbConnection->prepare($query);
+            $stmt->bindParam(':propertyId', $id);
+
+            if (!$stmt->execute()) {
+                throw new Exception("Error fetching booked dates: " . implode(", ", $stmt->errorInfo()));
+            }
+
+            $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch both start_date and day
+
+            $disabledDates = [];
+            foreach ($bookings as $booking) {
+                $startDate = new DateTime($booking['start_date']);
+                $days = intval($booking['day']);
+
+                // Loop to add all booked dates within the booked period
+                for ($i = 0; $i <= $days; $i++) {
+                    $disabledDates[] = $startDate->format('Y-m-d');
+                    $startDate->modify('+1 day'); // Add one day to the date
+                }
+            }
+
+            return $disabledDates; // Return the array of all booked dates
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
 }
+
+$bookingObj = new Booking();
+
+// var_dump($bookingObj->fetchbookeddate(10));
 

@@ -5,6 +5,7 @@ require_once __DIR__ . '/classes/booking.class.php';
 require_once __DIR__ . '/sanitize.php';
 
 $property = new Property();
+$bookingObj = new Booking();
 $message = '';
 $item = [];
 
@@ -12,17 +13,22 @@ checkAuth(); // Check if the user is logged in
 
 $id = $_GET['id'];
 $item = $property->fetchfocus($id);
+$disabledDates = $bookingObj->fetchbookeddate($id);
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $id = $_GET['id'];
     $item = $property->fetchfocus($id);
+
+    $bookingObj->propertyId = $id;
+    $disabledDates = $bookingObj->fetchbookeddate($id);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $bookingObj = new Booking();
 
     $bookingObj->userId = sanitizeInput($_SESSION['id']);
     $bookingObj->propertyId = sanitizeInput($_POST['p_id']);
     $bookingObj->day = sanitizeInput($_POST['day']);
+
+
     $bookingObj->startdate = sanitizeInput($_POST['startdate']);
     $bookingObj->enddate = sanitizeInput($_POST['enddate']);
     $bookingObj->check_in = sanitizeInput($_POST['starttime']);
@@ -32,13 +38,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $bookingObj->payment_method = sanitizeInput($_POST['payment']);
     $bookingObj->payment_info = sanitizeInput($_POST['paymentinfo']);
 
-    if ($bookingObj->book()) {
-        // echo "Booking successful!";
-        $message = "Booking successful!";
+    $currentDateTime = new DateTime();
+    $startDateTime = new DateTime($bookingObj->startdate . ' ' . $bookingObj->check_in);
+
+    if ($startDateTime < $currentDateTime) {
+        $message = "Invalid time. Chosen time is in the past.";
     } else {
-        // echo "Booking failed!";
-        // $message = "Booking failed!";
+        if ($bookingObj->book()) {
+            // echo "Booking successful!";+
+            $message = "Booking successful!";
+        } else {
+            // echo "Booking failed!";
+            $message = "Booking failed!";
+        }
     }
+
 }
 
 ?>
@@ -52,6 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Payment</title>
     <link rel="icon" href="../public/images/white_transparent.png">
     <link rel="stylesheet" href="../output.css?v=1.4"> <!-- Increment version number -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <body class="bg-neutral-700 text-neutral-100 relative h-screen box-border">
@@ -259,35 +275,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         const enddate = document.getElementById('enddate');
         const sdate = document.getElementById('startdate');
 
-        // function toggleEndDateVisibility() {
-        //     if (parseInt(day.value) > 1) {
-        //         enddate.classList.remove('hidden');
-        //         enddate.classList.add('flex');
-        //     } else {
-        //         enddate.classList.remove('flex');
-        //         enddate.classList.add('hidden');
-        //     }
-        // }
-
-        // day.addEventListener('input', toggleEndDateVisibility);
-        // sdate.addEventListener('input', toggleEndDateVisibility);
-
         // automatically calculate the end date
-        sdate.addEventListener('input', () => {
-            let startDate = new Date(sdate.value);
-            let endDate = new Date(startDate);
-            endDate.setDate(startDate.getDate() + parseInt(day.value) || 1);
-            enddate.value = endDate.toISOString().split('T')[0];
-        }
-        )
+        // sdate.addEventListener('input', () => {
+        //     let startDate = new Date(sdate.value);
+        //     let endDate = new Date(startDate);
+        //     endDate.setDate(startDate.getDate() + parseInt(day.value) || 1);
+        //     enddate.value = endDate.toISOString().split('T')[0];
+        // }
+        // )
 
-        day.addEventListener('input', () => {
-            let startDate = new Date(sdate.value);
-            let endDate = new Date(startDate);
-            endDate.setDate(startDate.getDate() + parseInt(day.value) || 1);
-            enddate.value = endDate.toISOString().split('T')[0];
-        }
-        )
+        // day.addEventListener('input', () => {
+        //     let startDate = new Date(sdate.value);
+        //     let endDate = new Date(startDate);
+        //     endDate.setDate(startDate.getDate() + parseInt(day.value) || 1);
+        //     enddate.value = endDate.toISOString().split('T')[0];
+        // }
+        // )
 
         // Update output for number of days and calculate total
         day.addEventListener('input', () => {
@@ -298,6 +301,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             document.getElementById('outputday').innerHTML = dayCount;
             document.getElementById('gtotal').innerHTML = `Php ${total.toFixed(2)}`;
             document.getElementById('grandtotal').value = total;
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Convert PHP dates array to JavaScript array
+            const disabledDates = <?php echo json_encode($disabledDates); ?>;
+
+            // Initialize Flatpickr with disabled dates
+            flatpickr("#startdate", {
+                dateFormat: "Y-m-d",
+                disable: disabledDates,
+                minDate: "today", // Optional: Set minimum date to today
+            });
+
+            // Optionally, update end date based on start date and number of days
+            const dayInput = document.getElementById('day');
+            const endDateInput = document.getElementById('enddate');
+            const startDateInput = document.getElementById('startdate');
+
+            function updateEndDate() {
+                const startDate = new Date(startDateInput.value);
+                const days = parseInt(dayInput.value) || 0;
+                const endDate = new Date(startDate);
+                endDate.setDate(startDate.getDate() + days);
+                endDateInput.value = endDate.toISOString().split('T')[0];
+            }
+
+            startDateInput.addEventListener('change', updateEndDate);
+            dayInput.addEventListener('input', updateEndDate);
         });
 
     </script>

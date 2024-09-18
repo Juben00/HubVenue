@@ -21,16 +21,17 @@ checkAuth();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.10">
+    <link rel="stylesheet" href="../output.css?v=1.11">
 </head>
 
 <body
     class="bg-neutral-700/80 text-neutral-100 flex justify-center items-center box-border lg:h-screen lg:overflow-hidden">
 
-    <div class="p-4 w-full lg:w-[1000px] flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:h-[600px] ">
+    <div
+        class="p-4 w-full lg:w-[1000px] flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:h-[600px] rounded-md shadow-neutral-600 shadow-md">
 
         <!-- Profile section -->
-        <div class="flex flex-col relative items-center justify-center p-6 space-y-4 lg:h-full">
+        <div class="flex flex-col relative items-center justify-start p-6 space-y-4 lg:h-full ">
             <div
                 class="fixed left-0 top-0 p-7 bg-neutral-600 lg:p-0 z-50 lg:absolute lg:left-[2px] lg:top-[2px] w-full h-fit">
                 <button onclick="window.history.back()"
@@ -42,18 +43,24 @@ checkAuth();
                     </svg>
                 </button>
             </div>
-            <div
-                class="relative w-32 h-32 border border-gray-300 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-                <img src=".././public/others/placeholder-400x400.jpg" alt="Profile Picture"
-                    class="object-cover w-full h-full" id="profilePicture">
-            </div>
-            <div class="text-center">
-                <p class="text-lg font-bold"><?= $profileinfo['username'] ?></p>
-                <p class="text-neutral-200" id="usertype"><?= $profileinfo['usertype'] ?></p>
-            </div>
-            <div class="flex flex-col w-full items-center">
-                <p class="w-[90%] text-center text-neutral-200">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ad, officia cupiditate voluptas saepe id fugiat.</p>
+
+            <div class="flex flex-col items-center h-full justify-center gap-4">
+                <div
+                    class="relative w-32 h-32 border border-gray-300 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img src=".././public/others/placeholder-400x400.jpg" alt="Profile Picture"
+                        class="object-cover w-full h-full" id="profilePicture">
+                </div>
+                <div class="text-center leading-3">
+                    <p class="text-lg font-bold"><?= $profileinfo['username'] ?></p>
+                    <p class="text-neutral-200" id="usertype"><?= $profileinfo['usertype'] ?></p>
+                </div>
+                <button class="py-2 px-4 border rounded-md bg-neutral-400 text-neutral-800">Upload new
+                    Avatar</button>
+                <div class="flex flex-col w-full items-center">
+                    <p class="w-[90%] text-center text-neutral-200">Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit.
+                        Ad, officia cupiditate voluptas saepe id fugiat.</p>
+                </div>
             </div>
 
             <!-- 

@@ -1,6 +1,8 @@
 <?php
 require_once './authmiddleware.php';
 require_once './classes/property.class.php';
+require_once './classes/saved.property.class.php';
+
 // Initialize the Property object
 $propertyObj = new Property();
 
@@ -13,13 +15,9 @@ $price = '';
 $search = '';
 $properties = []; // Initialize an empty array for properties
 
-// Handle form submission
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     // Sanitize and assign form input values
-//     $location = htmlentities($_POST['location'] ?? '');
-//     $price = htmlentities($_POST['price'] ?? '');
-//     $search = htmlentities($_POST['search'] ?? '');
-// }
+checkAuth();
+
+
 
 // Fetch properties based on user input
 $properties = $propertyObj->viewProp($location, $price, $search);
@@ -203,13 +201,19 @@ $properties = $propertyObj->viewProp($location, $price, $search);
                                                 Starts at ₱<?php echo htmlspecialchars($property['price']); ?>
                                             </p>
                                         </div>
-                                        <div class="text-red-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        <!-- bookmark -->
+
+                                        <form id="bookmark">
+                                            <input type="hidden" name="propertyId" value="<?php echo $property['p_id'] ?>">
+                                            <input class="text-neutral-100 border-2" type="submit">
+                                            <svg xmlns=" http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                                                 class="bi bi-bookmark-fill" viewBox="0 0 16 16">
                                                 <path
                                                     d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
                                             </svg>
-                                        </div>
+                                            </input>
+                                        </form>
+
                                     </div>
 
                                     <div class="w-full">
@@ -242,6 +246,7 @@ $properties = $propertyObj->viewProp($location, $price, $search);
                 <?php else: ?>
                     <p class="text-red-500">No properties found.</p>
                 <?php endif; ?>
+
             </div>
 
         </div>

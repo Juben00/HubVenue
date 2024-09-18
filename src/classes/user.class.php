@@ -71,7 +71,7 @@ class User
                     $_SESSION['id'] = $row['id'];
                     // $_SESSION['usertype'] = $row['usertype'];
                     // $_SESSION['username'] = $row['username'];
-                    $_SESSION['email'] = $row['email'];
+                    // $_SESSION['email'] = $row['email'];
                     return true;
                 } else {
                     $this->message = "Invalid credentials!";

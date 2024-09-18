@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.getElementById('searchForm').addEventListener('submit', (e) => {
     e.preventDefault();
 
-    fetch('./searchsubmit.api.php', {
+    fetch('./api/searchsubmit.api.php', {
         method: "POST",
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -82,3 +82,21 @@ function updateDashboard(html) {
 
     resultsContainer.innerHTML = html;
 }
+
+document.getElementById('bookmark').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+     fetch('./api/bookmark.api.php', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(new FormData(document.getElementById('bookmark')))
+    })
+    .then(response => response.text()) // Use text() to get HTML
+    .then(html => {
+        console.log('Success:', html);
+    }).catch((error) => {
+        console.error('Error:', error);
+    });
+})

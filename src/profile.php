@@ -9,8 +9,6 @@ $profileinfo = $profileobj->fetchprofile();
 
 checkAuth();
 
-
-
 ?>
 
 <!DOCTYPE html>

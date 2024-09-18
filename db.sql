@@ -49,6 +49,14 @@ CREATE TABLE bookings (
     FOREIGN KEY (paymentId) REFERENCES payments(pay_id) ON DELETE CASCADE
 );
 
+CREATE TABLE saved_properties (
+    sp_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    userId INT(11) NOT NULL,
+    propertyId INT(11) NOT NULL,
+    FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (propertyId) REFERENCES properties(p_id) ON DELETE CASCADE
+);
+
 
 
 -- SELECT u.usertype, u.username, b.*, p.* FROM users u JOIN bookings b ON u.id = b.userId JOIN payments p ON b.b_id = p.b_id WHERE u.id = 130

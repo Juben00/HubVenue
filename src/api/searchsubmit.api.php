@@ -1,7 +1,7 @@
 <?php
-require_once './authmiddleware.php';
-require_once './classes/property.class.php';
-require_once './sanitize.php';
+require_once '../authmiddleware.php';
+require_once '../classes/property.class.php';
+require_once '../sanitize.php';
 
 // Initialize the Property object
 $propertyObj = new Property();
@@ -42,11 +42,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <p class="font-semibold text-neutral-600/70 text-sm p-1">Starts at ₱' . htmlspecialchars($property['price']) . '</p>
                             </div>
-                            <div class="text-red-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
-                                    <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-                                </svg>
-                            </div>
+                            <form id="bookmark">
+                                            <input type="hidden" name="propertyId" value="<?php ' . htmlspecialchars($property['price']) . ' ">
+                                            <input class="text-neutral-100 border-2" type="submit">
+                                            <svg xmlns=" http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                                class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+                                            </svg>
+                                            </input>
+                                        </form>
                         </div>
                         <div class="w-full">
                             <div class="flex justify-center items-center ">

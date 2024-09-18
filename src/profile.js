@@ -17,7 +17,7 @@ if (usertype === 'user') {
 
 rents.addEventListener("click", async () => {
     try {
-        const response = await fetch('./profileApi/fetchRent.api.php');
+        const response = await fetch('./api/fetchRent.api.php');
         
         if (!response.ok) {
             throw new Error('Network response was not ok');

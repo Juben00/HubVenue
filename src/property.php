@@ -2,6 +2,7 @@
 require_once __DIR__ . '/authmiddleware.php';
 require_once __DIR__ . '/classes/property.class.php';
 require_once __DIR__ . '/classes/booking.class.php';
+require_once __DIR__ . '/classes/saved.property.class.php';
 
 $property = new Property();
 $bookedobj = new Booking();
@@ -50,8 +51,8 @@ checkAuth(); // Check if the user is logged in
 
         <div class="flex flex-col bg-neutral-100 p-6 pt-4 text-neutral-800 order-2 md:order-1 overflow-y-scroll flex-1">
             <div class="flex flex-col gap-1 h-full">
-                <!-- Map container -->
                 <div>
+                    <!-- Map container -->
                     <div id="map" class="h-[200px] w-full rounded-md border-2 mb-2 hidden md:block"
                         style="height: 180px;">
                     </div>
@@ -62,6 +63,7 @@ checkAuth(); // Check if the user is logged in
                                 <?= $item['property_name'] ?>
                             </p>
                         </span>
+                        <!-- bookmark -->
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                                 class="bi bi-bookmark-fill" viewBox="0 0 16 16">

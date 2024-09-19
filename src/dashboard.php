@@ -3,10 +3,9 @@ require_once './authmiddleware.php';
 require_once './classes/property.class.php';
 require_once './classes/saved.property.class.php';
 
-// Initialize the Property object
 $propertyObj = new Property();
+$saveobj = new Save();
 
-// Check if the user is logged in
 checkAuth();
 
 // Initialize variables for the form data
@@ -15,13 +14,21 @@ $price = '';
 $search = '';
 $properties = []; // Initialize an empty array for properties
 
-checkAuth();
-
-
-
 // Fetch properties based on user input
 $properties = $propertyObj->viewProp($location, $price, $search);
 
+//initailize the saved properties variable
+$savedProperties = [];
+$savedProperties = $saveobj->fetchSavedProperties();
+
+// Remove numeric keys from the array
+$filteredProperties = array_map(function ($property) {
+    return [
+        'propertyId' => $property['propertyId']
+    ];
+}, $savedProperties);
+
+// echo json_encode($filteredProperties);
 
 ?>
 <!DOCTYPE html>
@@ -167,8 +174,13 @@ $properties = $propertyObj->viewProp($location, $price, $search);
                 <div class="flex w-1/2 relative">
                     <input placeholder="Search for a Unit" class="outline-0 p-1 py-2 bg-neutral-300 rounded-lg w-full"
                         type="text" id="search" name="search" value="<?= htmlspecialchars($search) ?>">
-                    <input id="submit" type="submit" value="Search"
-                        class="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer">
+                    <button id="submit" type="submit" value="Search"
+                        class="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg></button>
                 </div>
 
             </form>
@@ -203,16 +215,18 @@ $properties = $propertyObj->viewProp($location, $price, $search);
                                         </div>
                                         <!-- bookmark -->
 
-                                        <form id="bookmark">
-                                            <input type="hidden" name="propertyId" value="<?php echo $property['p_id'] ?>">
-                                            <input class="text-neutral-100 border-2" type="submit">
-                                            <svg xmlns=" http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                                class="bi bi-bookmark-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-                                            </svg>
-                                            </input>
+                                        <form id="bookmark-<?php echo $property['p_id']; ?>">
+                                            <input type="hidden" name="propertyId" value="<?php echo $property['p_id']; ?>">
+                                            <button type="submit"
+                                                class="<?php echo in_array($property['p_id'], array_column($filteredProperties, "propertyId")) ? 'text-red-500' : 'text-neutral-100' ?> ">
+                                                <svg xmlns=" http://www.w3.org/2000/svg" width="25" height="25"
+                                                    fill="currentColor" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+                                                </svg>
+                                            </button>
                                         </form>
+
 
                                     </div>
 

@@ -32,8 +32,23 @@ class Save
         }
     }
 
+    function fetchSavedProperties()
+    {
+        $query = "SELECT propertyId FROM saved_properties WHERE userId = :userid";
+        $stmt = $this->db->connect()->prepare($query);
+        $this->userId = $_SESSION['id'];
+        $stmt->bindParam(":userid", $this->userId);
+        $data = null;
+
+        if ($stmt->execute()) {
+            $data = $stmt->fetchAll();
+        }
+
+        return $data;
+    }
+
 }
 
 $saveobj = new Save();
 
-// var_dump($saveobj->saveProperty());
+// var_dump($saveobj->fetchSavedProperties());

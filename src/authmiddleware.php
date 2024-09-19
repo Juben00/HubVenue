@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
 function checkAuth()
 {
     // Check if the user session variables are set
-    if (!isset($_SESSION['id']) || !isset($_SESSION['email'])) {
+    if (!isset($_SESSION['id'])) {
         // If not logged in, log the user out and redirect to the login page
         logout();
     }
@@ -30,7 +30,7 @@ function logout()
 function redirectIfAuth()
 {
     // Check if the user session variables are set
-    if (isset($_SESSION['id']) && isset($_SESSION['email'])) {
+    if (isset($_SESSION['id'])) {
         // If logged in, redirect to the dashboard
         header("Location: ./src/dashboard.php");
         exit();

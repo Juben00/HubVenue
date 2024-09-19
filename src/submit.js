@@ -83,20 +83,29 @@ function updateDashboard(html) {
     resultsContainer.innerHTML = html;
 }
 
-document.getElementById('bookmark').addEventListener('submit', (e) => {
-    e.preventDefault();
+//dynamic saving
+document.addEventListener('DOMContentLoaded', function () {
+    const bookmarkForms = document.querySelectorAll('form[id^="bookmark-"]');
 
-     fetch('./api/bookmark.api.php', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(new FormData(document.getElementById('bookmark')))
-    })
-    .then(response => response.text()) // Use text() to get HTML
-    .then(html => {
-        console.log('Success:', html);
-    }).catch((error) => {
-        console.error('Error:', error);
+    bookmarkForms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            fetch('./api/bookmark.api.php', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(new FormData(form))
+            })
+            .then(response => response.text())
+            .then(html => {
+                console.log('Success:', html);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
     });
-})
+});
+

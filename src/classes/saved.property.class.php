@@ -14,17 +14,48 @@ class Save
     function saveProperty()
     {
         try {
-            $query = "INSERT INTO saved_properties (userId, propertyId) VALUES (:userid, :propertyid);";
-            $stmt = $this->db->connect()->prepare($query);
+            $sqlcheck = "SELECT * FROM saved_properties WHERE userId = :userid AND propertyId = :propertyid";
+            $stmtcheck = $this->db->connect()->prepare($sqlcheck);
             $this->userId = $_SESSION['id'];
-            $stmt->bindParam(":userid", $this->userId);
-            $stmt->bindParam(":propertyid", $this->propertyId);
+            $stmtcheck->bindParam(":userid", $this->userId);
+            $stmtcheck->bindParam(":propertyid", $this->propertyId);
+            $stmtcheck->execute();
 
-            if ($stmt->execute()) {
+            if ($stmtcheck->rowCount() > 0) {
+                //remove the saved property
+                $query = "DELETE FROM saved_properties WHERE userId = :userid AND propertyId = :propertyid";
+                $stmt = $this->db->connect()->prepare($query);
+                $this->userId = $_SESSION['id'];
+                $stmt->bindParam(":userid", $this->userId);
+                $stmt->bindParam(":propertyid", $this->propertyId);
+                $stmt->execute();
                 return true;
+
             } else {
-                return false;
+                $query = "INSERT INTO saved_properties (userId, propertyId) VALUES (:userid, :propertyid);";
+                $stmt = $this->db->connect()->prepare($query);
+                $this->userId = $_SESSION['id'];
+                $stmt->bindParam(":userid", $this->userId);
+                $stmt->bindParam(":propertyid", $this->propertyId);
+
+                if ($stmt->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
+
+            // $query = "INSERT INTO saved_properties (userId, propertyId) VALUES (:userid, :propertyid);";
+            // $stmt = $this->db->connect()->prepare($query);
+            // $this->userId = $_SESSION['id'];
+            // $stmt->bindParam(":userid", $this->userId);
+            // $stmt->bindParam(":propertyid", $this->propertyId);
+
+            // if ($stmt->execute()) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
             // echo $this->userId;
         } catch (PDOException $e) {
             echo json_encode(['message' => 'Database Error: ' . $e->getMessage()]);

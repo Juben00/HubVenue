@@ -15,7 +15,7 @@ $search = '';
 $properties = []; // Initialize an empty array for properties
 
 // Fetch properties based on user input
-$properties = $propertyObj->viewProp($location, $price, $search);
+$properties = $propertyObj->viewProp();
 
 //initailize the saved properties variable
 $savedProperties = [];
@@ -29,7 +29,8 @@ $filteredProperties = array_map(function ($property) {
 }, $savedProperties);
 
 // echo json_encode($filteredProperties);
-
+// Set the header to refresh the page every second
+// header("Refresh: 1");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +41,7 @@ $filteredProperties = array_map(function ($property) {
     <title>HubVenue</title>
     <link rel="icon" href="../public/images/white_transparent.png">
     <link rel="stylesheet" href="../output.css?v=1.5">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .custom-gradient {
             background: linear-gradient(to top, rgba(71, 69, 69, 0.9), rgba(75, 85, 99, 0));
@@ -423,6 +424,30 @@ $filteredProperties = array_map(function ($property) {
     <?php require_once './components/Footer.php' ?>
 
     <script src="./submit.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#searchForm').on('submit', function (event) {
+                event.preventDefault(); // Prevent form from refreshing the page
+                console.log("clicked");
+
+                $.ajax({
+                    url: 'api/searchsubmit.api.php', // The PHP file that will handle the search
+                    type: 'POST',
+                    data: $(this).serialize(), // Serialize the form data (location, price, search)
+                    success: function (response) {
+                        // Populate the results in the #searchResults div
+                        $('#result').html(response);
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        console.error("Error: " + error);
+                    }
+                });
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>

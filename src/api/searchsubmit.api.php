@@ -26,8 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $properties = $propertyObj->viewProp($location, $price, $search);
 
     // Output the result as HTML
-    header('Content-Type: text/html');
-    if (!empty($properties)) {
+    if ($properties) {
         foreach ($properties as $property) {
             echo '<div class="property-item shadow-sm hover:-translate-y-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-500">
                 <div class="w-full relative overflow-hidden flex items-center" style="height: 350px;">

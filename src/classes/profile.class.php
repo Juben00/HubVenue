@@ -75,4 +75,35 @@ class Profile
             echo $e->getMessage();
         }
     }
+
+    public function fetchsave()
+    {
+        try {
+            $localid = $_SESSION['id'];
+            $query = "SELECT p.* FROM properties p JOIN saved_properties s ON s.propertyId = p.p_id  WHERE s.userId = :id ORDER BY s.sp_id DESC";
+
+            $queryexe = $this->db->connect()->prepare($query);
+            $queryexe->bindParam(":id", $localid);
+            $queryexe->execute();
+
+            $data = null;
+
+            if ($queryexe->rowCount() > 0) {
+                $data = $queryexe->fetchAll();
+            }
+
+            return $data;
+            // echo "<pre>";
+            // print_r($data);
+            // echo $data;
+            // echo "</pre>";
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
+
+$profileobj = new Profile();
+
+// var_dump($profileobj->fetchsave());

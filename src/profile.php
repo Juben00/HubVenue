@@ -83,6 +83,7 @@ checkAuth();
                 <div id="profiledisp" class="mt-2 flex flex-col gap-4 px-4">
 
                 </div>
+
             </div>
         </div>
 

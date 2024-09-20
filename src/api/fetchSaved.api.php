@@ -1,35 +1,21 @@
 <?php
 require_once '../authmiddleware.php';
-require_once '../classes/property.class.php';
+require_once '../classes/profile.class.php';
 require_once '../sanitize.php';
 
-// Initialize the Property object
-$propertyObj = new Property();
+$profileobj = new Profile();
 
-// Check if the user is logged in
 checkAuth();
 
-// Initialize variables for the form data
-$location = '';
-$price = '';
-$search = '';
-$properties = []; // Initialize an empty array for properties
+$properties = $profileobj->fetchsave();
 
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Sanitize and assign form input values
-    $location = sanitizeInput($_POST['location'] ?? '');
-    $price = sanitizeInput($_POST['price'] ?? '');
-    $search = sanitizeInput($_POST['search'] ?? '');
+header('Content-Type: text/html');
 
-    // Fetch properties based on user input
-    $properties = $propertyObj->viewProp($location, $price, $search);
 
-    // Output the result as HTML
-    if ($properties) {
-        foreach ($properties as $property) {
-            echo '<div class="property-item shadow-sm hover:-translate-y-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-500">
-                <div class="w-full relative overflow-hidden flex items-center" style="height: 350px;">
+if ($properties) {
+    foreach ($properties as $property) {
+        echo '<div class="property-item shadow-sm hover:-translate-y-2 border-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-500">
+                <div class="w-full relative overflow-hidden flex items-center"  style="height: 150px; width: 100%;">
                     <img class="" src="' . htmlspecialchars($property['image']) . '" alt="Property Image">
                     <div class="cursor-pointer flex gap-2 flex-col items-start p-4 absolute custom-gradient h-full top-0 w-full justify-between" style="background: linear-gradient(to top, rgba(75, 85, 99, 0.5), rgba(75, 85, 99, 0));">
                         <div class="flex justify-between items-center w-full">
@@ -53,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="w-full">
                             <div class="flex justify-center items-center ">
                                 <div class="flex-1 flex flex-col">
-                                    <h2 class="text-3xl font-semibold text-red-500">' . htmlspecialchars($property['property_name']) . '</h2>
+                                    <h2 class="text-xl font-semibold text-red-500">' . htmlspecialchars($property['property_name']) . '</h2>
                                     <p class="text-neutral-200 flex-1">' . htmlspecialchars($property['location']) . '</p>
                                 </div>
                                 <a class="bg-neutral-500/50 rounded-full border p-3 hover:text-red-600/80 duration-200 text-neutral-200" href="./property.php?id=' . $property['p_id'] . '">
@@ -68,12 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>';
 
-        }
-    } else {
-        echo '<p class="text-red-500">No properties found.</p>';
     }
 } else {
-    // Handle non-POST requests
-    http_response_code(405); // Method Not Allowed
-    echo '<p class="text-red-500">Invalid request method. Only POST requests are allowed.</p>';
+    echo '<p class="text-red-500">No properties found.</p>';
 }

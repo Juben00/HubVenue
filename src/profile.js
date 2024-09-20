@@ -1,6 +1,7 @@
 const usertype = document.getElementById('usertype').innerHTML;
 const posted = document.getElementById('posted');
 const rents = document.getElementById('rents');
+const saved = document.getElementById('saved');
 
 document.addEventListener('DOMContentLoaded', function () {
   if (usertype === 'user') {
@@ -17,7 +18,33 @@ if (usertype === 'user') {
 
 rents.addEventListener("click", async () => {
     try {
+      
+        rents.classList.add('bg-neutral-600')
+        saved.classList.remove('bg-neutral-600');
         const response = await fetch('./api/fetchRent.api.php');
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const html = await response.text();
+
+        if (html) {
+            updateProfileDisp(html);
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+saved.addEventListener("click", async () => {
+    try {
+      
+        rents.classList.remove('bg-neutral-600');
+        saved.classList.add('bg-neutral-600');
+
+        const response = await fetch('./api/fetchSaved.api.php');
         
         if (!response.ok) {
             throw new Error('Network response was not ok');

@@ -131,11 +131,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
 
         <!-- Buttons -->
-        <div class="flex justify-around gap-2 mt-2">
+        <div class="flex flex-col gap-2 mt-2 w-1/2">
             <button type="submit" class="px-3 py-2 border-2 bg-blue-700 font-semibold text-white rounded-md">SIGN
                 UP</button>
             <a href=".././index.php"
-                class="px-3 py-2 border border-black bg-neutral-400 font-semibold text-neutral-800 rounded-md">LOGIN</a>
+                class="underline underline-offset-1 text-xs text-center hover:text-red-500 duration-150">Back to
+                Login</a>
         </div>
     </form>
 

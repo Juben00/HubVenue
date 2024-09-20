@@ -55,8 +55,7 @@ CREATE TABLE saved_properties (
     propertyId INT(11) NOT NULL,
     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (propertyId) REFERENCES properties(p_id) ON DELETE CASCADE
-);
-
+); 
 
 INSERT INTO properties (p_id, userId, property_name, location, description, image, amenities, price) VALUES
 (1, 131, 'The Residence', 'Ayala, Zamboanga City', 'A contemporary 2-bedroom, 1-bathroom home featuring Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt expedita molestiae natus ea minima vel, molestias quo architecto veniam autem! lorem ipsum dolor, sit amet.', 'https://i.ibb.co/yh8mqGX/beaach-house-12.jpg', '{"1": "pool", "2": "basketball court", "3": "karaoke"}', 1500),

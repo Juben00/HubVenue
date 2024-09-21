@@ -56,5 +56,5 @@ if ($properties) {
 
     }
 } else {
-    echo '<p class="text-red-500">No properties found.</p>';
+    echo '<p class="text-red-500">No Saved Properties found.</p>';
 }

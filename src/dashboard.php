@@ -294,38 +294,17 @@ $filteredProperties = array_map(function ($property) {
                 <div class="flex flex-col items-center bg-neutral-200/20 p-4 lg:p-8 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold  text-red-500 italic">Our Mission</h3>
                     <p class="text-center">
-                        Our mission is to revolutionize the way people find and book event spaces by providing a
-                        dynamic
-                        platform that seamlessly connects event organizers with unique venues. We aim to empower
-                        property
-                        owners to maximize their earning potential by offering their homes, commercial spaces, and
-                        creative
-                        environments as venues for a diverse range of events. Whether it's a wedding, corporate
-                        meeting,
-                        or
-                        a casual gathering, we strive to offer a variety of spaces that cater to every occasion,
-                        helping
-                        make each event truly memorable.
+                        To simplify finding and booking available venues, offering users an easy and efficient platform
+                        that connects them with ideal spaces for their events, ensuring seamless experience from
+                        discovery ro registration.
                     </p>
                 </div>
                 <!-- vission -->
                 <div class="flex flex-col items-center bg-neutral-200/20 p-4 lg:p-8 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold  text-red-500 italic">Our Vision</h3>
                     <p class="text-center">
-                        Our vision is to be the leading platform that bridges the gap between event organizers and
-                        space
-                        owners, creating a global community where finding the perfect venue is as easy as a few
-                        clicks.
-                        We
-                        envision a future where every space, from cozy homes to grand commercial venues, is
-                        accessible
-                        to
-                        those looking to create extraordinary experiences. By fostering a collaborative environment,
-                        we
-                        aim
-                        to inspire creativity and enable hosts and organizers to come together, turning any space
-                        into a
-                        potential stage for unforgettable moments.
+                        To be the go to platform for venue reservations, helping people connect with the perfect spaces
+                        for any event.
                     </p>
                 </div>
             </div>

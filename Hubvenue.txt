@@ -1,0 +1,40 @@
+Tasks: 
+	booking{
+		if the start_date is in the past --done
+		disable the dates that are already booked --micro adjustments
+	}
+	
+	saving of property{
+		bookmark animation --bug --feature removed
+		saving to profile --done
+	}
+	
+	adding of properties{
+		form
+		uploading of image to imgbb
+	}
+	
+	password recovery{
+		*everything
+	}
+	
+	profile{
+		uploading avatar
+		setting a bio
+	}
+	
+	registration{
+		change username to firstname, lastname
+	}
+	
+	searching of property{
+		locations and price suggestions
+	}
+	
+	settings{
+		changing of user info
+	}
+	
+	bottons functionality
+	
+	refund and cancel

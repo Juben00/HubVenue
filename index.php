@@ -44,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet">
+    <title>HubVenue - Login</title>
+    <link rel="icon" href="./public/images/white_transparent.png">
     <style>
         .bg {
             background-image: url('./public/images/pexels-creative-vix-7283.jpg');
@@ -86,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="flex flex-col w-full">
             <span class="flex items-center justify-between">
                 <label for="password" class="font-semibold text-sm">PASSWORD</label>
-                <a href="#" class="text-xs underline underline-offset-2">Forgot Password</a>
+                <a href="#" class="text-xs underline underline-offset-2 hover:text-red-500">Forgot Password</a>
             </span>
             <input type="password" id="password" name="password" class="px-1 py-1 border" placeholder="Enter Password">
             <span class="text-red-500"><?php echo $passwordErr; ?></span>
@@ -95,8 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- Buttons -->
         <div class="flex flex-col gap-2 w-1/2 mt-2">
             <button type="submit"
-                class="px-3 py-2 border-2 bg-blue-700 font-semibold text-white rounded-md">LOGIN</button>
-            <a href="./src/signup.php"
+                class="px-3 py-2 border-2 bg-red-500 hover:text-neutral-700 duration-150 hover:bg-red-400 font-semibold text-white rounded-md">LOGIN</button>
+            <a href="./signup.php"
                 class="underline underline-offset-1 text-xs text-center hover:text-red-500 duration-150">Sign Up</a>
         </div>
     </form>

@@ -1,6 +1,6 @@
 <?php
-require_once './classes/user.class.php';
-require_once './sanitize.php';
+require_once './src/classes/user.class.php';
+require_once './src/sanitize.php';
 $userObj = new User();
 
 $message = '';
@@ -51,10 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../output.css?v=1.0">
+    <link rel="stylesheet" href="./output.css?v=1.0">
+    <title>HubVenue - Sign Up</title>
+    <link rel="icon" href="./public/images/white_transparent.png">
     <style>
         .bg {
-            background-image: url('../public/images/pexels-creative-vix-7283.jpg');
+            background-image: url('./public/images/pexels-creative-vix-7283.jpg');
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
@@ -68,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         class="flex flex-col items-center py-4 px-6 overflow-hidden border-2 rounded-2xl border-neutral-600 bg-neutral-200/80 gap-2 shadow-2xl"
         style="width: 400px; ">
         <div class="pt-4">
-            <img src="../public/images/black_transparent.png" alt="" class="h-24">
+            <img src="./public/images/black_transparent.png" alt="" class="h-24">
         </div>
         <h1 class="font-semibold text-xl">SIGNUP FORM</h1>
         <?php if (!empty($message)) { ?>
@@ -132,9 +134,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!-- Buttons -->
         <div class="flex flex-col gap-2 mt-2 w-1/2">
-            <button type="submit" class="px-3 py-2 border-2 bg-blue-700 font-semibold text-white rounded-md">SIGN
+            <button type="submit"
+                class="px-3 py-2 border-2 bg-red-500 hover:text-neutral-700 duration-150 hover:bg-red-400 font-semibold text-white rounded-md">SIGN
                 UP</button>
-            <a href=".././index.php"
+            <a href="./index.php"
                 class="underline underline-offset-1 text-xs text-center hover:text-red-500 duration-150">Back to
                 Login</a>
         </div>

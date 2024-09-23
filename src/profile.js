@@ -23,7 +23,7 @@ posted.addEventListener("click", async () => {
     posted.classList.add("bg-neutral-600");
     saved.classList.remove("bg-neutral-600");
     rents.classList.remove("bg-neutral-600");
-    const response = await fetch("./api/fetchRent.api.php");
+    const response = await fetch("./api/fetchPost.api.php");
 
     if (!response.ok) {
       throw new Error("Network response was not ok");

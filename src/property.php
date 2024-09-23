@@ -171,7 +171,7 @@ checkAuth(); // Check if the user is logged in
                     .bindPopup(address)
                     .openPopup();
             } else {
-                alert('Address not found!');
+                console.log('Address not found!');
             }
         })
         .catch(error => {

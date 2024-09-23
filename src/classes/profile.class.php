@@ -102,8 +102,34 @@ class Profile
             echo $e->getMessage();
         }
     }
+
+    public function fetchpost()
+    {
+        try {
+            $localid = $_SESSION['id'];
+            $query = "SELECT * FROM properties WHERE userId = :id ORDER BY p_id DESC";
+
+            $queryexe = $this->db->connect()->prepare($query);
+            $queryexe->bindParam(":id", $localid);
+            $queryexe->execute();
+
+            $data = null;
+
+            if ($queryexe->rowCount() > 0) {
+                $data = $queryexe->fetchAll();
+            }
+
+            return $data;
+            // echo "<pre>";
+            // print_r($data);
+            // echo "</pre>";
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
 
 $profileobj = new Profile();
 
-// var_dump($profileobj->fetchsave());
+// var_dump($profileobj->fetchpost());

@@ -10,8 +10,8 @@ Tasks:
 	}
 	
 	adding of properties{
-		form
-		uploading of image to imgbb
+		form  
+		uploading of image to imgbb  
 	}
 	
 	password recovery{
@@ -19,6 +19,7 @@ Tasks:
 	}
 	
 	profile{
+		display of posted properties -- done
 		uploading avatar
 		setting a bio
 	}

@@ -19,7 +19,7 @@ checkAuth();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.11">
+    <link rel="stylesheet" href="../output.css?v=1.12">
 </head>
 
 <body
@@ -48,14 +48,18 @@ checkAuth();
                     <img src=".././public/others/placeholder-400x400.jpg" alt="Profile Picture"
                         class="object-cover w-full h-full" id="profilePicture">
                 </div>
-                <div class="text-center leading-3">
-                    <p class="text-lg font-bold"><?= $profileinfo['username'] ?></p>
-                    <p class="text-neutral-200" id="usertype"><?= $profileinfo['usertype'] ?></p>
+                <div class="text-center">
+                    <p class="text-lg font-bold capitalize  leading-4"><?= $profileinfo['username'] ?>
+                        <br>
+                        <span class="text-neutral-200 capitalize text-sm font-normal"
+                            id="usertype"><?= $profileinfo['usertype'] ?></span>
+                    </p>
                 </div>
                 <button class="py-2 px-4 border rounded-md bg-neutral-400 text-neutral-800">Upload new
                     Avatar</button>
                 <div class="flex flex-col w-full items-center">
-                    <p class="w-[90%] text-center text-neutral-200">Lorem ipsum dolor sit amet consectetur adipisicing
+                    <p class="w-[90%] text-center text-neutral-200 leading-5">Lorem ipsum dolor sit amet consectetur
+                        adipisicing
                         elit.
                         Ad, officia cupiditate voluptas saepe id fugiat.</p>
                 </div>

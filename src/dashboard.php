@@ -269,7 +269,7 @@ $filteredProperties = array_map(function ($property) {
                 <h3 class="text-xl font-semibold  text-red-500 italic">Our Story</h3>
                 <p>
                     Hubvenue was born out of the need to streamline the often complex and time-consuming process of
-                    f event
+                    event
                     planning. The journey began when our founders, faced with the daunting task of organizing
                     multiple
                     events, realized how fragmented the venue and catering service industry was. From endless phone

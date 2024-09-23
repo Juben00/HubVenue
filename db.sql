@@ -6,7 +6,8 @@ USE Hubvenue;
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usertype VARCHAR(10) NOT NULL,
-    username VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL, -- Increased length for storing hashed passwords
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

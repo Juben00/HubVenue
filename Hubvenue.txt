@@ -15,7 +15,8 @@ Tasks:
 	}
 	
 	password recovery{
-		*everything
+		*everything -- done
+		UI
 	}
 	
 	profile{
@@ -25,7 +26,7 @@ Tasks:
 	}
 	
 	registration{
-		change username to firstname, lastname
+		change username to firstname, lastname -- done
 	}
 	
 	searching of property{

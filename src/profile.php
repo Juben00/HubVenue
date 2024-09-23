@@ -19,7 +19,7 @@ checkAuth();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.12">
+    <link rel="stylesheet" href="../output.css?v=1.13">
 </head>
 
 <body
@@ -49,11 +49,12 @@ checkAuth();
                         class="object-cover w-full h-full" id="profilePicture">
                 </div>
                 <div class="text-center">
-                    <p class="text-lg font-bold capitalize  leading-4"><?= $profileinfo['username'] ?>
+                    <div class="text-lg font-bold capitalize leading-3">
+                        <p><?= $profileinfo['first_name'] ?> <?= $profileinfo['last_name'] ?> </p>
                         <br>
                         <span class="text-neutral-200 capitalize text-sm font-normal"
                             id="usertype"><?= $profileinfo['usertype'] ?></span>
-                    </p>
+                    </div>
                 </div>
                 <button class="py-2 px-4 border rounded-md bg-neutral-400 text-neutral-800">Upload new
                     Avatar</button>
@@ -82,11 +83,12 @@ checkAuth();
                 <button id="saved" class="text-lg font-semibold text-center flex-1 w-full h-full">Saved</button>
             </div>
             <div class="flex flex-col lg:h-[530px] lg:overflow-y-auto">
-
                 <!-- Inner container without fixed height -->
                 <div id="profiledisp" class="mt-2 flex flex-col gap-4 px-4">
 
+
                 </div>
+
 
             </div>
         </div>

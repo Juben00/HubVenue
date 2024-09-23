@@ -3,6 +3,11 @@ const posted = document.getElementById("posted");
 const rents = document.getElementById("rents");
 const saved = document.getElementById("saved");
 
+// Cache for storing content
+let cachedPosted = null;
+let cachedRents = null;
+let cachedSaved = null;
+
 document.addEventListener("DOMContentLoaded", function () {
   if (usertype === "user") {
     posted.classList.add("hidden");
@@ -19,10 +24,17 @@ if (usertype === "user") {
 }
 
 posted.addEventListener("click", async () => {
+  posted.classList.add("bg-neutral-600");
+  saved.classList.remove("bg-neutral-600");
+  rents.classList.remove("bg-neutral-600");
+
+  // If cached content is available, use it
+  if (cachedPosted) {
+    updateProfileDisp(cachedPosted);
+    return;
+  }
+
   try {
-    posted.classList.add("bg-neutral-600");
-    saved.classList.remove("bg-neutral-600");
-    rents.classList.remove("bg-neutral-600");
     const response = await fetch("./api/fetchPost.api.php");
 
     if (!response.ok) {
@@ -32,6 +44,7 @@ posted.addEventListener("click", async () => {
     const html = await response.text();
 
     if (html) {
+      cachedPosted = html; // Cache the content
       updateProfileDisp(html);
     }
   } catch (error) {
@@ -40,10 +53,17 @@ posted.addEventListener("click", async () => {
 });
 
 rents.addEventListener("click", async () => {
+  rents.classList.add("bg-neutral-600");
+  saved.classList.remove("bg-neutral-600");
+  posted.classList.remove("bg-neutral-600");
+
+  // If cached content is available, use it
+  if (cachedRents) {
+    updateProfileDisp(cachedRents);
+    return;
+  }
+
   try {
-    rents.classList.add("bg-neutral-600");
-    saved.classList.remove("bg-neutral-600");
-    posted.classList.remove("bg-neutral-600");
     const response = await fetch("./api/fetchRent.api.php");
 
     if (!response.ok) {
@@ -53,6 +73,7 @@ rents.addEventListener("click", async () => {
     const html = await response.text();
 
     if (html) {
+      cachedRents = html; // Cache the content
       updateProfileDisp(html);
     }
   } catch (error) {
@@ -61,10 +82,17 @@ rents.addEventListener("click", async () => {
 });
 
 saved.addEventListener("click", async () => {
+  rents.classList.remove("bg-neutral-600");
+  saved.classList.add("bg-neutral-600");
+  posted.classList.remove("bg-neutral-600");
+
+  // If cached content is available, use it
+  if (cachedSaved) {
+    updateProfileDisp(cachedSaved);
+    return;
+  }
+
   try {
-    rents.classList.remove("bg-neutral-600");
-    saved.classList.add("bg-neutral-600");
-    posted.classList.remove("bg-neutral-600");
     const response = await fetch("./api/fetchSaved.api.php");
 
     if (!response.ok) {
@@ -74,6 +102,7 @@ saved.addEventListener("click", async () => {
     const html = await response.text();
 
     if (html) {
+      cachedSaved = html; // Cache the content
       updateProfileDisp(html);
     }
   } catch (error) {

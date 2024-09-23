@@ -14,7 +14,18 @@ header('Content-Type: text/html');
 
 if ($properties) {
     foreach ($properties as $property) {
-        echo '<div class="property-item shadow-sm hover:-translate-y-2 border-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-500">
+        echo '
+        <div class="property-item shadow-sm border-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 group">
+        <div class="w-full relative overflow-hidden flex items-center group justify-center" style="height: 150px; width: 100%;">
+            <button class="duration-200 group-hover:scale-105 flex items-center gap-2 p-2 rounded-md ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg> <p class="text-2xl font-bold">Post</p>
+            </button>
+        </div>
+        </div>
+        <div class="property-item shadow-sm hover:-translate-y-2 border-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-500">
                 <div class="w-full relative overflow-hidden flex items-center"  style="height: 150px; width: 100%;">
                     <img class="" src="' . htmlspecialchars($property['image']) . '" alt="Property Image">
                     <div class="cursor-pointer flex gap-2 flex-col items-start p-4 absolute custom-gradient h-full top-0 w-full justify-between" style="background: linear-gradient(to top, rgba(75, 85, 99, 0.5), rgba(75, 85, 99, 0));">

@@ -8,25 +8,24 @@ Tasks:
 		bookmark animation --bug --feature removed
 		saving to profile --done
 	}
+
+	password recovery{
+		*everything -- done
+	}
+
+	registration{
+		change username to firstname, lastname -- done
+	}
 	
 	adding of properties{
 		form  
 		uploading of image to imgbb  
 	}
 	
-	password recovery{
-		*everything -- done
-		UI
-	}
-	
 	profile{
 		display of posted properties -- done
 		uploading avatar
 		setting a bio
-	}
-	
-	registration{
-		change username to firstname, lastname -- done
 	}
 	
 	searching of property{

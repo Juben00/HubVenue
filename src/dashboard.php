@@ -222,8 +222,8 @@ $filteredProperties = array_map(function ($property) {
 
                                     <div class="w-full">
                                         <div class="flex justify-center items-center ">
-                                            <div class="flex-1 flex flex-col">
-                                                <h2 class="text-3xl font-semibold text-red-500">
+                                            <div class="flex-1 flex flex-col leading-3">
+                                                <h2 class="text-2xl font-semibold text-red-500">
                                                     <?php echo htmlspecialchars($property['property_name']); ?>
                                                 </h2>
                                                 <p class="text-neutral-200 flex-1">

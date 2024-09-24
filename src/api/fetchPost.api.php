@@ -13,9 +13,7 @@ header('Content-Type: text/html');
 
 
 if ($properties) {
-    foreach ($properties as $property) {
-        echo '
-        <div class="property-item shadow-sm border-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 group">
+    echo '<div class="property-item shadow-sm border-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 group">
         <div class="w-full relative overflow-hidden flex items-center group justify-center" style="height: 150px; width: 100%;">
             <button class="duration-200 group-hover:scale-105 flex items-center gap-2 p-2 rounded-md ">
             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
@@ -24,7 +22,9 @@ if ($properties) {
             </svg> <p class="text-2xl font-bold">Post</p>
             </button>
         </div>
-        </div>
+        </div>';
+    foreach ($properties as $property) {
+        echo '
         <div class="property-item shadow-sm hover:-translate-y-2 border-2 ease-out overflow-hidden rounded-lg relative shadow-neutral-50 duration-500">
                 <div class="w-full relative overflow-hidden flex items-center"  style="height: 150px; width: 100%;">
                     <img class="" src="' . htmlspecialchars($property['image']) . '" alt="Property Image">

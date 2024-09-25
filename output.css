@@ -857,6 +857,10 @@ video {
   width: 90%;
 }
 
+.w-\[95\%\] {
+  width: 95%;
+}
+
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
@@ -864,6 +868,18 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[98\%\] {
+  width: 98%;
+}
+
+.w-\[48\%\] {
+  width: 48%;
+}
+
+.w-\[49\%\] {
+  width: 49%;
 }
 
 .max-w-\[1000px\] {

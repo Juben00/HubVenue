@@ -6,7 +6,9 @@ class User
 {
     public $id;
     public $usertype;
-    public $username;
+    // public $username;
+    public $first_name;
+    public $last_name;
     public $email;
     public $password;
     public $message;
@@ -29,10 +31,11 @@ class User
                 $this->message = "Error: Duplicate entry for Email '" . htmlspecialchars($this->email) . "'. Please use a different email.";
                 return false;
             } else {
-                $insertquery = "INSERT INTO users (usertype, username, email, password) VALUES (:usertype, :username, :email, :password)";
+                $insertquery = "INSERT INTO users (usertype, first_name, last_name, email, password) VALUES (:usertype, :first_name, :last_name, :email, :password)";
                 $queryexe = $this->db->connect()->prepare($insertquery);
                 $queryexe->bindParam(":usertype", $this->usertype);
-                $queryexe->bindParam(":username", $this->username);
+                $queryexe->bindParam(":first_name", $this->first_name);
+                $queryexe->bindParam(":last_name", $this->last_name);
                 $queryexe->bindParam(":email", $this->email);
                 $hash_pass = password_hash($this->password, PASSWORD_DEFAULT);
                 $queryexe->bindParam(":password", $hash_pass);

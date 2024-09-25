@@ -12,7 +12,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     token VARCHAR(255),
-    expires_at DATETIME
+    expires_at DATETIME,
+    profile_pic_url VARCHAR(255) NOT NULL
 );
 
 -- Create the properties table with a foreign key constraint

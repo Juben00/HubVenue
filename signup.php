@@ -4,20 +4,24 @@ require_once './src/sanitize.php';
 $userObj = new User();
 
 $message = '';
-$usertype = $username = $email = $password = "";
-$usertypeErr = $usernameErr = $emailErr = $passwordErr = "";
+$usertype = $first_name = $last_name = $email = $password = "";
+$usertypeErr = $first_nameErr = $last_nameErr = $emailErr = $passwordErr = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usertype = isset($_POST['user']) ? sanitizeInput($_POST['user']) : '';
-    $username = isset($_POST['username']) ? sanitizeInput($_POST['username']) : '';
+    $first_name = isset($_POST['first_name']) ? sanitizeInput($_POST['first_name']) : '';
+    $last_name = isset($_POST['last_name']) ? sanitizeInput($_POST['last_name']) : '';
     $email = isset($_POST['email']) ? sanitizeInput($_POST['email']) : '';
     $password = isset($_POST['password']) ? sanitizeInput($_POST['password']) : '';
 
     if (empty($usertype)) {
         $usertypeErr = "* User type is required";
     }
-    if (empty($username)) {
-        $usernameErr = "* Username is required";
+    if (empty($first_name)) {
+        $first_nameErr = "* Firstname is required";
+    }
+    if (empty($last_name)) {
+        $last_nameErr = "* Lastname is required";
     }
     if (verifyEmail($email) === false) {
         $emailErr = "* Invalid email format";
@@ -32,12 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($usertypeErr) && empty($usernameErr) && empty($emailErr) && empty($passwordErr)) {
         $userObj->usertype = $usertype;
-        $userObj->username = $username;
+        $userObj->first_name = $first_name;
+        $userObj->last_name = $last_name;
         $userObj->email = $email;
         $userObj->password = $password;
 
         if ($userObj->register()) {
-            header("Location: .././index.php");
+            header("Location: ./index.php");
         } else {
             $message = $userObj->message;
         }
@@ -51,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./output.css?v=1.0">
+    <link rel="stylesheet" href="./output.css?v=1.13">
     <title>HubVenue - Sign Up</title>
     <link rel="icon" href="./public/images/white_transparent.png">
     <style>
@@ -101,17 +106,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
 
-        <!-- USERNAME Field -->
-        <div class="flex flex-col w-full">
-            <span class="flex items-center justify-between">
-                <label for="username" class="font-semibold text-sm">USERNAME</label>
-                <span class="text-red-500"><?php echo $usernameErr; ?></span>
-            </span>
-            <input type="text" class="px-2 py-1 border" placeholder="Enter Username" name="username"
-                value="<?php echo htmlspecialchars($username); ?>">
+        <div class="flex items-center w-full justify-between">
+            <div class="flex flex-col w-[49%]">
+                <span class="flex items-center justify-between">
+                    <label for="first_name" class="font-semibold text-sm">FIRST NAME</label>
+                    <span class="text-red-500"><?php echo $first_nameErr; ?></span>
+                </span>
+                <input type="text" class="px-2= py-1 border" placeholder="Enter First Name" name="first_name"
+                    value="<?php echo htmlspecialchars($first_name); ?>">
+            </div>
+
+            <div class="flex flex-col w-[49%]">
+                <span class="flex items-center justify-between">
+                    <label for="last_name" class="font-semibold text-sm">LAST NAME</label>
+                    <span class="text-red-500"><?php echo $last_nameErr; ?></span>
+                </span>
+                <input type="text" class="px-2  py-1 border" placeholder="Enter Last Name" name="last_name"
+                    value="<?php echo htmlspecialchars($last_name); ?>">
+            </div>
+
         </div>
 
-        <!-- EMAIL Field -->
         <div class="flex flex-col w-full">
             <span class="flex items-center justify-between">
                 <label for="email" class="font-semibold text-sm">EMAIL</label>
@@ -119,7 +134,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </span>
             <input type="text" class="px-2 py-1 border" placeholder="Enter Email" name="email"
                 value="<?php echo htmlspecialchars($email); ?>">
-
         </div>
 
         <!-- PASSWORD Field -->

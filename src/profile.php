@@ -23,10 +23,75 @@ checkAuth();
 </head>
 
 <body
-    class="bg-neutral-700/80 text-neutral-100 flex justify-center items-center box-border lg:h-screen lg:overflow-hidden">
+    class="bg-neutral-700/80 text-neutral-100 flex relative justify-center items-center box-border lg:h-screen lg:overflow-hidden">
+
+
 
     <div
-        class="p-4 w-full lg:w-[1000px] flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:h-[600px] rounded-md shadow-neutral-600 shadow-md">
+        class="p-4 w-full lg:w-[1000px] flex flex-col relative h-screen lg:grid lg:grid-cols-2 gap-4 lg:h-[600px] rounded-md shadow-neutral-600 shadow-md">
+
+        <!-- upload_property_form -->
+        <form action="upload_property.php"
+            class="absolute bg-neutral-100 z-50 w-[90%] text-neutral-800 gap-2 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 p-4 rounded-md flex flex-col"
+            id="upload_property_form" method="POST" enctype="multipart/form-data">
+            <h1 class="font-bold text-lg md:text-2xl text-center">PROPERTY UPLOAD FORM</h1>
+
+            <!-- image -->
+            <div class="flex flex-col relative">
+                <!-- Image placeholder -->
+                <img id="property_pic_preview" class="mb-2 h-56 object-cover border w-full" />
+                <button class="left-1/2 top-1/2 absolute -translate-y-1/2 -translate-x-1/2" id="imgtrigg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                        class="bi bi-plus-square" viewBox="0 0 16 16">
+                        <path
+                            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                        <path
+                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                    </svg>
+                </button>
+                <input type="file" name="property_pic" id="property_pic" accept="image/*" required class="hidden">
+            </div>
+
+            <!-- property name -->
+            <div class="flex flex-col gap-2">
+                <div class="flex flex-col">
+                    <label for="property_name" class="font-semibold">Property Name</label>
+                    <input type="text" name="property_name" class="px-2 py-1 border" required
+                        placeholder="Enter property name">
+                </div>
+
+                <!-- property location -->
+                <div class="flex flex-col">
+                    <label for="property_location" class="font-semibold">Property Location</label>
+                    <input type="text" name="property_location" class="px-2 py-1 border" required
+                        placeholder="Enter property location">
+                </div>
+
+                <!-- description -->
+                <div class="flex flex-col">
+                    <label for="property_description" class="font-semibold">Property Description</label>
+                    <textarea name="property_description" rows="4" class="px-2 py-1 border" required
+                        placeholder="Enter property description"></textarea>
+                </div>
+
+                <!-- amenities (JSON format) -->
+                <div class="flex flex-col">
+                    <label for="property_amenities" class="font-semibold">Amenities (Separated by commas)</label>
+                    <textarea name="property_amenities" rows="3" class="px-2 py-1 border" required
+                        placeholder='e.g. Wifi, Pool, Billard Hall, Kitchen'></textarea>
+                </div>
+
+                <!-- price -->
+                <div class="flex flex-col">
+                    <label for="property_price" class="font-semibold">Price</label>
+                    <input type="number" name="property_price" class="px-2 py-1 border" required
+                        placeholder="Enter property price">
+                </div>
+
+                <button type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md">Upload Property</button>
+            </div>
+        </form>
+
 
         <!-- Profile section -->
         <div class="flex flex-col relative items-center justify-start p-6 space-y-4 lg:h-full ">
@@ -45,19 +110,20 @@ checkAuth();
             <div class="flex flex-col items-center h-full justify-center gap-4 relative">
 
                 <!-- image placeholder -->
-                <div class="relative w-32 h-32 cursor-pointer border border-gray-300 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center"
+                <div class="relative w-52 h-52 cursor-pointer border border-gray-300 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center"
                     id="uploadbtn">
                     <img src="<?= $profileinfo['profile_pic_url'] ?>" alt="Profile Picture"
                         class="object-cover w-full h-full" id="profilePicture">
                 </div>
 
-                <!-- upload_form.html -->
+                <!-- upload_profile_picture_form -->
                 <form action="profile_upload.php"
                     class="absolute bg-neutral-100 text-neutral-800 gap-2 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 p-4 rounded-md hidden"
                     id="upload_form" method="POST" enctype="multipart/form-data">
                     <label for="profile_pic" class="font-semibold">Upload Profile Picture</label>
                     <input type="file" name="profile_pic" accept="image/*" required>
-                    <button type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md">Upload Image</button>
+                    <button type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md">Upload
+                        Image</button>
                 </form>
 
 
@@ -131,6 +197,34 @@ checkAuth();
     </div>
 
     <script src="./profile.js"></script>
+    <script>
+        // JavaScript to trigger file upload and change button opacity
+        document.getElementById('imgtrigg').addEventListener('click', (e) => {
+            e.preventDefault();  // Prevent the default button behavior
+            e.target.classList.add('opacity-0');  // Add the 'opacity-0' class to the button
+            document.getElementById('property_pic').click();  // Trigger file input click
+        });
+
+        // JavaScript to display the image when a file is selected
+        document.getElementById('property_pic').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('property_pic_preview');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden');
+                    preview.classList.add('block');
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '';
+            }
+        });
+    </script>
+
+
 </body>
 
 </html>

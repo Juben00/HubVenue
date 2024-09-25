@@ -24,7 +24,7 @@ Tasks:
 	
 	profile{
 		display of posted properties -- done
-		uploading avatar
+		uploading avatar -- done
 		setting a bio
 	}
 	
@@ -45,3 +45,5 @@ Tasks:
 	bottons functionality
 	
 	refund and cancel
+
+	admin

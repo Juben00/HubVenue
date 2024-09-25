@@ -35,6 +35,12 @@ Tasks:
 	settings{
 		changing of user info
 	}
+
+	terms and conditions - (sign up)
+	
+	feedback rating
+
+	searching options
 	
 	bottons functionality
 	

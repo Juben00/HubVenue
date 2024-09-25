@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 if (usertype === "user") {
-  posted.lassList.add("hidden");
+  posted.classList.add("hidden");
   rents.click();
   rents.classList.add("bg-neutral-600");
 }

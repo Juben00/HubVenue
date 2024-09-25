@@ -146,3 +146,33 @@ updateRentStatus();
 
 // Optionally, set an interval to keep checking the status every minute (or any interval you prefer)
 setInterval(updateRentStatus, 100);
+
+const uploadBtn = document.getElementById("uploadbtn");
+const uploadForm = document.getElementById("upload_form");
+let isVisible = false;
+
+const toggleFormVisibility = (visible) => {
+  if (visible) {
+    uploadForm.classList.remove("hidden");
+    uploadForm.classList.add("flex", "flex-col");
+  } else {
+    uploadForm.classList.add("hidden");
+    uploadForm.classList.remove("flex", "flex-col");
+  }
+  isVisible = visible;
+};
+
+uploadBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleFormVisibility(!isVisible);
+});
+
+document.addEventListener("click", (e) => {
+  if (
+    isVisible &&
+    !uploadForm.contains(e.target) &&
+    !uploadBtn.contains(e.target)
+  ) {
+    toggleFormVisibility(false);
+  }
+});

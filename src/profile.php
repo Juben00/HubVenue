@@ -32,7 +32,7 @@ checkAuth();
         <div class="flex flex-col relative items-center justify-start p-6 space-y-4 lg:h-full ">
             <div
                 class="fixed left-0 top-0 p-7 bg-neutral-600 lg:p-0 z-50 lg:absolute lg:left-[2px] lg:top-[2px] w-full h-fit">
-                <button onclick="window.history.back()"
+                <button onclick="window.location.href = './dashboard.php';"
                     class="fixed left-[5px] top-[10px] lg:absolute lg:left-[2px] lg:top-[2px] hover:text-red-500 duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                         class="bi bi-chevron-left" viewBox="0 0 16 16">
@@ -42,12 +42,25 @@ checkAuth();
                 </button>
             </div>
 
-            <div class="flex flex-col items-center h-full justify-center gap-4">
+            <div class="flex flex-col items-center h-full justify-center gap-4 relative">
+
+                <!-- image placeholder -->
                 <div
                     class="relative w-32 h-32 border border-gray-300 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-                    <img src=".././public/others/placeholder-400x400.jpg" alt="Profile Picture"
+                    <img src="<?= $profileinfo['profile_pic_url'] ?>" alt="Profile Picture"
                         class="object-cover w-full h-full" id="profilePicture">
                 </div>
+
+                <!-- upload_form.html -->
+                <form action="profile_upload.php"
+                    class="absolute bg-neutral-100 text-neutral-800 gap-2 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 p-4 rounded-md hidden"
+                    id="upload_form" method="POST" enctype="multipart/form-data">
+                    <label for="profile_pic" class="font-semibold">Upload Profile Picture</label>
+                    <input type="file" name="profile_pic" accept="image/*" required>
+                    <button type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md">Upload Image</button>
+                </form>
+
+
                 <div class="text-center">
                     <div class="text-lg font-bold capitalize leading-3">
                         <p><?= $profileinfo['first_name'] ?> <?= $profileinfo['last_name'] ?> </p>
@@ -56,8 +69,11 @@ checkAuth();
                             id="usertype"><?= $profileinfo['usertype'] ?></span>
                     </div>
                 </div>
-                <button class="py-2 px-4 border rounded-md bg-neutral-400 text-neutral-800">Upload new
+
+                <!-- toggle upload button -->
+                <button class="py-2 px-4 border rounded-md bg-neutral-400 text-neutral-800" id="uploadbtn">Upload new
                     Avatar</button>
+
                 <div class="flex flex-col w-full items-center">
                     <p class="w-[90%] text-center text-neutral-200 leading-5">Lorem ipsum dolor sit amet consectetur
                         adipisicing

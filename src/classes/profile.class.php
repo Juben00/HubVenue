@@ -21,7 +21,7 @@ class Profile
     {
         try {
             $localid = $_SESSION['id'];
-            $query = "SELECT usertype, first_name, last_name FROM users WHERE id = :id";
+            $query = "SELECT usertype, first_name, last_name, profile_pic_url FROM users WHERE id = :id";
             $queryexe = $this->db->connect()->prepare($query);
             $queryexe->bindParam(":id", $localid);
             $queryexe->execute();

@@ -6,7 +6,6 @@ class User
 {
     public $id;
     public $usertype;
-    // public $username;
     public $first_name;
     public $last_name;
     public $email;

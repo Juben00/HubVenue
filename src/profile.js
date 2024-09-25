@@ -2,6 +2,7 @@ const usertype = document.getElementById("usertype").innerHTML;
 const posted = document.getElementById("posted");
 const rents = document.getElementById("rents");
 const saved = document.getElementById("saved");
+const postTrigger = document.getElementById("post_trigger");
 
 // Cache for storing content
 let cachedPosted = null;
@@ -11,6 +12,7 @@ let cachedSaved = null;
 document.addEventListener("DOMContentLoaded", function () {
   if (usertype === "user") {
     posted.classList.add("hidden");
+    postTrigger.classList.add("hidden");
     rents.click();
   } else {
     posted.click();
@@ -27,6 +29,8 @@ posted.addEventListener("click", async () => {
   posted.classList.add("bg-neutral-600");
   saved.classList.remove("bg-neutral-600");
   rents.classList.remove("bg-neutral-600");
+  postTrigger.classList.remove("hidden");
+  postTrigger.classList.add("block");
 
   // If cached content is available, use it
   if (cachedPosted) {
@@ -56,6 +60,7 @@ rents.addEventListener("click", async () => {
   rents.classList.add("bg-neutral-600");
   saved.classList.remove("bg-neutral-600");
   posted.classList.remove("bg-neutral-600");
+  postTrigger.classList.add("hidden");
 
   // If cached content is available, use it
   if (cachedRents) {
@@ -85,6 +90,7 @@ saved.addEventListener("click", async () => {
   rents.classList.remove("bg-neutral-600");
   saved.classList.add("bg-neutral-600");
   posted.classList.remove("bg-neutral-600");
+  postTrigger.classList.add("hidden");
 
   // If cached content is available, use it
   if (cachedSaved) {
@@ -175,4 +181,8 @@ document.addEventListener("click", (e) => {
   ) {
     toggleFormVisibility(false);
   }
+});
+
+postTrigger.addEventListener("click", () => {
+  console.log("post triggered");
 });

@@ -45,8 +45,8 @@ checkAuth();
             <div class="flex flex-col items-center h-full justify-center gap-4 relative">
 
                 <!-- image placeholder -->
-                <div
-                    class="relative w-32 h-32 border border-gray-300 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                <div class="relative w-32 h-32 cursor-pointer border border-gray-300 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center"
+                    id="uploadbtn">
                     <img src="<?= $profileinfo['profile_pic_url'] ?>" alt="Profile Picture"
                         class="object-cover w-full h-full" id="profilePicture">
                 </div>
@@ -71,8 +71,8 @@ checkAuth();
                 </div>
 
                 <!-- toggle upload button -->
-                <button class="py-2 px-4 border rounded-md bg-neutral-400 text-neutral-800" id="uploadbtn">Upload new
-                    Avatar</button>
+                <!-- <button class="py-2 px-4 border rounded-md bg-neutral-400 text-neutral-800" id="uploadbtn">Upload new
+                    Avatar</button> -->
 
                 <div class="flex flex-col w-full items-center">
                     <p class="w-[90%] text-center text-neutral-200 leading-5">Lorem ipsum dolor sit amet consectetur
@@ -98,13 +98,30 @@ checkAuth();
                 <button id="rents" class="text-lg font-semibold text-center flex-1 w-full h-full">Rents</button>
                 <button id="saved" class="text-lg font-semibold text-center flex-1 w-full h-full">Saved</button>
             </div>
-            <div class="flex flex-col lg:h-[530px] lg:overflow-y-auto">
+
+            <div class="flex flex-col lg:h-[530px] lg:overflow-y-auto ">
+
+                <div class="property-item shadow-sm border-2 ease-out overflow-hidden rounded-lg mt-2 w-[93%] mx-auto relative shadow-neutral-50 group hidden"
+                    id="post_trigger">
+                    <div class="w-full relative overflow-hidden flex items-center group justify-center"
+                        style="height: 150px; width: 100%;">
+                        <button class="duration-200 group-hover:scale-105 flex items-center gap-2 p-2 rounded-md"
+                            id="post_trigger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                class="bi bi-plus-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                            </svg>
+                            <p class="text-2xl font-bold">Post</p>
+                        </button>
+                    </div>
+                </div>
                 <!-- Inner container without fixed height -->
                 <div id="profiledisp" class="mt-2 flex flex-col gap-4 px-4">
 
-
                 </div>
-
 
             </div>
         </div>

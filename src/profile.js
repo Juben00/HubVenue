@@ -2,6 +2,7 @@ const usertype = document.getElementById("usertype").innerHTML;
 const posted = document.getElementById("posted");
 const rents = document.getElementById("rents");
 const saved = document.getElementById("saved");
+const uploadPropertyForm = document.getElementById("upload_property_form");
 const postTrigger = document.getElementById("post_trigger");
 
 // Cache for storing content
@@ -30,7 +31,7 @@ posted.addEventListener("click", async () => {
   saved.classList.remove("bg-neutral-600");
   rents.classList.remove("bg-neutral-600");
   postTrigger.classList.remove("hidden");
-  postTrigger.classList.add("block");
+  postTrigger.classList.add("flex");
 
   // If cached content is available, use it
   if (cachedPosted) {
@@ -60,7 +61,7 @@ rents.addEventListener("click", async () => {
   rents.classList.add("bg-neutral-600");
   saved.classList.remove("bg-neutral-600");
   posted.classList.remove("bg-neutral-600");
-  postTrigger.classList.add("hidden");
+  // postTrigger.classList.add("hidden");
 
   // If cached content is available, use it
   if (cachedRents) {
@@ -90,7 +91,7 @@ saved.addEventListener("click", async () => {
   rents.classList.remove("bg-neutral-600");
   saved.classList.add("bg-neutral-600");
   posted.classList.remove("bg-neutral-600");
-  postTrigger.classList.add("hidden");
+  // postTrigger.classList.add("hidden");
 
   // If cached content is available, use it
   if (cachedSaved) {
@@ -157,6 +158,7 @@ const uploadBtn = document.getElementById("uploadbtn");
 const uploadForm = document.getElementById("upload_form");
 let isVisible = false;
 
+// profile picture
 const toggleFormVisibility = (visible) => {
   if (visible) {
     uploadForm.classList.remove("hidden");
@@ -183,6 +185,24 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// property add form
+
 postTrigger.addEventListener("click", () => {
-  console.log("post triggered");
+  //scroll to top
+  window.scrollTo(0, 0);
+  uploadPropertyForm.classList.add("fixed");
+  uploadPropertyForm.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  // disable scroll
+});
+
+document.addEventListener("click", (e) => {
+  if (
+    !uploadPropertyForm.contains(e.target) &&
+    !postTrigger.contains(e.target)
+  ) {
+    uploadPropertyForm.classList.add("hidden");
+    uploadPropertyForm.classList.remove("fixed");
+    document.body.style.overflow = "auto";
+  }
 });

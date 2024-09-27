@@ -21,7 +21,16 @@ class Profile
     {
         try {
             $localid = $_SESSION['id'];
-            $query = "SELECT usertype, first_name, last_name, profile_pic_url FROM users WHERE id = :id";
+            $query = "SELECT 
+    u.usertype, 
+    u.first_name, 
+    u.last_name, 
+    u.profile_pic_url, 
+    (SELECT COUNT(*) FROM properties p WHERE p.userId = u.id) AS posted,
+    (SELECT COUNT(*) FROM bookings b WHERE b.userId = u.id) AS booked,
+    (SELECT COUNT(*) FROM saved_properties s WHERE s.userId = u.id) AS saved 
+FROM users u
+WHERE u.id = :id;";
             $queryexe = $this->db->connect()->prepare($query);
             $queryexe->bindParam(":id", $localid);
             $queryexe->execute();
@@ -132,4 +141,4 @@ class Profile
 
 $profileobj = new Profile();
 
-// var_dump($profileobj->fetchpost());
+// var_dump($profileobj->fetchprofile());

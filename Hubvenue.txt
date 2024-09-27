@@ -25,7 +25,7 @@ Tasks:
 	profile{
 		display of posted properties -- done
 		uploading avatar -- done
-		setting a bio 
+		number of poseted, booked, saved -- done
 	}
 	
 	searching of property{

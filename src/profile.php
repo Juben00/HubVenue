@@ -72,7 +72,7 @@ checkAuth();
                         <label for="property_description" class="font-semibold ">Property Description</label>
                         <textarea name="property_description" rows="4"
                             class="px-2 py-1 leading-5 flex-1 border-2 resize-none" required
-                            placeholder="Enter property description"></textarea>
+                            placeholder="Enter property d                                           escription"></textarea>
                     </div>
 
                     <!-- amenities (JSON format) -->
@@ -99,7 +99,7 @@ checkAuth();
 
 
         <!-- Profile section -->
-        <div class="flex flex-col relative items-center justify-start p-6 space-y-4 lg:h-full ">
+        <div class="flex flex-col relative items-center justify-start p-6 space-y-4 lg:h-full pb-0">
             <div
                 class="fixed left-0 top-0 p-7 bg-neutral-600 lg:p-0 z-40 lg:absolute lg:left-[2px] lg:top-[2px] w-full h-fit">
                 <button onclick="window.location.href = './dashboard.php';"
@@ -112,7 +112,7 @@ checkAuth();
                 </button>
             </div>
 
-            <div class="flex flex-col items-center h-full justify-center gap-4 relative max-w-[500px]">
+            <div class="flex flex-col items-center h-full justify-center gap-4 relative  w-full ">
 
                 <!-- image placeholder -->
                 <div class="relative w-52 h-52 cursor-pointer border border-gray-300 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center"
@@ -133,7 +133,7 @@ checkAuth();
 
 
                 <div class="text-center">
-                    <div class="text-lg font-bold capitalize leading-3">
+                    <div class="text-lg font-bold capitalize leading-[.50rem]">
                         <p><?= $profileinfo['first_name'] ?> <?= $profileinfo['last_name'] ?> </p>
                         <br>
                         <span class="text-neutral-200 capitalize text-sm font-normal"
@@ -141,13 +141,7 @@ checkAuth();
                     </div>
                 </div>
 
-                <div class="flex flex-col w-full items-center">
-                    <p class="w-[90%] text-center text-neutral-200 leading-5">Lorem ipsum dolor sit amet consectetur
-                        adipisicing
-                        elit.
-                        Ad, officia cupiditate voluptas saepe id fugiat.</p>
-                </div>
-                <div class="property-item shadow-sm border-2 max-w-[500px] ease-out overflow-hidden rounded-lg mt-2 w-[93%] mx-auto relative shadow-neutral-50 group hidden h-[50px] bg-neutral-600"
+                <div class="property-item shadow-sm border md:max-w-[500px] ease-out overflow-hidden rounded-lg mt-2 w-[93%] mx-auto relative shadow-neutral-50 group hidden h-[50px] bg-neutral-600"
                     id="post_trigger">
                     <div class="w-full relative overflow-hidden flex items-center group justify-center">
                         <button class="duration-200 group-hover:scale-105 flex items-center gap-2 p-2 rounded-md"
@@ -159,10 +153,42 @@ checkAuth();
                                 <path
                                     d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                             </svg>
-                            <p class="text-lg font-bold">Post New Property</p>
+                            <p class="font-semibold">Post New Property</p>
                         </button>
                     </div>
                 </div>
+                <div class="w-full border rounded-sm flex justify-evenly relative md:max-w-[500px]">
+                    <!-- Posted -->
+                    <?php
+                    if ($profileinfo['usertype'] == 'client'): ?>
+                        <span class="text-center leading-3 mt-1 mb-2">
+                            <h1 class="font-semibold text-lg"><?= $profileinfo["posted"] ?></h1>
+                            <p class="text-sm">Posted</p>
+                        </span>
+                        <div class="w-px bg-gray-400 h-full"></div>
+                    <?php endif;
+                    ?>
+
+                    <!-- Divider -->
+
+
+                    <!-- Booked -->
+                    <span class="text-center leading-3 mt-1 mb-2">
+                        <h1 class="font-semibold text-lg"><?= $profileinfo['booked'] ?></h1>
+                        <p class="text-sm">Booked</p>
+                    </span>
+
+                    <!-- Divider -->
+                    <div class="w-px bg-gray-400 h-full"></div>
+
+                    <!-- Saved -->
+                    <span class="text-center leading-3 mt-1 mb-2">
+                        <h1 class="font-semibold text-lg"><?= $profileinfo['saved'] ?></h1>
+                        <p class="text-sm">Saved</p>
+                    </span>
+                </div>
+
+
             </div>
 
             <!-- 

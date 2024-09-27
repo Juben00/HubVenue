@@ -87,4 +87,24 @@ class User
         return false;
     }
 
+    public function fetchprofile()
+    {
+        try {
+            $localid = $_SESSION['id'];
+            $query = "SELECT * FROM users WHERE id = :id";
+            $queryexe = $this->db->connect()->prepare($query);
+            $queryexe->bindParam(":id", $localid);
+            $queryexe->execute();
+
+            $data = null;
+
+            if ($queryexe->rowCount() > 0) {
+                $data = $queryexe->fetch();
+            }
+
+            return $data;
+        } catch (PDOException $e) {
+            $this->message = "Database error: " . $e->getMessage();
+        }
+    }
 }

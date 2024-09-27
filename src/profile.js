@@ -196,13 +196,8 @@ postTrigger.addEventListener("click", () => {
   // disable scroll
 });
 
-document.addEventListener("click", (e) => {
-  if (
-    !uploadPropertyForm.contains(e.target) &&
-    !postTrigger.contains(e.target)
-  ) {
-    uploadPropertyForm.classList.add("hidden");
-    uploadPropertyForm.classList.remove("fixed");
-    document.body.style.overflow = "auto";
-  }
+document.getElementById("close").addEventListener("click", (e) => {
+  uploadPropertyForm.classList.add("hidden");
+  uploadPropertyForm.classList.remove("fixed");
+  document.body.style.overflow = "auto";
 });

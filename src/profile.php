@@ -29,72 +29,85 @@ checkAuth();
         class="p-4 w-full lg:w-[1000px] flex flex-col relative h-screen lg:grid lg:grid-cols-2 gap-4 lg:h-[600px] rounded-md ">
 
         <!-- upload_property_for -->
-        <form action="upload_property.php"
-            class="absolute bg-neutral-100 hidden z-50 w-[90%] text-neutral-800 gap-2 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 p-4 rounded-md flex-col"
-            method="POST" enctype="multipart/form-data" id="upload_property_form">
-            <h1 class="font-bold text-lg md:text-2xl text-center">PROPERTY UPLOAD FORM</h1>
+        <div class="absolute left-1/2 top-1/2 bg-neutral-700/80 -translate-y-1/2 hidden -translate-x-1/2 h-screen w-screen z-50 "
+            id="upload_property_form">
+            <form action="upload_property.php"
+                class="absolute bg-neutral-100  z-50 w-[80%] lg:w-[60%] text-neutral-800 gap-2 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 p-4 rounded-md flex-col"
+                method="POST" enctype="multipart/form-data">
+                <h1 class="font-bold text-lg md:text-2xl text-center">PROPERTY UPLOAD FORM</h1>
 
-            <!-- image -->
-            <div class="lg:grid lg:grid-cols-2 lg:gap-2 lg:mt-2 overflow-hidden lg:h-[500px] ">
-                <!-- Image placeholder -->
-                <div class="flex flex-col relative">
-                    <img id="property_pic_preview"
-                        class="mb-2 h-56 object-cover w-full lg:h-full lg:mb-0 overflow-hidden" />
-                    <button class="left-1/2 top-1/2 absolute -translate-y-1/2 -translate-x-1/2" id="imgtrigg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                            class="bi bi-plus-square" viewBox="0 0 16 16">
-                            <path
-                                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-                            <path
-                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                        </svg>
-                    </button>
-                    <input type="file" name="property_pic" id="property_pic" accept="image/*" required class="hidden">
+                <span class="text-red-500 absolute top-2 right-3 cursor-pointer" id="close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    </svg>
+                </span>
+
+                <!-- image -->
+                <div class="lg:grid lg:grid-cols-2 lg:gap-2 lg:mt-2 overflow-hidden lg:h-[500px] ">
+                    <!-- Image placeholder -->
+                    <div class="flex flex-col relative">
+                        <img id="property_pic_preview"
+                            class="mb-2 h-56 object-cover w-full lg:h-full lg:mb-0 overflow-hidden" />
+                        <button class="left-1/2 top-1/2 absolute -translate-y-1/2 -translate-x-1/2" id="imgtrigg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                class="bi bi-plus-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                            </svg>
+                        </button>
+                        <input type="file" name="property_pic" id="property_pic" accept="image/*" required
+                            class="hidden">
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <!-- property name -->
+                        <div class="flex flex-col">
+                            <label for="property_name" class="font-semibold">Property Name</label>
+                            <input type="text" name="property_name" class="px-2 py-1 border-2 " required
+                                placeholder="Enter property name">
+                        </div>
+
+                        <!-- property location -->
+                        <div class="flex flex-col">
+                            <label for="property_location" class="font-semibold">Property Location</label>
+                            <input type="text" name="property_location" class="px-2 py-1 border-2" required
+                                placeholder="Enter property location">
+                        </div>
+
+                        <!-- description -->
+                        <div class="flex flex-col flex-1">
+                            <label for="property_description" class="font-semibold ">Property Description</label>
+                            <textarea name="property_description" rows="4"
+                                class="px-2 py-1 leading-5 flex-1 border-2 resize-none" required
+                                placeholder="Enter property description"></textarea>
+                        </div>
+
+                        <!-- amenities (JSON format) -->
+                        <div class="flex flex-col flex-1">
+                            <label for="property_amenities" class="font-semibold">Amenities (Separated by
+                                commas)</label>
+                            <textarea name="property_amenities" rows="4"
+                                class="px-2 py-1 leading-5 flex-1 border-2 resize-none" required
+                                placeholder='e.g. Wifi, Pool, Billard Hall, Kitchen'></textarea>
+                        </div>
+
+                        <!-- price -->
+                        <div class="flex flex-col">
+                            <label for="property_price" class="font-semibold">Price</label>
+                            <input type="number" name="property_price" class="px-2 py-1 border-2" required
+                                placeholder="Enter property price">
+                        </div>
+
+                        <input type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md"
+                            value="Upload Property"></input>
+                    </div>
                 </div>
-
-                <div class="flex flex-col gap-2">
-                    <!-- property name -->
-                    <div class="flex flex-col">
-                        <label for="property_name" class="font-semibold">Property Name</label>
-                        <input type="text" name="property_name" class="px-2 py-1 border-2 " required
-                            placeholder="Enter property name">
-                    </div>
-
-                    <!-- property location -->
-                    <div class="flex flex-col">
-                        <label for="property_location" class="font-semibold">Property Location</label>
-                        <input type="text" name="property_location" class="px-2 py-1 border-2" required
-                            placeholder="Enter property location">
-                    </div>
-
-                    <!-- description -->
-                    <div class="flex flex-col flex-1">
-                        <label for="property_description" class="font-semibold ">Property Description</label>
-                        <textarea name="property_description" rows="4"
-                            class="px-2 py-1 leading-5 flex-1 border-2 resize-none" required
-                            placeholder="Enter property d                                           escription"></textarea>
-                    </div>
-
-                    <!-- amenities (JSON format) -->
-                    <div class="flex flex-col flex-1">
-                        <label for="property_amenities" class="font-semibold">Amenities (Separated by commas)</label>
-                        <textarea name="property_amenities" rows="4"
-                            class="px-2 py-1 leading-5 flex-1 border-2 resize-none" required
-                            placeholder='e.g. Wifi, Pool, Billard Hall, Kitchen'></textarea>
-                    </div>
-
-                    <!-- price -->
-                    <div class="flex flex-col">
-                        <label for="property_price" class="font-semibold">Price</label>
-                        <input type="number" name="property_price" class="px-2 py-1 border-2" required
-                            placeholder="Enter property price">
-                    </div>
-
-                    <input type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md"
-                        value="Upload Property"></input>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
 
 
 
@@ -144,7 +157,8 @@ checkAuth();
                 <div class="property-item shadow-sm border md:max-w-[500px] ease-out overflow-hidden rounded-lg mt-2 w-[93%] mx-auto relative shadow-neutral-50 group hidden h-[50px] bg-neutral-600"
                     id="post_trigger">
                     <div class="w-full relative overflow-hidden flex items-center group justify-center">
-                        <button class="duration-200 group-hover:scale-105 flex items-center gap-2 p-2 rounded-md"
+                        <button
+                            class="duration-200 cursor-pointer group-hover:scale-105 flex items-center gap-2 p-2 rounded-md"
                             id="post_trigger">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-plus-square" viewBox="0 0 16 16">

@@ -28,12 +28,12 @@ Tasks:
 		number of poseted, booked, saved -- done
 	}
 	
-	searching of property{
-		locations and price suggestions
-	}
-	
 	settings{
 		changing of user info
+	}
+
+	searching of property{
+		locations and price suggestions
 	}
 
 	terms and conditions - (sign up)

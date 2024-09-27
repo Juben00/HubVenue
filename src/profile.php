@@ -88,8 +88,8 @@ checkAuth();
                             placeholder="Enter property price">
                     </div>
 
-                    <input type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md">Upload
-                    Property</input>
+                    <input type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md"
+                        value="Upload Property"></input>
                 </div>
             </div>
         </form>
@@ -125,8 +125,8 @@ checkAuth();
                     id="upload_form" method="POST" enctype="multipart/form-data">
                     <label for="profile_pic" class="font-semibold">Upload Profile Picture</label>
                     <input type="file" name="profile_pic" accept="image/*" required>
-                    <button type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md">Upload
-                        Image</button>
+                    <input type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md"
+                        value="Upload Image"></input>
                 </form>
 
 

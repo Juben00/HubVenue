@@ -12,7 +12,8 @@ class Property
     public $image = "";
     public $amenities = "";
     public $price = "";
-    public $booked_date = "";
+
+    public $status = "";
 
     protected $db;
 
@@ -96,6 +97,32 @@ class Property
         }
         return $data;
     }
+
+    public function addProp()
+    {
+        try {
+            $sql = "INSERT INTO properties (userId, property_name, location, description, image, amenities, price, status)
+                VALUES (:userId, :property_name, :location, :description, :image, :amenities, :price, :status)";
+            $stmt = $this->db->connect()->prepare($sql);
+
+            // Bind parameters
+            $stmt->bindParam(':userId', $this->userId);
+            $stmt->bindParam(':property_name', $this->p_name);
+            $stmt->bindParam(':location', $this->location);
+            $stmt->bindParam(':description', $this->description);
+            $stmt->bindParam(':image', $this->image, PDO::PARAM_LOB); // Assuming image is binary/blob
+            $stmt->bindParam(':amenities', $this->amenities);
+            $stmt->bindParam(':price', $this->price);
+            $stmt->bindParam(':status', $this->status); // Assuming status defaults to 'pending'
+
+            // Execute query
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
 }
 
 // Create an instance of the Property class

@@ -11,6 +11,7 @@ $localid = $_SESSION['id'] ?? null;
 
 if (!$localid) {
     die("User not authenticated.");
+    // header('Location: ')
 }
 
 $db = new Database();

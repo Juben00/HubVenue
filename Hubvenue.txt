@@ -18,14 +18,14 @@ Tasks:
 	}
 	
 	adding of properties{
-		form  
-		uploading of image to imgbb  
+		form  -- adjustments staus of the property
+		uploading of image to imgbb   -- done
 	}
 	
 	profile{
 		display of posted properties -- done
 		uploading avatar -- done
-		setting a bio
+		setting a bio 
 	}
 	
 	searching of property{

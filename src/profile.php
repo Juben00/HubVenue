@@ -38,7 +38,8 @@ checkAuth();
             <div class="lg:grid lg:grid-cols-2 lg:gap-2 lg:mt-2 ">
                 <div class="flex flex-col relative">
                     <!-- Image placeholder -->
-                    <img id="property_pic_preview" class="mb-2 h-56 object-cover border w-full lg:h-full lg:mb-0" />
+                    <img id="property_pic_preview"
+                        class="mb-2 h-56 object-cover border w-full lg:h-full lg:mb-0  overflow-hidden" />
                     <button class="left-1/2 top-1/2 absolute -translate-y-1/2 -translate-x-1/2" id="imgtrigg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
                             class="bi bi-plus-square" viewBox="0 0 16 16">
@@ -55,40 +56,40 @@ checkAuth();
                     <!-- property name -->
                     <div class="flex flex-col">
                         <label for="property_name" class="font-semibold">Property Name</label>
-                        <input type="text" name="property_name" class="px-2 py-1 border" required
+                        <input type="text" name="property_name" class="px-2 py-1 border-2 " required
                             placeholder="Enter property name">
                     </div>
 
                     <!-- property location -->
                     <div class="flex flex-col">
                         <label for="property_location" class="font-semibold">Property Location</label>
-                        <input type="text" name="property_location" class="px-2 py-1 border" required
+                        <input type="text" name="property_location" class="px-2 py-1 border-2" required
                             placeholder="Enter property location">
                     </div>
 
                     <!-- description -->
                     <div class="flex flex-col">
                         <label for="property_description" class="font-semibold">Property Description</label>
-                        <textarea name="property_description" rows="4" class="px-2 py-1 border" required
+                        <textarea name="property_description" rows="4" class="px-2 py-1 border-2 resize-none" required
                             placeholder="Enter property description"></textarea>
                     </div>
 
                     <!-- amenities (JSON format) -->
                     <div class="flex flex-col">
                         <label for="property_amenities" class="font-semibold">Amenities (Separated by commas)</label>
-                        <textarea name="property_amenities" rows="3" class="px-2 py-1 border" required
+                        <textarea name="property_amenities" rows="3" class="px-2 py-1 border-2 resize-none" required
                             placeholder='e.g. Wifi, Pool, Billard Hall, Kitchen'></textarea>
                     </div>
 
                     <!-- price -->
                     <div class="flex flex-col">
                         <label for="property_price" class="font-semibold">Price</label>
-                        <input type="number" name="property_price" class="px-2 py-1 border" required
+                        <input type="number" name="property_price" class="px-2 py-1 border-2" required
                             placeholder="Enter property price">
                     </div>
 
-                    <button type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md">Upload
-                        Property</button>
+                    <input type="submit" class="bg-neutral-700 text-neutral-100 p-2 rounded-md">Upload
+                    Property</input>
                 </div>
             </div>
         </form>

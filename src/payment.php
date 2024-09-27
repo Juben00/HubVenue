@@ -214,8 +214,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
 
                     <div class="mt-auto flex">
-                        <button type="submit" class="bg-neutral-900 text-neutral-50 p-2 rounded-md w-full">Book
-                            Now</button>
+                        <input type="submit" class="bg-neutral-900 text-neutral-50 p-2 rounded-md w-full">Book
+                        Now</input>
                     </div>
 
 

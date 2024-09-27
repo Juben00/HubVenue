@@ -65,9 +65,9 @@ if (isset($_GET['token'])) {
 
                 <!-- Buttons -->
                 <div class="flex flex-col gap-2 mt-2">
-                    <button type="submit"
+                    <input type="submit"
                         class="px-3 py-2 border-2 bg-red-500 hover:text-neutral-700 duration-150 hover:bg-red-400 font-semibold text-white rounded-md">SEND
-                        RESET PASSWORD</button>
+                    RESET PASSWORD</input>
                 </div>
             </form>
         </body>

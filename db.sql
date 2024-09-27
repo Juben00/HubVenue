@@ -26,6 +26,7 @@ CREATE TABLE properties (
     image BLOB NOT NULL,
     amenities LONGTEXT NOT NULL,
     price DOUBLE NOT NULL,
+    status ENUM('approved', 'pending', 'rejected') DEFAULT 'pending',
     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
 );
 

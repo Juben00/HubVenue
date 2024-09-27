@@ -828,10 +828,6 @@ video {
   height: 1.5rem;
 }
 
-.h-\[150px\] {
-  height: 150px;
-}
-
 .h-\[200px\] {
   height: 200px;
 }
@@ -842,6 +838,10 @@ video {
 
 .h-\[380px\] {
   height: 380px;
+}
+
+.h-\[50px\] {
+  height: 50px;
 }
 
 .h-fit {
@@ -855,10 +855,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[50px\] {
-  height: 50px;
 }
 
 .max-h-\[600px\] {
@@ -970,6 +966,10 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.resize-none {
+  resize: none;
 }
 
 .resize {
@@ -1905,10 +1905,6 @@ video {
 
   .lg\:overflow-y-auto {
     overflow-y: auto;
-  }
-
-  .lg\:border-2 {
-    border-width: 2px;
   }
 
   .lg\:p-0 {

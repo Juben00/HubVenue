@@ -113,7 +113,9 @@ class Property
             $stmt->bindParam(':image', $this->image, PDO::PARAM_LOB); // Assuming image is binary/blob
             $stmt->bindParam(':amenities', $this->amenities);
             $stmt->bindParam(':price', $this->price);
-            $stmt->bindParam(':status', $this->status); // Assuming status defaults to 'pending'
+
+            $fixedStatus = 'pending'; // Assuming status defaults to 'pending'
+            $stmt->bindParam(':status', $fixedStatus); // Assuming status defaults to 'pending'
 
             // Execute query
             return $stmt->execute();

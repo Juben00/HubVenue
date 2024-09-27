@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['property_pic'])) {
             // Upload file to Cloudinary
             $uploadResult = (new UploadApi())->upload($uploadedFile, [
                 'folder' => 'property_pics',
-                'public_id' => 'user_' . uniqid(),
+                'public_id' => 'property_' . uniqid(),
             ]);
 
             // Get the URL of the uploaded image

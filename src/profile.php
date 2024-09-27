@@ -19,7 +19,7 @@ checkAuth();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.13">
+    <link rel="stylesheet" href="../output.css?v=1.14">
 </head>
 
 <body
@@ -30,16 +30,16 @@ checkAuth();
 
         <!-- upload_property_for -->
         <form action="upload_property.php"
-            class="absolute bg-neutral-100 hidden z-50 w-[90%] md:max-h-[80vh] text-neutral-800 gap-2 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 p-4 rounded-md flex-col"
+            class="absolute bg-neutral-100 hidden z-50 w-[90%] text-neutral-800 gap-2 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 p-4 rounded-md flex-col"
             method="POST" enctype="multipart/form-data" id="upload_property_form">
             <h1 class="font-bold text-lg md:text-2xl text-center">PROPERTY UPLOAD FORM</h1>
 
             <!-- image -->
-            <div class="lg:grid lg:grid-cols-2 lg:gap-2 lg:mt-2 ">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-2 lg:mt-2 overflow-hidden lg:h-[500px] ">
+                <!-- Image placeholder -->
                 <div class="flex flex-col relative">
-                    <!-- Image placeholder -->
                     <img id="property_pic_preview"
-                        class="mb-2 h-56 object-cover border w-full lg:h-full lg:mb-0  overflow-hidden" />
+                        class="mb-2 h-56 object-cover w-full lg:h-full lg:mb-0 overflow-hidden" />
                     <button class="left-1/2 top-1/2 absolute -translate-y-1/2 -translate-x-1/2" id="imgtrigg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
                             class="bi bi-plus-square" viewBox="0 0 16 16">
@@ -68,16 +68,18 @@ checkAuth();
                     </div>
 
                     <!-- description -->
-                    <div class="flex flex-col">
-                        <label for="property_description" class="font-semibold">Property Description</label>
-                        <textarea name="property_description" rows="4" class="px-2 py-1 border-2 resize-none" required
+                    <div class="flex flex-col flex-1">
+                        <label for="property_description" class="font-semibold ">Property Description</label>
+                        <textarea name="property_description" rows="4"
+                            class="px-2 py-1 leading-5 flex-1 border-2 resize-none" required
                             placeholder="Enter property description"></textarea>
                     </div>
 
                     <!-- amenities (JSON format) -->
-                    <div class="flex flex-col">
+                    <div class="flex flex-col flex-1">
                         <label for="property_amenities" class="font-semibold">Amenities (Separated by commas)</label>
-                        <textarea name="property_amenities" rows="3" class="px-2 py-1 border-2 resize-none" required
+                        <textarea name="property_amenities" rows="4"
+                            class="px-2 py-1 leading-5 flex-1 border-2 resize-none" required
                             placeholder='e.g. Wifi, Pool, Billard Hall, Kitchen'></textarea>
                     </div>
 

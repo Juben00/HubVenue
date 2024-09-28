@@ -21,7 +21,7 @@ if ($properties) {
                         <div class="flex justify-between items-center w-full">
                             <div class="bg-neutral-200 rounded-full flex items-center p-1">
                                 <div class="bg-red-500 rounded-full p-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tag-fill" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" class="text-neutral-100" height="16" fill="currentColor" class="bi bi-tag-fill" viewBox="0 0 16 16">
                                         <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                                     </svg>
                                 </div>

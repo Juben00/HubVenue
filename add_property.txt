@@ -1,0 +1,38 @@
+what type of unit?
+
+how many guest will fit?
+
+where is it located?
+
+amenities{
+	bedrooms,
+	beds,
+	pool,
+	recreational place,
+	bathrooms,
+	wifi,
+	tv,
+	kitchen,
+	parking,
+	air conditioning,
+	bbq grill, 
+	gym,
+	beach acess,
+	outdoor shower, 
+	exercise equipment,
+	choose ===
+} = buttons
+
+photos could be 5
+
+title
+
+tags: peaceful, unique
+
+description
+
+add discounts -- options 3(7days up)
+
+payment method: 
+
+image for confirmation

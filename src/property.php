@@ -58,7 +58,7 @@ checkAuth(); // Check if the user is logged in
             <img src="<?= $item['image'] ?>" alt="Property Image" class="w-full h-full">
         </div>
 
-        <div class="flex flex-col bg-neutral-200 p-6 pt-4 text-neutral-800 order-2 md:order-1 overflow-y-scroll flex-1">
+        <div class="flex flex-col bg-neutral-200 p-6 pt-4 text-neutral-800 order-2 md:order-1 overflow-y-hidden flex-1">
             <div class="flex flex-col gap-1 h-full">
                 <div>
                     <!-- Map container -->
@@ -115,25 +115,26 @@ checkAuth(); // Check if the user is logged in
                     </div>
 
                     <div class="mt-2 flex flex-col w-full">
-                        <p class="text-sm"><?= $item['description'] ?></p>
+                        <p class="text-sm px-2"><?= $item['description'] ?></p>
                     </div>
 
-                    <div class="my-2  flex flex-col w-full">
+                    <div class="flex flex-col w-full border-2 h-auto flex-wrap px-3 my-2">
                         <h1 class="text-center font-semibold">AMENITIES</h1>
                         <?php
                         $amenities = json_decode($item['amenities'], true);
 
-                        if (is_array($amenities)) {
-                            echo '<ul class="list-disc list-inside">';
+                        if (is_array($amenities) && !empty($amenities)) {
+                            echo '<ul class="list-disc list-inside grid grid-cols-2">';
                             foreach ($amenities as $key => $value) {
-                                echo '<li>' . htmlspecialchars($value) . '</li>';
+                                echo '<li class="text-sm">' . htmlspecialchars($value) . '</li>';
                             }
                             echo '</ul>';
                         } else {
-                            echo '<p class="text-center">No amenities listed.</p>';
+                            echo '<p class="text-center text-gray-500">No amenities listed.</p>';
                         }
                         ?>
                     </div>
+
 
 
                 </div>

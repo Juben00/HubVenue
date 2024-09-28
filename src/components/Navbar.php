@@ -1,8 +1,8 @@
-<nav class="bg-neutral-800 text-neutral-100 shadow-xl sticky top-0 z-50">
+<nav class="bg-neutral-200 text-neutral-700 shadow-xl sticky top-0 z-50">
     <div class=" container mx-auto px-8 flex items-center justify-between ">
         <!-- Logo -->
         <a href=" #" class="flex items-center">
-            <img src="../public/images/white_transparent (1).ico" alt="Logo" class="h-24">
+            <img src="../public/images/black_ico.png" alt="Logo" class="h-24">
         </a>
 
         <!-- Hamburger Icon (visible on small screens) -->
@@ -34,7 +34,7 @@
 
 
             <!-- <a href="logout.php" class="hover:underline hover:underline-offset-2">Logout</a> -->
-            <div class="hidden flex-col w-48 gap-2 bg-neutral-800 absolute top-16 right-0 rounded-md border border-red-500 p-4"
+            <div class="hidden flex-col w-48 gap-2 bg-neutral-200 absolute top-16 right-0 rounded-md border border-red-500 p-4"
                 id="options">
                 <div class="flex items-center ">
                     <div class="flex items-center gap-2 flex-1">

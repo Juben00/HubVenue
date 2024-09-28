@@ -49,7 +49,7 @@ $filteredProperties = array_map(function ($property) {
     </style>
 </head>
 
-<body class="bg-neutral-700 text-neutral-100 box-border">
+<body class="bg-neutral-100 text-neutral-700 box-border">
     <?php require_once './components/Navbar.php'; ?>
 
     <section
@@ -86,7 +86,7 @@ $filteredProperties = array_map(function ($property) {
                     <div class="dot w-2 h-2 bg-neutral-800 rounded-full cursor-pointer"></div>
                 </div>
             </div>
-            <div class="flex flex-col items-center bg-neutral-200/20 p-2">
+            <div class="flex flex-col items-center bg-neutral-200/20 border p-2">
                 <span class="text-center my-auto flex flex-col gap-2 ">
                     <h1 class="text-3xl font-semibold md:text-4xl ">Welcome to <span
                             class="text-red-500 italic">HubVenue!</span></h1>
@@ -110,18 +110,18 @@ $filteredProperties = array_map(function ($property) {
     <section class="container mx-auto flex flex-col items-center mb-4 md:mb-8 ">
         <h2 class="text-3xl lg:text-5xl font-bold mt-4">Our Services</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-2">
-            <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg m-4">
+            <div class="flex flex-col items-center bg-neutral-200/20  border p-4 rounded-lg shadow-lg m-4">
                 <img src="../public/serviceimages/pexels-pixabay-267569.jpg" alt="Rent Space" class="w-full">
                 <h3 class="text-xl font-semibold mt-2 text-center">Space Rentals</h3>
                 <p class="text-center">Discover unique spaces for any event, from intimate gatherings to large-scale
                     functions.</p>
             </div>
-            <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg m-4">
+            <div class="flex flex-col items-center bg-neutral-200/20  border p-4 rounded-lg shadow-lg m-4">
                 <img src="../public/serviceimages/pexels-rdne-7414284.jpg" alt="Post Listings" class="w-full">
                 <h3 class="text-xl font-semibold mt-2 text-center">Post Your Space</h3>
                 <p class="text-center">Earn money by listing your home or commercial space for event rentals.</p>
             </div>
-            <div class="flex flex-col items-center bg-neutral-200/20 p-4 rounded-lg shadow-lg m-4">
+            <div class="flex flex-col items-center bg-neutral-200/20  border p-4 rounded-lg shadow-lg m-4">
                 <img src="../public/serviceimages/pexels-tima-miroshnichenko-6694575.jpg" alt="Book Event"
                     class="w-full">
                 <h3 class="text-xl font-semibold mt-2 text-center">Book an Event Space</h3>
@@ -134,7 +134,8 @@ $filteredProperties = array_map(function ($property) {
         <h2 class="text-3xl lg:text-5xl font-bold mt-4 mb-2">Rental Properties</h2>
 
 
-        <div class="flex flex-col gap-4 md:gap-8 bg-neutral-200/20 p-4 lg:p-8 m-4 rounded-lg w-full min-h-30">
+        <div
+            class="flex flex-col gap-4 md:gap-8 bg-neutral-200/20 border shadow-lg p-4 lg:p-8 m-4 rounded-lg w-full min-h-30">
 
             <!-- HTML form to search properties -->
             <form id="searchForm" class="text-neutral-900 flex gap-2 justify-center w-full">
@@ -204,7 +205,7 @@ $filteredProperties = array_map(function ($property) {
 
                                     <div class="flex justify-between items-center w-full">
                                         <div class="bg-neutral-200 rounded-full flex items-center p-1">
-                                            <div class="bg-neutral-700 rounded-full p-1">
+                                            <div class="bg-red-500 rounded-full p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-tag-fill" viewBox="0 0 16 16">
                                                     <path
@@ -266,7 +267,7 @@ $filteredProperties = array_map(function ($property) {
 
         <div class="flex flex-col gap-4 m-4">
 
-            <div class="flex flex-col items-center bg-neutral-200/20 p-4 lg:p-8 rounded-lg shadow-lg">
+            <div class="flex flex-col items-center bg-neutral-200/20 border p-4 lg:p-8 rounded-lg shadow-lg">
                 <h3 class="text-xl font-semibold  text-red-500 italic">Our Story</h3>
                 <p>
                     Hubvenue was born out of the need to streamline the often complex and time-consuming process of
@@ -292,7 +293,7 @@ $filteredProperties = array_map(function ($property) {
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <!-- mission -->
-                <div class="flex flex-col items-center bg-neutral-200/20 p-4 lg:p-8 rounded-lg shadow-lg">
+                <div class="flex flex-col items-center bg-neutral-200/20 border p-4 lg:p-8 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold  text-red-500 italic">Our Mission</h3>
                     <p class="text-center">
                         To simplify finding and booking available venues, offering users an easy and efficient platform
@@ -301,7 +302,7 @@ $filteredProperties = array_map(function ($property) {
                     </p>
                 </div>
                 <!-- vission -->
-                <div class="flex flex-col items-center bg-neutral-200/20 p-4 lg:p-8 rounded-lg shadow-lg">
+                <div class="flex flex-col items-center bg-neutral-200/20 border p-4 lg:p-8 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold  text-red-500 italic">Our Vision</h3>
                     <p class="text-center">
                         To be the go to platform for venue reservations, helping people connect with the perfect spaces
@@ -311,15 +312,15 @@ $filteredProperties = array_map(function ($property) {
             </div>
 
             <!-- FAQ -->
-            <div class="flex flex-col bg-neutral-200/20 p-4 lg:p-8 rounded-lg shadow-lg">
+            <div class="flex flex-col bg-neutral-200/20 border text-neutral-700 p-4 lg:p-8 rounded-lg shadow-lg">
                 <h3 class="text-xl font-semibold text-red-500 italic text-center">FAQs</h3>
                 <div class="w-full ">
                     <div class="faq-item mb-4">
-                        <button class="faq-header text-neutral-200 w-full text-left">
+                        <button class="faq-header w-full text-left">
                             1. How do I book a space?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300 text-xs">To book a space, simply look for your desired
+                            <p class="text-xs">To book a space, simply look for your desired
                                 location
                                 and
                                 date on our platform. Browse
@@ -329,11 +330,11 @@ $filteredProperties = array_map(function ($property) {
                         </div>
                     </div>
                     <div class="faq-item mb-4">
-                        <button class="faq-header text-neutral-200 w-full text-left">
+                        <button class="faq-header  w-full text-left">
                             2. Can I list my own space on HubVenue?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300 text-xs">Yes, you can list your space on HubVenue. Create an
+                            <p class=" text-xs">Yes, you can list your space on HubVenue. Create an
                                 account,
                                 provide details about your
                                 space, upload photos, and set your availability and pricing. Once your listing is
@@ -341,11 +342,11 @@ $filteredProperties = array_map(function ($property) {
                         </div>
                     </div>
                     <div class="faq-item mb-4">
-                        <button class="faq-header text-neutral-200 w-full text-left">
+                        <button class="faq-header  w-full text-left">
                             3. What types of spaces can I list?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300 text-xs">You can list a variety of spaces including
+                            <p class=" text-xs">You can list a variety of spaces including
                                 residential
                                 homes,
                                 commercial venues, event
@@ -355,11 +356,11 @@ $filteredProperties = array_map(function ($property) {
                         </div>
                     </div>
                     <div class="faq-item mb-4">
-                        <button class="faq-header text-neutral-200 w-full text-left">
+                        <button class="faq-header  w-full text-left">
                             4. Are there any fees associated with booking or listing a space?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300 text-xs">Yes, there may be fees associated with both booking
+                            <p class=" text-xs">Yes, there may be fees associated with both booking
                                 and
                                 listing
                                 spaces. Booking fees are
@@ -371,11 +372,11 @@ $filteredProperties = array_map(function ($property) {
                         </div>
                     </div>
                     <div class="faq-item mb-4">
-                        <button class="faq-header text-neutral-200 w-full text-left">
+                        <button class="faq-header  w-full text-left">
                             5. How can I contact customer support?
                         </button>
                         <div class="faq-content hidden text-center">
-                            <p class="text-neutral-300 text-xs">If you need assistance, you can contact our customer
+                            <p class=" text-xs">If you need assistance, you can contact our customer
                                 support
                                 team via the contact form on
                                 our website, or by email at info@hubvenue.com. Our team is available to help you

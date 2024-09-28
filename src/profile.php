@@ -23,10 +23,10 @@ checkAuth();
 </head>
 
 <body
-    class="bg-neutral-700/80 text-neutral-100 flex relative justify-center items-center box-border lg:h-screen lg:overflow-hidden">
+    class="bg-neutral-100 text-neutral-700 flex relative justify-center items-center box-border lg:h-screen lg:overflow-hidden">
 
     <div
-        class="p-4 w-full lg:w-[1000px] flex flex-col relative h-screen lg:grid lg:grid-cols-2 gap-4 lg:h-[600px] rounded-md ">
+        class="p-4 w-full lg:w-[1000px] bg-neutral-200 flex flex-col relative h-screen lg:grid lg:grid-cols-2 gap-4 lg:h-[600px] rounded-md ">
 
         <!-- upload_property_for -->
         <div class="absolute left-1/2 top-1/2 bg-neutral-700/80 -translate-y-1/2 hidden -translate-x-1/2 h-screen w-screen z-50 "
@@ -149,16 +149,16 @@ checkAuth();
                     <div class="text-lg font-bold capitalize leading-[.50rem]">
                         <p><?= $profileinfo['first_name'] ?> <?= $profileinfo['last_name'] ?> </p>
                         <br>
-                        <span class="text-neutral-200 capitalize text-sm font-normal"
+                        <span class="capitalize text-sm font-normal"
                             id="usertype"><?= $profileinfo['usertype'] ?></span>
                     </div>
                 </div>
 
-                <div class="property-item shadow-sm border md:max-w-[500px] ease-out overflow-hidden rounded-lg mt-2 w-[93%] mx-auto relative shadow-neutral-50 group hidden h-[50px] bg-neutral-600"
+                <div class="property-item shadow-sm border md:max-w-[500px] ease-out overflow-hidden rounded-lg mt-2 w-[93%] mx-auto relative shadow-neutral-50 group hidden h-[50px] bg-neutral-400"
                     id="post_trigger">
                     <div class="w-full relative overflow-hidden flex items-center group justify-center">
                         <button
-                            class="duration-200 cursor-pointer group-hover:scale-105 flex items-center gap-2 p-2 rounded-md"
+                            class="duration-200 cursor-pointer group-hover:scale-105 group-hover:text-neutral-200 flex items-center gap-2 p-2 rounded-md"
                             id="post_trigger">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-plus-square" viewBox="0 0 16 16">
@@ -171,7 +171,7 @@ checkAuth();
                         </button>
                     </div>
                 </div>
-                <div class="w-full border rounded-sm flex justify-evenly relative md:max-w-[500px]">
+                <div class="w-full border border-gray-400 rounded-md flex justify-evenly relative md:max-w-[500px]">
                     <!-- Posted -->
                     <?php
                     if ($profileinfo['usertype'] == 'client'): ?>
@@ -216,16 +216,17 @@ checkAuth();
 
         <!-- Rents and Saved section -->
         <div>
-            <div class="bg-neutral-500 rounded-md overflow-hidden flex justify-center max-w-[500px] mx-auto">
-                <button id="posted" class="text-lg font-semibold text-center flex-1 w-full h-full">Posted</button>
-                <button id="rents" class="text-lg font-semibold text-center flex-1 w-full h-full">Rents</button>
-                <button id="saved" class="text-lg font-semibold text-center flex-1 w-full h-full">Saved</button>
+            <div class="bg-neutral-300 rounded-md overflow-hidden flex justify-center max-w-[500px] mx-auto">
+                <button id="posted" class="text-lg text-center flex-1 w-full h-full">Posted</button>
+                <button id="rents" class="text-lg text-center flex-1 w-full h-full">Rents</button>
+                <button id="saved" class="text-lg text-center flex-1 w-full h-full">Saved</button>
             </div>
 
             <div class="flex flex-col lg:h-[530px] lg:overflow-y-auto ">
 
                 <!-- Inner container without fixed height -->
-                <div id="profiledisp" class="mt-2 flex flex-col items-center max-w-[500px] mx-auto gap-4 px-4">
+                <div id="profiledisp"
+                    class="mt-2 flex flex-col items-center max-w-[500px] mx-auto gap-4 text-neutral-700">
 
                 </div>
 

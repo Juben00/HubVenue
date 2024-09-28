@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body
-    class="bg-neutral-700/80 text-neutral-100 flex relative justify-center items-center box-border lg:h-screen lg:overflow-hidden">
+    class="bg-neutral-100 text-neutral-700 flex relative justify-center items-center box-border lg:h-screen lg:overflow-hidden">
 
     <div
         class="p-4 w-full lg:w-[1000px] flex flex-col relative h-screen lg:grid lg:grid-cols-2 gap-4 lg:h-[600px] rounded-md ">

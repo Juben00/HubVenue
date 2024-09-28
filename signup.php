@@ -4,19 +4,16 @@ require_once './src/sanitize.php';
 $userObj = new User();
 
 $message = '';
-$usertype = $first_name = $last_name = $email = $password = "";
-$usertypeErr = $first_nameErr = $last_nameErr = $emailErr = $passwordErr = "";
+$first_name = $last_name = $email = $password = "";
+$first_nameErr = $last_nameErr = $emailErr = $passwordErr = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $usertype = isset($_POST['user']) ? sanitizeInput($_POST['user']) : '';
     $first_name = isset($_POST['first_name']) ? sanitizeInput($_POST['first_name']) : '';
     $last_name = isset($_POST['last_name']) ? sanitizeInput($_POST['last_name']) : '';
     $email = isset($_POST['email']) ? sanitizeInput($_POST['email']) : '';
     $password = isset($_POST['password']) ? sanitizeInput($_POST['password']) : '';
 
-    if (empty($usertype)) {
-        $usertypeErr = "* User type is required";
-    }
+
     if (empty($first_name)) {
         $first_nameErr = "* Firstname is required";
     }
@@ -34,8 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 
-    if (empty($usertypeErr) && empty($usernameErr) && empty($emailErr) && empty($passwordErr)) {
-        $userObj->usertype = $usertype;
+    if (empty($usernameErr) && empty($emailErr) && empty($passwordErr)) {
         $userObj->first_name = $first_name;
         $userObj->last_name = $last_name;
         $userObj->email = $email;
@@ -89,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         <!-- USERTYPE Field -->
-        <div class="flex flex-col w-full">
+        <!-- <div class="flex flex-col w-full">
             <span class="flex items-center justify-between">
                 <label for="" class="font-semibold text-sm">USERTYPE </label>
                 <span class="text-red-500"><?php echo $usertypeErr; ?></span>
@@ -104,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="client">Client</label>
                 </span>
             </div>
-        </div>
+        </div> -->
 
         <div class="flex items-center w-full justify-between">
             <div class="flex flex-col w-[49%]">
@@ -112,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="first_name" class="font-semibold text-sm">FIRST NAME</label>
                     <span class="text-red-500"><?php echo $first_nameErr; ?></span>
                 </span>
-                <input type="text" class="px-2= py-1 border" placeholder="Enter First Name" name="first_name"
+                <input type="text" class="px-2 py-1 border" placeholder="Enter First Name" name="first_name"
                     value="<?php echo htmlspecialchars($first_name); ?>">
             </div>
 

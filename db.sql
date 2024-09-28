@@ -5,7 +5,7 @@ USE Hubvenue;
 -- Create the users table
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    usertype VARCHAR(10) NOT NULL,
+    usertype ENUM('client', 'user') NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,

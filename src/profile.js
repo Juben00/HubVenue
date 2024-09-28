@@ -10,6 +10,24 @@ let cachedPosted = null;
 let cachedRents = null;
 let cachedSaved = null;
 
+// Utility function to handle adding/removing class lists
+function toggleActive(element, isActive) {
+  if (isActive) {
+    element.classList.add(
+      "bg-neutral-400",
+      "font-semibold",
+      "text-neutral-100"
+    );
+  } else {
+    element.classList.remove(
+      "bg-neutral-400",
+      "font-semibold",
+      "text-neutral-100"
+    );
+  }
+}
+
+// Handle page load
 document.addEventListener("DOMContentLoaded", function () {
   if (usertype === "user") {
     posted.classList.add("hidden");
@@ -20,36 +38,34 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Set initial view based on user type
 if (usertype === "user") {
   posted.classList.add("hidden");
   rents.click();
-  rents.classList.add("bg-neutral-600");
+  toggleActive(rents, true);
 }
 
+// Handle the 'Posted' tab click event
 posted.addEventListener("click", async () => {
-  posted.classList.add("bg-neutral-600");
-  saved.classList.remove("bg-neutral-600");
-  rents.classList.remove("bg-neutral-600");
+  toggleActive(posted, true);
+  toggleActive(saved, false);
+  toggleActive(rents, false);
   postTrigger.classList.remove("hidden");
   postTrigger.classList.add("flex");
 
-  // If cached content is available, use it
+  // Use cached content if available
   if (cachedPosted) {
     updateProfileDisp(cachedPosted);
     return;
   }
 
+  // Fetch the 'Posted' content
   try {
     const response = await fetch("./api/fetchPost.api.php");
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
+    if (!response.ok) throw new Error("Network response was not ok");
     const html = await response.text();
-
     if (html) {
-      cachedPosted = html; // Cache the content
+      cachedPosted = html;
       updateProfileDisp(html);
     }
   } catch (error) {
@@ -57,29 +73,25 @@ posted.addEventListener("click", async () => {
   }
 });
 
+// Handle the 'Rents' tab click event
 rents.addEventListener("click", async () => {
-  rents.classList.add("bg-neutral-600");
-  saved.classList.remove("bg-neutral-600");
-  posted.classList.remove("bg-neutral-600");
-  // postTrigger.classList.add("hidden");
+  toggleActive(rents, true);
+  toggleActive(saved, false);
+  toggleActive(posted, false);
 
-  // If cached content is available, use it
+  // Use cached content if available
   if (cachedRents) {
     updateProfileDisp(cachedRents);
     return;
   }
 
+  // Fetch the 'Rents' content
   try {
     const response = await fetch("./api/fetchRent.api.php");
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
+    if (!response.ok) throw new Error("Network response was not ok");
     const html = await response.text();
-
     if (html) {
-      cachedRents = html; // Cache the content
+      cachedRents = html;
       updateProfileDisp(html);
     }
   } catch (error) {
@@ -87,29 +99,25 @@ rents.addEventListener("click", async () => {
   }
 });
 
+// Handle the 'Saved' tab click event
 saved.addEventListener("click", async () => {
-  rents.classList.remove("bg-neutral-600");
-  saved.classList.add("bg-neutral-600");
-  posted.classList.remove("bg-neutral-600");
-  // postTrigger.classList.add("hidden");
+  toggleActive(saved, true);
+  toggleActive(rents, false);
+  toggleActive(posted, false);
 
-  // If cached content is available, use it
+  // Use cached content if available
   if (cachedSaved) {
     updateProfileDisp(cachedSaved);
     return;
   }
 
+  // Fetch the 'Saved' content
   try {
     const response = await fetch("./api/fetchSaved.api.php");
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
+    if (!response.ok) throw new Error("Network response was not ok");
     const html = await response.text();
-
     if (html) {
-      cachedSaved = html; // Cache the content
+      cachedSaved = html;
       updateProfileDisp(html);
     }
   } catch (error) {
@@ -117,27 +125,26 @@ saved.addEventListener("click", async () => {
   }
 });
 
+// Function to update the content display
 function updateProfileDisp(html) {
   const profiledisp = document.getElementById("profiledisp");
   profiledisp.innerHTML = html;
 }
 
-// Function to check if the date is in the past in JavaScript
+// Utility function to check if a date is in the past
 function isDateInThePast(endDate, checkOut) {
   const dateTimeString = `${endDate} ${checkOut}`;
   const rentEndDate = new Date(dateTimeString);
   const now = new Date();
-
   return rentEndDate < now;
 }
 
+// Function to update the rent status on the page
 function updateRentStatus() {
   const rentStatusElements = document.querySelectorAll(".enddatecheck");
-
   rentStatusElements.forEach((el) => {
     const endDate = el.getAttribute("data-end-date");
     const checkOut = el.getAttribute("data-check-out");
-
     if (isDateInThePast(endDate, checkOut)) {
       el.classList.remove("bg-green-500");
       el.classList.add("bg-red-500");
@@ -148,17 +155,15 @@ function updateRentStatus() {
   });
 }
 
-// Call the function immediately on page load
+// Check rent status on page load and at regular intervals
 updateRentStatus();
-
-// Optionally, set an interval to keep checking the status every minute (or any interval you prefer)
 setInterval(updateRentStatus, 100);
 
+// Handle property add form visibility toggle
 const uploadBtn = document.getElementById("uploadbtn");
 const uploadForm = document.getElementById("upload_form");
 let isVisible = false;
 
-// profile picture
 const toggleFormVisibility = (visible) => {
   if (visible) {
     uploadForm.classList.remove("hidden");
@@ -170,11 +175,13 @@ const toggleFormVisibility = (visible) => {
   isVisible = visible;
 };
 
+// Toggle the visibility of the upload form
 uploadBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   toggleFormVisibility(!isVisible);
 });
 
+// Close the upload form if clicking outside of it
 document.addEventListener("click", (e) => {
   if (
     isVisible &&
@@ -185,19 +192,17 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// property add form
-
+// Handle the property add form trigger
 postTrigger.addEventListener("click", () => {
-  //scroll to top
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 0); // Scroll to top
   uploadPropertyForm.classList.add("fixed");
   uploadPropertyForm.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
-  // disable scroll
+  document.body.style.overflow = "hidden"; // Disable scroll
 });
 
+// Close property add form
 document.getElementById("close").addEventListener("click", (e) => {
   uploadPropertyForm.classList.add("hidden");
   uploadPropertyForm.classList.remove("fixed");
-  document.body.style.overflow = "auto";
+  document.body.style.overflow = "auto"; // Re-enable scroll
 });

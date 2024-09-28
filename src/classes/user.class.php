@@ -26,6 +26,8 @@ class User
             $checkexe->bindParam(":email", $this->email);
             $checkexe->execute();
 
+            $this->usertype = 'user';
+
             if ($checkexe->fetchColumn() > 0) {
                 $this->message = "Error: Duplicate entry for Email '" . htmlspecialchars($this->email) . "'. Please use a different email.";
                 return false;

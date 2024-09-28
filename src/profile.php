@@ -130,8 +130,8 @@ checkAuth();
                 <!-- image placeholder -->
                 <div class="relative w-52 h-52 cursor-pointer border border-gray-300 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center"
                     id="uploadbtn">
-                    <img src="<?= $profileinfo['profile_pic_url'] ?>" alt="Profile Picture"
-                        class="object-cover w-full h-full" id="profilePicture">
+                    <img src="<?= isset($profileinfo['profile_pic_url']) && $profileinfo['profile_pic_url'] ? $profileinfo['profile_pic_url'] : '../public/others/placeholder-400x400.jpg'; ?>"
+                        alt="Profile Picture" class="object-cover w-full h-full" id="profilePicture">
                 </div>
 
                 <!-- upload_profile_picture_form -->

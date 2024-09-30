@@ -115,7 +115,7 @@ checkAuth();
         <div class="flex flex-col relative items-center justify-start p-6 space-y-4 lg:h-full pb-0">
             <div
                 class="fixed left-0 top-0 p-7 bg-neutral-600 lg:p-0 z-40 lg:absolute lg:left-[2px] lg:top-[2px] w-full h-fit">
-                <button onclick="window.location.href = './dashboard.php';"
+                <button onclick="window.location.href = './index.php';"
                     class="fixed left-[5px] top-[14px] lg:absolute lg:left-[2px] lg:top-[2px] hover:text-red-500 duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                         class="bi bi-chevron-left" viewBox="0 0 16 16">

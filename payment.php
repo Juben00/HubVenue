@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
                 <div class="bg-green-500 p-6 text-neutral-50 text-center rounded-lg shadow-lg">
                     <p class="text-lg font-semibold mb-4"><?= htmlspecialchars($message) ?></p>
-                    <a href="dashboard.php"
+                    <a href="./index.php"
                         class="bg-neutral-800 text-neutral-50 px-4 py-2 rounded-md hover:bg-neutral-900 transition-all">OK</a>
                 </div>
             </div>

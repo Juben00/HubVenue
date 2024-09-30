@@ -22,7 +22,7 @@ function logout()
     session_destroy();
 
     // Redirect to the login page
-    header("Location: ./index.php");
+    header("Location: ./login.php");
     exit();
 }
 
@@ -32,7 +32,7 @@ function redirectIfAuth()
     // Check if the user session variables are set
     if (isset($_SESSION['id'])) {
         // If logged in, redirect to the dashboard
-        header("Location: ./dashboard.php");
+        header("Location: ./index.php");
         exit();
     }
 }

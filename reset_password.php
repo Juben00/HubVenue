@@ -91,5 +91,5 @@ if (isset($_GET['token'])) {
     $query->execute();
     // $pdo->prepare("UPDATE users SET password = ?, token = NULL, expires_at = NULL WHERE token = ?")
     //     ->execute([$new_password, $token]);
-    header("Location: index.php");
+    header("Location: login.php");
 }

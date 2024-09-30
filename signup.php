@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $userObj->password = $password;
 
         if ($userObj->register()) {
-            header("Location: ./index.php");
+            header("Location: ./login.php");
         } else {
             $message = $userObj->message;
         }
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="submit"
                 class="px-3 py-2 border-2 bg-red-500 hover:text-neutral-700 duration-150 hover:bg-red-400 font-semibold text-white rounded-md"
                 value="SIGN UP"></input>
-            <a href="./index.php"
+            <a href="./login.php"
                 class="underline underline-offset-1 text-xs text-center hover:text-red-500 duration-150">Back to
                 Login</a>
         </div>

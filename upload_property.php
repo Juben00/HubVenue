@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['property_pic'])) {
 
             // Add property to the database
             if ($propertyObj->addProp()) {
-                header('Location: ./dashboard.php'); // Redirect on success
+                header('Location: ./index.php'); // Redirect on success
                 exit();
             } else {
                 echo "Failed to add property";

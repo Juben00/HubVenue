@@ -7,14 +7,12 @@ redirectIfAuth();
 
 $userObj = new User();
 $message = '';
-$email = "";
-$emailErr = "";
-
-
-date_default_timezone_set('Asia/Manila');
+$email = $password = "";
+$emailErr = $passwordErr = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = isset($_POST['email']) ? sanitizeInput($_POST['email']) : '';
+    $password = isset($_POST['password']) ? sanitizeInput($_POST['password']) : '';
 
     if (verifyEmail($email) === false) {
         $emailErr = "* Invalid email format";
@@ -22,14 +20,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($email)) {
         $emailErr = "* Email is required";
     }
-    if (empty($emailErr)) {
-        // Proceed to send the password recovery email
-        require_once './send_recovery_email.php';
+    if (empty($password)) {
+        $passwordErr = "* Password is required";
+    }
 
-        $message = "If the email exists in our system, a recovery link has been sent.";
+    if (empty($emailErr) && empty($passwordErr)) {
+        $userObj->email = $email;
+        $userObj->password = $password;
+
+        if ($userObj->login()) {
+            header("Location: ./index.php");
+            exit();
+        } else {
+            $message = $userObj->message;
+        }
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet">
-    <title>HubVenue - Password Recovery</title>
+    <title>HubVenue - Login</title>
     <link rel="icon" href="./public/images/white_transparent.png">
     <style>
         .bg {
@@ -58,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="pt-4">
             <img src="./public/images/black_transparent.png" alt="" class="h-24">
         </div>
-        <h1 class="font-semibold text-xl">PASSWORD RECOVERY FORM</h1>
+        <h1 class="font-semibold text-xl">LOGIN FORM</h1>
 
         <!-- Display error message if available -->
         <?php if (!empty($message)) { ?>
@@ -73,21 +79,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- EMAIL Field -->
         <div class="flex flex-col w-full">
             <label for="email" class="font-semibold text-sm">EMAIL</label>
-            <input type="text" id="email" name="email" class="px-2 py-1 border" placeholder="Enter your Recovery Email"
+            <input type="text" id="email" name="email" class="px-2 py-1 border" placeholder="Enter Email"
                 value="<?php echo htmlspecialchars($email); ?>">
-            <span class="text-red-500">
-                <?php echo $emailErr; ?>
+            <span class="text-red-500"><?php echo $emailErr; ?></span>
+        </div>
+
+        <!-- PASSWORD Field -->
+        <div class="flex flex-col w-full">
+            <span class="flex items-center justify-between">
+                <label for="password" class="font-semibold text-sm">PASSWORD</label>
+                <a href="./pwdRecovery.php" class="text-xs underline underline-offset-2 hover:text-red-500">Forgot
+                    Password</a>
             </span>
+            <input type="password" id="password" name="password" class="px-1 py-1 border" placeholder="Enter Password">
+            <span class="text-red-500"><?php echo $passwordErr; ?></span>
         </div>
 
         <!-- Buttons -->
-        <div class="flex flex-col gap-2 mt-2">
+        <div class="flex flex-col gap-2 w-1/2 mt-2">
             <input type="submit"
                 class="px-3 py-2 border-2 bg-red-500 hover:text-neutral-700 duration-150 hover:bg-red-400 font-semibold text-white rounded-md"
-                value="SEND RECOVERY LINK"></input>
-            <a href="./login.php"
-                class="underline underline-offset-1 text-xs text-center hover:text-red-500 duration-150">Back to
-                Login</a>
+                value="LOGIN">
+            <a href="./signup.php"
+                class="underline underline-offset-1 text-xs text-center hover:text-red-500 duration-150">Sign Up</a>
         </div>
     </form>
 </body>

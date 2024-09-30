@@ -39,7 +39,7 @@ $filteredProperties = array_map(function ($property) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HubVenue</title>
     <link rel="icon" href="./public/images/white_transparent.png">
-    <link rel="stylesheet" href="./output.css?v=1.5">
+    <link rel="stylesheet" href="./output.css?v=1.14">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .custom-gradient {

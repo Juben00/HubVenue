@@ -237,7 +237,7 @@ checkAuth();
 
     </div>
 
-    <script src="./profile.js"></script>
+    <script src="./js/profile.js"></script>
     <script>
         // JavaScript to trigger file upload and change button opacity
         document.getElementById('imgtrigg').addEventListener('click', (e) => {

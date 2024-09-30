@@ -389,7 +389,7 @@ $filteredProperties = array_map(function ($property) {
 
     <?php require_once './components/Footer.php' ?>
 
-    <script src="./submit.js"></script>
+    <script src="./js/submit.js"></script>
     <script>
         $(document).ready(function () {
             $('#searchForm').on('submit', function (event) {

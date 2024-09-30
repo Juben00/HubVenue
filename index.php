@@ -19,7 +19,6 @@ $properties = $propertyObj->viewProp();
 
 //initailize the saved properties variable
 $savedProperties = [];
-// $savedProperties = $saveobj->fetchSavedProperties();
 
 // Remove numeric keys from the array
 $filteredProperties = array_map(function ($property) {

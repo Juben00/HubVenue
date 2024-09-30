@@ -102,6 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 value="LOGIN">
             <a href="./signup.php"
                 class="underline underline-offset-1 text-xs text-center hover:text-red-500 duration-150">Sign Up</a>
+            <a href="./index.php"
+                class="underline underline-offset-1 text-xs text-center hover:text-red-500 duration-150">View Only</a>
         </div>
     </form>
 </body>

@@ -64,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
-    <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.4"> <!-- Increment version number -->
+    <link rel="icon" href="./public/images/white_transparent.png">
+    <link rel="stylesheet" href="./output.css?v=1.4"> <!-- Increment version number -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>

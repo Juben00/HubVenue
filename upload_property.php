@@ -1,7 +1,7 @@
 <?php
 require_once './classes/property.class.php';
 require_once './sanitize.php';
-require_once '../vendor/autoload.php';
+require_once './vendor/autoload.php';
 use Cloudinary\Cloudinary;
 use Cloudinary\Api\Upload\UploadApi;
 use Cloudinary\Configuration\Configuration;

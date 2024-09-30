@@ -33,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
-    <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.14">
+    <link rel="icon" href="./public/images/white_transparent.png">
+    <link rel="stylesheet" href="./output.css?v=1.14">
 </head>
 
 <body

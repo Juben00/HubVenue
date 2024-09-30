@@ -1,7 +1,7 @@
 <?php
-require_once './src/classes/user.class.php';
-require_once './src/sanitize.php';
-require_once './src/authmiddleware.php';
+require_once './classes/user.class.php';
+require_once './sanitize.php';
+require_once './authmiddleware.php';
 
 redirectIfAuth();
 

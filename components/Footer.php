@@ -1,7 +1,7 @@
 <footer class="bg-neutral-200 text-neutral-700 shadow-xl grid min-h-[150px] grid-cols-1 md:grid-cols-4">
     <!-- Logo Section -->
     <div class="flex flex-col items-center  ">
-        <img src="../public/images/black_ico.png" alt="HubVenue Logo" style="height: 200px;">
+        <img src="./public/images/black_ico.png" alt="HubVenue Logo" style="height: 200px;">
     </div>
 
     <div class="flex flex-col items-center justify-center p-2">

@@ -1,6 +1,6 @@
 <?php
-require_once './src/classes/user.class.php';
-require_once './src/sanitize.php';
+require_once './classes/user.class.php';
+require_once './sanitize.php';
 $userObj = new User();
 
 $message = '';

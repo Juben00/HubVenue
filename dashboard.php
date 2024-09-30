@@ -39,8 +39,8 @@ $filteredProperties = array_map(function ($property) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HubVenue</title>
-    <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.5">
+    <link rel="icon" href="./public/images/white_transparent.png">
+    <link rel="stylesheet" href="./output.css?v=1.5">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .custom-gradient {
@@ -59,20 +59,19 @@ $filteredProperties = array_map(function ($property) {
                 <!-- Image Container -->
                 <div id="carousel" class="flex transition-transform duration-500 h-full ">
                     <img class="h-full w-full flex-shrink-0 opacity-90 object-cover"
-                        src="../public/bgimages/Inside Weddings.jpg" alt="">
+                        src="./public/bgimages/Inside Weddings.jpg" alt="">
                     <img class="h-full w-full flex-shrink-0 opacity-90 object-cover"
-                        src="../public/bgimages/Modern And Minimalistic Museo Casa de la Bola Wedding.jpg" alt="">
+                        src="./public/bgimages/Modern And Minimalistic Museo Casa de la Bola Wedding.jpg" alt="">
                     <img class="h-full w-full flex-shrink-0 opacity-90 object-cover"
-                        src="../public/bgimages/Red and white rustic wedding venue  decor with lanterns.jpg" alt="">
+                        src="./public/bgimages/Red and white rustic wedding venue  decor with lanterns.jpg" alt="">
                     <img class="h-full w-full flex-shrink-0 opacity-90 object-cover"
-                        src="../public/bgimages/marc-babin-aQWmCH_b3MU-unsplash.jpg" alt="">
+                        src="./public/bgimages/marc-babin-aQWmCH_b3MU-unsplash.jpg" alt="">
                     <img class="h-full w-full flex-shrink-0 opacity-90 object-cover"
-                        src="../public/bgimages/Rent Party & Event Items Portland OR.jpg" alt="">
+                        src="./public/bgimages/Rent Party & Event Items Portland OR.jpg" alt="">
                     <img class="h-full w-full flex-shrink-0 opacity-90 object-cover"
-                        src="../public/bgimages/Black Plates & Red Roses at Head Table.jpg" alt="">
+                        src="./public/bgimages/Black Plates & Red Roses at Head Table.jpg" alt="">
                     <img class="h-full w-full flex-shrink-0 opacity-90 object-cover"
-                        src="../public/bgimages/elegant black tablescape with red roses; Ralph Lauren dinner.jpg"
-                        alt="">
+                        src="./public/bgimages/elegant black tablescape with red roses; Ralph Lauren dinner.jpg" alt="">
                 </div>
 
                 <!-- Dots Navigation -->
@@ -111,18 +110,18 @@ $filteredProperties = array_map(function ($property) {
         <h2 class="text-3xl lg:text-5xl font-bold mt-4">Our Services</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-2">
             <div class="flex flex-col items-center bg-neutral-200/20  border p-4 rounded-lg shadow-lg m-4">
-                <img src="../public/serviceimages/pexels-pixabay-267569.jpg" alt="Rent Space" class="w-full">
+                <img src="./public/serviceimages/pexels-pixabay-267569.jpg" alt="Rent Space" class="w-full">
                 <h3 class="text-xl font-semibold mt-2 text-center">Space Rentals</h3>
                 <p class="text-center">Discover unique spaces for any event, from intimate gatherings to large-scale
                     functions.</p>
             </div>
             <div class="flex flex-col items-center bg-neutral-200/20  border p-4 rounded-lg shadow-lg m-4">
-                <img src="../public/serviceimages/pexels-rdne-7414284.jpg" alt="Post Listings" class="w-full">
+                <img src="./public/serviceimages/pexels-rdne-7414284.jpg" alt="Post Listings" class="w-full">
                 <h3 class="text-xl font-semibold mt-2 text-center">Post Your Space</h3>
                 <p class="text-center">Earn money by listing your home or commercial space for event rentals.</p>
             </div>
             <div class="flex flex-col items-center bg-neutral-200/20  border p-4 rounded-lg shadow-lg m-4">
-                <img src="../public/serviceimages/pexels-tima-miroshnichenko-6694575.jpg" alt="Book Event"
+                <img src="./public/serviceimages/pexels-tima-miroshnichenko-6694575.jpg" alt="Book Event"
                     class="w-full">
                 <h3 class="text-xl font-semibold mt-2 text-center">Book an Event Space</h3>
                 <p class="text-center">Easily browse and book spaces for weddings, meetings, parties, and more.</p>

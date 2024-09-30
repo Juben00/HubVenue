@@ -1,7 +1,7 @@
 <?php
-require_once './src/classes/user.class.php';
-require_once './src/sanitize.php';
-require_once './src/authmiddleware.php';
+require_once './classes/user.class.php';
+require_once './sanitize.php';
+require_once './authmiddleware.php';
 
 redirectIfAuth();
 
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $userObj->password = $password;
 
         if ($userObj->login()) {
-            header("Location: ./src/dashboard.php");
+            header("Location: ./dashboard.php");
             exit();
         } else {
             $message = $userObj->message;

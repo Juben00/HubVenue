@@ -1,7 +1,7 @@
 <?php
 
 require_once './dbconnection.php';
-require_once '../vendor/autoload.php';
+require_once './vendor/autoload.php';
 use Cloudinary\Cloudinary;
 use Cloudinary\Api\Upload\UploadApi;
 use Cloudinary\Configuration\Configuration;

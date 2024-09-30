@@ -18,8 +18,8 @@ checkAuth();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link rel="icon" href="../public/images/white_transparent.png">
-    <link rel="stylesheet" href="../output.css?v=1.14">
+    <link rel="icon" href="./public/images/white_transparent.png">
+    <link rel="stylesheet" href="./output.css?v=1.14">
 </head>
 
 <body
@@ -130,7 +130,7 @@ checkAuth();
                 <!-- image placeholder -->
                 <div class="relative w-52 h-52 cursor-pointer border border-gray-300 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center"
                     id="uploadbtn">
-                    <img src="<?= isset($profileinfo['profile_pic_url']) && $profileinfo['profile_pic_url'] ? $profileinfo['profile_pic_url'] : '../public/others/placeholder-400x400.jpg'; ?>"
+                    <img src="<?= isset($profileinfo['profile_pic_url']) && $profileinfo['profile_pic_url'] ? $profileinfo['profile_pic_url'] : './public/others/placeholder-400x400.jpg'; ?>"
                         alt="Profile Picture" class="object-cover w-full h-full" id="profilePicture">
                 </div>
 

@@ -2,7 +2,7 @@
     <div class=" container mx-auto px-8 flex items-center justify-between ">
         <!-- Logo -->
         <a href=" #" class="flex items-center">
-            <img src="../public/images/black_ico.png" alt="Logo" class="h-24">
+            <img src="./public/images/black_ico.png" alt="Logo" class="h-24">
         </a>
 
         <!-- Hamburger Icon (visible on small screens) -->

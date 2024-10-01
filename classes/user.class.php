@@ -10,6 +10,8 @@ class User
     public $last_name;
     public $email;
     public $password;
+
+    public $cpassword;
     public $message;
     protected $db;
 
@@ -109,4 +111,53 @@ class User
             $this->message = "Database error: " . $e->getMessage();
         }
     }
+
+    public function changeInfo()
+    {
+        try {
+            $localid = $_SESSION['id'];
+            // Fetch the old password from the database
+            $checkquery = "SELECT password FROM users WHERE id = :id;";
+            $checkqueryexe = $this->db->connect()->prepare($checkquery);
+            $checkqueryexe->bindParam(":id", $localid);
+            $checkqueryexe->execute();
+            $oldPasswordHash = $checkqueryexe->fetchColumn(); // Fetches the password hash directly
+
+            // If there is an existing password hash for the user
+            if ($oldPasswordHash) {
+                // Check if the new password matches the old password
+                if (password_verify($this->password, $oldPasswordHash)) {
+                    $this->message = "New Password cannot be the same as the Old Password";
+                    return; // Stop further execution if passwords match
+                }
+
+                // Check if the new password matches the confirm password
+                if ($this->password === $this->cpassword) {
+                    // Hash the new password
+                    $newPasswordHash = password_hash($this->password, PASSWORD_DEFAULT);
+
+                    // Update the user's details and the password
+                    $query = "UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email, password = :password WHERE id = :id;";
+                    $queryexe = $this->db->connect()->prepare($query);
+                    $queryexe->bindParam(":first_name", $this->first_name);
+                    $queryexe->bindParam(":last_name", $this->last_name);
+                    $queryexe->bindParam(":email", $this->email);
+                    $queryexe->bindParam(":password", $newPasswordHash); // Bind the hashed new password
+                    $queryexe->bindParam(":id", $localid);
+                    $queryexe->execute();
+                    $this->message = "Information updated successfully!";
+                    return;
+                } else {
+                    $this->message = "New password and confirm password do not match!";
+                }
+            }
+        } catch (Exception $e) {
+            $this->message = "Database error: " . $e->getMessage();
+        }
+    }
 }
+
+$userObj = new User();
+
+
+// var_dump($userObj->fetchprofile());

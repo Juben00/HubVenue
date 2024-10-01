@@ -183,7 +183,7 @@ $filteredProperties = array_map(function ($property) {
 
             </form>
 
-            <div id="result" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6  rounded-xl">
+            <div id="result" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  rounded-xl">
 
                 <?php if (!empty($properties)): ?>
                     <?php foreach ($properties as $property): ?>

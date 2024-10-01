@@ -1,27 +1,62 @@
 <?php
 require_once './authmiddleware.php';
 require_once './classes/user.class.php';
+require_once './sanitize.php';
 
 checkAuth();
 
-$user = new User();
+$userObj = new User();
 
-$settings = $user->fetchprofile();
+$settings = $userObj->fetchprofile();
+$message = "";
+$first_name = $last_name = $email = $password = $cpassword = "";
+$first_nameErr = $last_nameErr = $emailErr = $passwordErr = $cpasswordErr = "";
 
-$first_name = $last_name = $email = $password = "";
-$first_nameErr = $last_nameErr = $emailErr = $passwordErr = "";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $first_name = isset($_POST['first_name']) ? sanitizeInput($_POST['first_name']) : "";
+    $last_name = isset($_POST['last_name']) ? sanitizeInput($_POST['last_name']) : "";  // Removed extra space
+    $email = isset($_POST['email']) ? sanitizeInput($_POST['email']) : "";  // Removed extra space
+    $password = isset($_POST['password']) ? sanitizeInput($_POST['password']) : "";  // Removed extra space
+    $cpassword = isset($_POST['cpassword']) ? sanitizeInput($_POST['cpassword']) : "";  // Removed extra space
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user->usertype = $_POST['usertype'];
-    $user->first_name = $_POST['first_name'];
-    $user->last_name = $_POST['last_name'];
-    $user->email = $_POST['email'];
-    $user->password = $_POST['password'];
 
-    //update
-    // if ($user->register()) {
-    //     header('Location: login.php');
-    // }
+    if (verifyEmail($email) == false) {
+        $emailErr = "* Invalid email format";
+    }
+    if (empty($email)) {
+        $emailErr = "* Email is required";
+    }
+    if (empty($password)) {
+        $passwordErr = "* Password is required";
+    }
+    if (empty($cpassword)) {
+        $passwordErr = "* Confirmation Password is required";
+    }
+    if (empty($first_name)) {
+        $first_nameErr = "* First Name is required";
+    }
+    if (empty($last_name)) {
+        $last_nameErr = "* Last Name is required";
+    }
+
+    if (empty($first_nameErr) && empty($last_nameErr) && empty($emailErr) && empty($passwordErr)) {
+
+        $userObj->first_name = $first_name;
+        $userObj->last_name = $last_name;
+        $userObj->email = $email;
+        $userObj->password = $password;
+        $userObj->cpassword = $cpassword;
+
+
+        // update
+        if ($userObj->changeInfo()) {
+            header('Location: ./index.php');
+        } else {
+            $message = $userObj->message;
+        }
+    }
+
+
 }
 
 ?>
@@ -51,7 +86,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </svg>
             </button>
             <h1 class="font-bold text-lg md:text-xl text-center">SETTINGS</h1>
-
+            <!--  -->
+            <?php
+            if ($message) {
+                ?>
+                <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+                    <div class="bg-green-500 p-6 text-neutral-50 text-center rounded-lg shadow-lg">
+                        <p class="text-lg font-semibold mb-4"><?= htmlspecialchars($message) ?></p>
+                        <a href="./index.php"
+                            class="bg-neutral-800 text-neutral-50 px-4 py-2 rounded-md hover:bg-neutral-900 transition-all">OK</a>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
         </div>
 
         <div
@@ -68,8 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </svg>
                     </button>
                     <div class="faq-content hidden">
-                        <form action="" class="text-sm p-4">
+                        <form method="POST" class="text-sm p-4">
                             <div class="flex flex-col gap-2">
+                                <h1 class="text-center text-lg">Form for Updating Account Information</h1>
                                 <div class="flex flex-col gap-1">
                                     <label for="first_name">First Name</label>
                                     <input type="text" name="first_name" id="first_name" class="p-2 rounded-md" required
@@ -89,20 +138,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="flex flex-col gap-1">
                                     <label for="password">Password</label>
                                     <input type="password" name="password" id="password" class="p-2 rounded-md" required
-                                        value="" placeholder="********">
+                                        placeholder="********">
                                 </div>
                                 <div class="flex flex-col gap-1">
                                     <label for="password">Confirm Password</label>
-                                    <input type="password" name="password" id="password" class="p-2 rounded-md" required
-                                        value="" placeholder="********">
+                                    <input type="password" name="cpassword" id="cpassword" class="p-2 rounded-md"
+                                        required placeholder="********">
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
-                                    <button type="submit"
-                                        class="border-2 text-neutral-200 bg-red-500 w-fit px-3 py-2 rounded-2xl">Save</button>
+                                    <input type="submit"
+                                        class="border-2 text-neutral-200 bg-red-500 w-fit px-3 py-2 rounded-2xl"
+                                        value="Save"></input>
                                 </div>
                             </div>
-
                         </form>
+
                     </div>
                 </div>
                 <div class="faq-item mb-4">
@@ -209,12 +259,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659" />
                         </svg>
                     </button>
-                    <div class="faq-content hidden text-center">
-                        <p class=" text-sm">Yes, you can list your space on HubVenue. Create an
-                            account,
-                            provide details about your
-                            space, upload photos, and set your availability and pricing. Once your listing is
-                            approved, it will be visible to potential renters.</p>
+                    <div class="faq-content hidden px-6 py-4">
+                        <h3 class="text-lg font-bold">Terms of Service</h3>
+                        <p>The <strong>Terms of Service</strong> outline the rules and regulations for using HubVenue.
+                            By accessing or using our platform, you agree to these terms. Please ensure that you read
+                            and understand them. If you have any questions about our terms, feel free to contact us.</p>
+                        <a href="" class="text-red-500 underline text-xs">Read more</a>
+
+                        <h3 class="text-lg font-bold mt-4">Privacy Policy</h3>
+                        <p>At <strong>HubVenue</strong>, protecting your privacy is a priority. Our <strong>Privacy
+                                Policy</strong> explains how we collect, use, and safeguard your personal information.
+                            It also provides details on your rights and how you can manage your data.</p>
+                        <a href="" class="text-red-500 underline text-xs">Read more</a>
                     </div>
                 </div>
                 <div class="faq-item mb-4">
@@ -227,12 +283,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659" />
                         </svg>
                     </button>
-                    <div class="faq-content hidden text-center">
-                        <p class=" text-sm">Yes, you can list your space on HubVenue. Create an
-                            account,
-                            provide details about your
-                            space, upload photos, and set your availability and pricing. Once your listing is
-                            approved, it will be visible to potential renters.</p>
+                    <div class="faq-content hidden px-6 py-4">
+                        <h3 class="text-lg font-bold">FAQs</h3>
+                        <p>Do you have questions? Visit our <strong>Frequently Asked Questions (FAQs)</strong> section
+                            to find quick answers to common inquiries, including how to use the platform, managing your
+                            account, and resolving technical issues.</p>
+                        <a href="./index.php" class="text-red-500 underline text-xs">Visit FAQs</a>
+
+                        <h3 class="text-lg font-bold mt-4">Contact Support</h3>
+                        <p>If you need further assistance, you can reach out to our support team. We are available to
+                            help with any issues related to your account, payments, or general inquiries. Submit a
+                            request and we’ll get back to you as soon as possible.</p>
+                        <a href="" class="text-red-500 underline text-xs">Contact Support</a>
                     </div>
                 </div>
             </div>

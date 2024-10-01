@@ -15,7 +15,7 @@ header('Content-Type: text/html');
 if (!empty($rented)) {
     foreach ($rented as $rent) {
         echo '
-            <div class="property-item hover:-translate-y-2 ease-out overflow-hidden rounded-lg relative duration-500 border shadow-md shadow-neutral-50 border-neutral-500 flex">
+            <div class="property-item hover:-translate-y-2 ease-out overflow-hidden rounded-lg relative duration-500 border shadow-md shadow-neutral-50 border-neutral-500 w-full flex">
   <div class="w-full relative overflow-hidden flex items-center" style="height: 150px; width: 150px;">
       <img class="" src="' . htmlspecialchars($rent['image']) . '" alt="Property Image">
       <div class="cursor-pointer flex gap-2 flex-col items-start p-4 absolute custom-gradient h-full top-0 w-full justify-between" style="background: linear-gradient(to top, rgba(75, 85, 99, 0.5), rgba(75, 85, 99, 0));">

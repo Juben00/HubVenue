@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
             </a>';
-
         }
     } else {
         echo '<p class="text-red-500">No properties found.</p>';

@@ -71,6 +71,14 @@ CREATE TABLE saved_properties (
     FOREIGN KEY (propertyId) REFERENCES properties(p_id) ON DELETE CASCADE
 );
 
+CREATE TABLE property_disabled (
+    pd_id INT AUTO_INCREMENT PRIMARY KEY,
+    propertyId INT NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    FOREIGN KEY (propertyId) REFERENCES properties(p_id) ON DELETE CASCADE
+);
+
 INSERT INTO properties (p_id, userId, property_name, location, description, image, amenities, price, status) VALUES
 (1, 2, 'The Residence', 'Ayala, Zamboanga City', 'A contemporary 2-bedroom, 1-bathroom home featuring Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt expedita molestiae natus ea minima vel, molestias quo architecto veniam autem! lorem ipsum dolor, sit amet.', 'https://i.ibb.co/yh8mqGX/beaach-house-12.jpg', '{"1": "pool", "2": "basketball court", "3": "karaoke"}', 1500, "pending"),
 (2, 2, 'The Kubo House', 'Tumaga, Zamboanga City', 'This charming 2-bedroom, 1-bathroom cottage offers Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt expedita molestiae natus ea minima vel, molestias quo architecto veniam autem! lorem ipsum dolor, sit amet.', 'https://i.ibb.co/fvtQfcr/beach-house-11.jpg', '{"1": "pool", "2": "basketball court", "3": "karaoke"}', 2500, "pending"),

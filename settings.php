@@ -1,5 +1,4 @@
-<?php
-require_once './authmiddleware.php';
+<?php require_once './authmiddleware.php';
 require_once './classes/user.class.php';
 require_once './sanitize.php';
 
@@ -14,10 +13,10 @@ $first_nameErr = $last_nameErr = $emailErr = $passwordErr = $cpasswordErr = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = isset($_POST['first_name']) ? sanitizeInput($_POST['first_name']) : "";
-    $last_name = isset($_POST['last_name']) ? sanitizeInput($_POST['last_name']) : "";  // Removed extra space
-    $email = isset($_POST['email']) ? sanitizeInput($_POST['email']) : "";  // Removed extra space
-    $password = isset($_POST['password']) ? sanitizeInput($_POST['password']) : "";  // Removed extra space
-    $cpassword = isset($_POST['cpassword']) ? sanitizeInput($_POST['cpassword']) : "";  // Removed extra space
+    $last_name = isset($_POST['last_name']) ? sanitizeInput($_POST['last_name']) : ""; // Removed extra space
+    $email = isset($_POST['email']) ? sanitizeInput($_POST['email']) : ""; // Removed extra space
+    $password = isset($_POST['password']) ? sanitizeInput($_POST['password']) : ""; // Removed extra space
+    $cpassword = isset($_POST['cpassword']) ? sanitizeInput($_POST['cpassword']) : ""; // Removed extra space
 
 
     if (verifyEmail($email) == false) {
@@ -147,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="flex flex-col items-center mt-2">
                                     <input type="submit"
-                                        class="border-2 text-neutral-200 bg-red-500 w-fit px-3 py-2 rounded-2xl"
+                                        class="border-2 text-neutral-200 bg-red-500 w-fit px-6 py-2 rounded-md"
                                         value="Save"></input>
                                 </div>
                             </div>
@@ -166,12 +165,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </svg>
                     </button>
                     <div class="faq-content hidden">
-                        <form action="" class="text-sm p-4">
+                        <form action="hostApplication.php" method="POST" enctype="multipart/form-data"
+                            class="text-sm p-4">
                             <div class="flex flex-col gap-2">
                                 <h1 class="text-center text-lg">Application for Host Account</h1>
+
+                                <div class="flex gap-1 items-center">
+                                    <!-- Transaction Method -->
+                                    <span class="flex flex-col flex-1 gap-1">
+                                        <label for="transaction">Transaction Method</label>
+                                        <select name="transaction_method" id="transaction" class="p-2 rounded-md"
+                                            required>
+                                            <option value="">Please select an option</option>
+                                            <option value="Bank Transfer">Bank Transfer</option>
+                                            <option value="Credit Card">Credit Card</option>
+                                            <option value="PayPal">PayPal</option>
+                                            <option value="Gcash">Gcash</option>
+                                            <option value="PayMaya">PayMaya</option>
+                                        </select>
+                                    </span>
+
+                                    <!-- Transaction Details -->
+                                    <span class="flex flex-col flex-1 gap-1">
+                                        <label for="transactionDetails">Transaction Details</label>
+                                        <input type="text" name="transaction_details" id="transactionDetails"
+                                            placeholder="Transaction ID" class="p-2 rounded-md flex-1" required>
+                                    </span>
+                                </div>
+
+                                <!-- Identification Card -->
                                 <div class="flex flex-col gap-1">
-                                    <label for="first_name">Type of Identification Card</label>
-                                    <select name="" id="" class="p-2 rounded-md" required>
+                                    <label for="identification_card">Identification Card</label>
+                                    <select name="identification_card" id="identification_card" class="p-2 rounded-md"
+                                        required>
                                         <option value="">Please select an option</option>
                                         <option value="National ID">National ID</option>
                                         <option value="Passport">Passport</option>
@@ -180,19 +206,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <option value="Senior Citizen ID">Senior Citizen ID</option>
                                     </select>
                                 </div>
+
+                                <!-- Upload Identification Card -->
                                 <div class="flex flex-col gap-1">
-                                    <label for="first_name">Upload Identification Card</label>
-                                    <input type="file" name="file" id="file" class="p-2 rounded-md" required>
+                                    <label for="id">Upload Identification Card</label>
+                                    <input type="file" name="identification_card_image" id="id" class="p-2 rounded-md"
+                                        required>
                                 </div>
 
+                                <!-- Terms and Conditions -->
+                                <div class="flex items-center gap-1">
+                                    <input type="checkbox" id="termsAndConditions" name="termsAndConditions"
+                                        class="accent-red-500" required>
+                                    <p class="text-xs">Please read and understand our
+                                        <a href="#" class="text-red-500 underline">terms and conditions</a> before
+                                        applying.
+                                    </p>
+                                </div>
+
+                                <!-- Submit Button -->
                                 <div class="flex flex-col items-center mt-2">
                                     <button type="submit"
-                                        class="border-2 text-neutral-200 bg-red-500 w-fit px-3 py-2 rounded-2xl">Apply</button>
+                                        class="border-2 text-neutral-200 bg-red-500 w-fit px-6 py-2 rounded-md">
+                                        Apply
+                                    </button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
+
                 </div>
                 <div class="faq-item mb-4">
                     <button
@@ -261,14 +303,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </button>
                     <div class="faq-content hidden px-6 py-4">
                         <h3 class="text-lg font-bold">Terms of Service</h3>
-                        <p>The <strong>Terms of Service</strong> outline the rules and regulations for using HubVenue.
-                            By accessing or using our platform, you agree to these terms. Please ensure that you read
-                            and understand them. If you have any questions about our terms, feel free to contact us.</p>
+                        <p>The <strong>Terms of Service</strong> outline the rules and regulations for using
+                            HubVenue.
+                            By accessing or using our platform, you agree to these terms. Please ensure that you
+                            read
+                            and understand them. If you have any questions about our terms, feel free to contact us.
+                        </p>
                         <a href="" class="text-red-500 underline text-xs">Read more</a>
 
                         <h3 class="text-lg font-bold mt-4">Privacy Policy</h3>
                         <p>At <strong>HubVenue</strong>, protecting your privacy is a priority. Our <strong>Privacy
-                                Policy</strong> explains how we collect, use, and safeguard your personal information.
+                                Policy</strong> explains how we collect, use, and safeguard your personal
+                            information.
                             It also provides details on your rights and how you can manage your data.</p>
                         <a href="" class="text-red-500 underline text-xs">Read more</a>
                     </div>
@@ -285,13 +331,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </button>
                     <div class="faq-content hidden px-6 py-4">
                         <h3 class="text-lg font-bold">FAQs</h3>
-                        <p>Do you have questions? Visit our <strong>Frequently Asked Questions (FAQs)</strong> section
-                            to find quick answers to common inquiries, including how to use the platform, managing your
+                        <p>Do you have questions? Visit our <strong>Frequently Asked Questions (FAQs)</strong>
+                            section
+                            to find quick answers to common inquiries, including how to use the platform, managing
+                            your
                             account, and resolving technical issues.</p>
                         <a href="./index.php" class="text-red-500 underline text-xs">Visit FAQs</a>
 
                         <h3 class="text-lg font-bold mt-4">Contact Support</h3>
-                        <p>If you need further assistance, you can reach out to our support team. We are available to
+                        <p>If you need further assistance, you can reach out to our support team. We are available
+                            to
                             help with any issues related to your account, payments, or general inquiries. Submit a
                             request and we’ll get back to you as soon as possible.</p>
                         <a href="" class="text-red-500 underline text-xs">Contact Support</a>

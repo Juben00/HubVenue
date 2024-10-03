@@ -28,7 +28,7 @@ $loggedOut = !isset($_SESSION['id']);
         </button>
 
         <!-- Links (hidden on small screens, visible on larger screens) -->
-        <ul class="hidden lg:flex space-x-4 relative">
+        <ul class="hidden lg:flex space-x-4 relative items-center">
             <li><a href="#" class="hover:underline hover:underline-offset-2">Services</a></li>
             <li><a href="#" class="hover:underline hover:underline-offset-2">About</a></li>
             <li><a href="#" class="hover:underline hover:underline-offset-2">Contact</a></li>
@@ -36,12 +36,12 @@ $loggedOut = !isset($_SESSION['id']);
 
 
             <?php if ($loggedOut): ?>
-                <div class="flex gap-1">
+                <div class="flex gap-1 items-center">
                     <li><a href="./login.php"
-                            class="duration-150 px-3 py-1 bg-red-500 rounded-md text-neutral-200 hover:scale-105 text-xs">LOGIN</a>
+                            class="duration-150 w-16 text-center block py-2 bg-red-500 rounded-md text-neutral-200 hover:scale-105 text-xs">LOGIN</a>
                     </li>
                     <li><a href="./signup.php"
-                            class=" duration-150 px-3 py-1 border border-red-500 rounded-md  hover:scale-105 text-xs">SIGNUP</a>
+                            class=" duration-150 w-16 text-center block py-2 border border-red-500 rounded-md  hover:scale-105 text-xs">SIGNUP</a>
                 </div>
             <?php else: ?>
                 <button id="toggle">

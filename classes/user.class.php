@@ -4,15 +4,19 @@ require_once __DIR__ . '/../dbconnection.php';
 
 class User
 {
+    public $message;
     public $id;
     public $usertype;
     public $first_name;
     public $last_name;
     public $email;
     public $password;
-
     public $cpassword;
-    public $message;
+    public $transaction_method;
+    public $transaction_details;
+    public $identification_card;
+    public $identification_card_image_url;
+
     protected $db;
 
     public function __construct()
@@ -155,9 +159,58 @@ class User
             $this->message = "Database error: " . $e->getMessage();
         }
     }
+    public function hostApplication()
+    {
+        try {
+            // Ensure session has user ID
+            if (!isset($_SESSION['id'])) {
+                throw new Exception('User not authenticated.');
+            }
+
+            $localid = $_SESSION['id'];
+            $query = "SELECT * FROM users WHERE id = :id";
+            $queryexe = $this->db->connect()->prepare($query);
+            $queryexe->bindParam(":id", $localid);
+            $queryexe->execute();
+
+            if ($queryexe->rowCount() > 0) {
+                // Update user information with transaction method and details
+                $updatequery = "UPDATE users 
+                            SET transaction_method = :transaction_method, 
+                                transaction_details = :transaction_details, 
+                                identification_card = :identification_card, 
+                                identification_card_image_url = :identification_card_image_url 
+                            WHERE id = :id";
+
+                $updatequeryexe = $this->db->connect()->prepare($updatequery);
+                $updatequeryexe->bindParam(":transaction_method", $this->transaction_method);
+                $updatequeryexe->bindParam(":transaction_details", $this->transaction_details);
+                $updatequeryexe->bindParam(":identification_card", $this->identification_card);
+                $updatequeryexe->bindParam(":identification_card_image_url", $this->identification_card_image_url);
+                $updatequeryexe->bindParam(":id", $localid);
+
+                if ($updatequeryexe->execute()) {
+                    $this->message = "Application submitted successfully!";
+                    return true;
+                } else {
+                    throw new Exception("Application submission failed!");
+                }
+            } else {
+                throw new Exception("User not found.");
+            }
+        } catch (PDOException $e) {
+            $this->message = "Database error: " . $e->getMessage();
+            return false;
+        } catch (Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
 }
 
-$userObj = new User();
+
+// $userObj = new User();
 
 
 // var_dump($userObj->fetchprofile());

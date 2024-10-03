@@ -2,7 +2,7 @@
 require_once './authmiddleware.php';
 require_once './api/imageUpload.api.php';
 require_once './classes/user.class.php';
-$settings = require_once './Settings.php';
+require_once './settings.php';
 
 // Check if the user is logged in
 checkAuth();
@@ -24,8 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Register user and handle the result
     if ($userobj->hostApplication()) {
-        $settings->message = "Registration successful!";
+        $message = "Registration successful!";
+        return $message;
     } else {
-        $settings->message = "Registration failed!";
+        $message = "Registration failed!";
+        return $message;
     }
 }

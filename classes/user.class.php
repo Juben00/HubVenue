@@ -176,7 +176,9 @@ class User
             if ($queryexe->rowCount() > 0) {
                 // Update user information with transaction method and details
                 $updatequery = "UPDATE users 
-                            SET transaction_method = :transaction_method, 
+                            SET 
+                                usertype = 'pending',
+                                transaction_method = :transaction_method, 
                                 transaction_details = :transaction_details, 
                                 identification_card = :identification_card, 
                                 identification_card_image_url = :identification_card_image_url 

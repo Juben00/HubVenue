@@ -12,7 +12,7 @@ if (isset($_GET['token'])) {
     $query = $conn->prepare("SELECT * FROM users WHERE token = :token AND expires_at > NOW()");
     $query->bindParam(":token", $token);
     $query->execute();
-    $user = $query->fetch();
+    $user = $query->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
         // Show the reset password form

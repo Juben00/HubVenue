@@ -59,7 +59,7 @@ class Save
         $data = null;
 
         if ($stmt->execute()) {
-            $data = $stmt->fetchAll();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         return $data;

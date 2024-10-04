@@ -177,7 +177,7 @@ checkAuth();
                     if ($profileinfo['usertype'] == 'client'): ?>
                         <span class="text-center leading-3 mt-1 mb-2">
                             <h1 class="font-semibold text-lg"><?= $profileinfo["posted"] ?></h1>
-                            <p class="text-sm">Posted</p>
+                            <p class="text-xs">Posted</p>
                         </span>
                         <div class="w-px bg-gray-400 h-full"></div>
                     <?php endif;
@@ -189,7 +189,7 @@ checkAuth();
                     <!-- Booked -->
                     <span class="text-center leading-3 mt-1 mb-2">
                         <h1 class="font-semibold text-lg"><?= $profileinfo['booked'] ?></h1>
-                        <p class="text-sm">Booked</p>
+                        <p class="text-xs">Booked</p>
                     </span>
 
                     <!-- Divider -->
@@ -198,7 +198,7 @@ checkAuth();
                     <!-- Saved -->
                     <span class="text-center leading-3 mt-1 mb-2">
                         <h1 class="font-semibold text-lg"><?= $profileinfo['saved'] ?></h1>
-                        <p class="text-sm">Saved</p>
+                        <p class="text-xs">Saved</p>
                     </span>
                 </div>
 
@@ -217,9 +217,9 @@ checkAuth();
         <!-- Rents and Saved section -->
         <div>
             <div class="bg-neutral-300 rounded-md overflow-hidden flex justify-center max-w-[500px] mx-auto">
-                <button id="posted" class="text-lg text-center flex-1 w-full h-full">Posted</button>
-                <button id="rents" class="text-lg text-center flex-1 w-full h-full">Rents</button>
-                <button id="saved" class="text-lg text-center flex-1 w-full h-full">Saved</button>
+                <button id="posted" class="text-sm py-1 text-center flex-1 w-full h-full">Posted</button>
+                <button id="rents" class="text-sm py-1 text-center flex-1 w-full h-full">Rents</button>
+                <button id="saved" class="text-sm py-1 text-center flex-1 w-full h-full">Saved</button>
             </div>
 
             <div class="flex flex-col lg:h-[530px] lg:overflow-y-auto ">

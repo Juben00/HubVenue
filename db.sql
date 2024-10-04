@@ -41,9 +41,7 @@ CREATE TABLE payments (
     payment_method VARCHAR(255) NOT NULL,
     payment_info VARCHAR(255),
     payment_image_url VARCHAR(255),
-    payment_status ENUM('paid', 'pending', 'rejected') DEFAULT 'pending',
-    userId INT NOT NULL,
-    FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+    payment_status ENUM('paid', 'pending', 'rejected') DEFAULT 'pending'
 );
 
 -- Create the bookings table with foreign key constraints

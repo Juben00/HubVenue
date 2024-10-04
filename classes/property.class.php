@@ -43,7 +43,7 @@ class Property
 
         // Execute the query. If successful, fetch all the results into an array.
         if ($stmt->execute()) {
-            $data = $stmt->fetchAll(); // Fetch all rows from the result set.
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all rows from the result set.
         }
 
         return $data; // Return the fetched data.
@@ -58,7 +58,7 @@ class Property
         $data = null;
 
         if ($stmt->execute()) {
-            $data = $stmt->fetchAll();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         return $data;
@@ -73,7 +73,7 @@ class Property
         $data = null;
 
         if ($stmt->execute()) {
-            $data = $stmt->fetchAll();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         return $data;
@@ -93,7 +93,7 @@ class Property
         $stmt->bindParam(':id', $id);
 
         if ($stmt->execute()) {
-            $data = $stmt->fetch();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
         }
         return $data;
     }

@@ -14,8 +14,8 @@ checkAuth(); // Check if the user is logged in
 $id = $_GET['id'];
 $item = $property->fetchfocus($id);
 $disabledDates = $bookingObj->fetchbookeddate($id);
+
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
-    $id = $_GET['id'];
     $item = $property->fetchfocus($id);
 
     $bookingObj->propertyId = $id;
@@ -27,13 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $bookingObj->userId = sanitizeInput($_SESSION['id']);
     $bookingObj->propertyId = sanitizeInput($_POST['p_id']);
     $bookingObj->day = sanitizeInput($_POST['day']);
-
-
     $bookingObj->startdate = sanitizeInput($_POST['startdate']);
     $bookingObj->enddate = sanitizeInput($_POST['enddate']);
     $bookingObj->check_in = sanitizeInput($_POST['starttime']);
-    $bookingObj->check_out = sanitizeInput($_POST['endtime']);
-    //payment table
+    $bookingObj->check_out = sanitizeInput($_POST['starttime']);
     $bookingObj->amount = sanitizeInput($_POST['grandtotal']);
     $bookingObj->payment_method = sanitizeInput($_POST['payment']);
     $bookingObj->payment_info = sanitizeInput($_POST['paymentinfo']);
@@ -45,10 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message = "Invalid time. Chosen time is in the past.";
     } else {
         if ($bookingObj->book()) {
-            // echo "Booking successful!";+
             $message = "Booking successful!";
         } else {
-            // echo "Booking failed!";
             $message = "Booking failed!";
         }
     }
@@ -170,14 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <input type="time" name="starttime" id="starttime"
                                 class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                         </div>
-                        <div class="flex flex-col gap-1 w-full">
-                            <div class="flex flex-col gap-1 w-full">
-                                <label for="endtime" class="text-xs">End Time</label>
-                                <input type="time" name="endtime" id="endtime"
-                                    class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1"
-                                    required>
-                            </div>
-                        </div>
+
                     </div>
 
                     <!-- Payment method selection -->

@@ -38,7 +38,7 @@ WHERE u.id = :id;";
             $data = null;
 
             if ($queryexe->rowCount() > 0) {
-                $data = $queryexe->fetch();
+                $data = $queryexe->fetch(PDO::FETCH_ASSOC);
             }
 
             return $data;
@@ -72,7 +72,7 @@ WHERE u.id = :id;";
             $data = null;
 
             if ($queryexe->rowCount() > 0) {
-                $data = $queryexe->fetchAll();
+                $data = $queryexe->fetchAll(PDO::FETCH_ASSOC);
             }
 
             return $data;
@@ -98,7 +98,7 @@ WHERE u.id = :id;";
             $data = null;
 
             if ($queryexe->rowCount() > 0) {
-                $data = $queryexe->fetchAll();
+                $data = $queryexe->fetchAll(PDO::FETCH_ASSOC);
             }
 
             return $data;
@@ -125,7 +125,7 @@ WHERE u.id = :id;";
             $data = null;
 
             if ($queryexe->rowCount() > 0) {
-                $data = $queryexe->fetchAll();
+                $data = $queryexe->fetchAll(PDO::FETCH_ASSOC);
             }
 
             return $data;
@@ -137,8 +137,43 @@ WHERE u.id = :id;";
             echo $e->getMessage();
         }
     }
+
+    public function fetchpostandclient($PID)
+    {
+        try {
+
+            // Correct the JOIN statement
+            $query = "SELECT u.*, p.* FROM users u 
+                  JOIN properties p ON u.id = p.userId 
+                  WHERE p.p_id = :id 
+                  LIMIT 1";
+
+            $queryexe = $this->db->connect()->prepare($query);
+            $queryexe->bindParam(":id", $PID);
+            $queryexe->execute();
+
+            $data = null;
+
+            if ($queryexe->rowCount() > 0) {
+                // Fetch a single row
+                $data = $queryexe->fetch(PDO::FETCH_ASSOC);  // Fetch one record as an associative array
+            }
+
+
+            //display the data
+            return $data;
+
+
+
+
+        } catch (PDOException $e) {
+            // Handle the exception
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
 }
 
 $profileobj = new Profile();
 
-// var_dump($profileobj->fetchprofile());
+// var_dump($profileobj->fetchpostandclient(2));

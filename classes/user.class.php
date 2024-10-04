@@ -75,7 +75,7 @@ class User
             $queryexe->execute();
 
             if ($queryexe->rowCount() > 0) {
-                $row = $queryexe->fetch();
+                $row = $queryexe->fetch(PDO::FETCH_ASSOC);
                 if (password_verify($this->password, $row['password'])) {
                     session_start();
                     $_SESSION['id'] = $row['id'];
@@ -107,7 +107,7 @@ class User
             $data = null;
 
             if ($queryexe->rowCount() > 0) {
-                $data = $queryexe->fetch();
+                $data = $queryexe->fetch(PDO::FETCH_ASSOC);
             }
 
             return $data;
@@ -125,7 +125,7 @@ class User
             $checkqueryexe = $this->db->connect()->prepare($checkquery);
             $checkqueryexe->bindParam(":id", $localid);
             $checkqueryexe->execute();
-            $oldPasswordHash = $checkqueryexe->fetchColumn(); // Fetches the password hash directly
+            $oldPasswordHash = $checkqueryexe->fetchColumn(PDO::FETCH_ASSOC); // Fetches the password hash directly
 
             // If there is an existing password hash for the user
             if ($oldPasswordHash) {

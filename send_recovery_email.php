@@ -16,7 +16,7 @@ if (isset($_POST['email'])) {
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
-    $user = $stmt->fetch();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($user) {
 
         $token = bin2hex(random_bytes(50));

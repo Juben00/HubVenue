@@ -191,6 +191,6 @@ checkAuth(); // Check if the user is logged in
         });
 
 </script>
-<script src="./submit.js"></script>
+<script src="./js/submit.js"></script>
 
 </html>

@@ -135,8 +135,8 @@ $filteredProperties = array_map(function ($property) {
             <!-- HTML form to search properties -->
             <form id="searchForm" class="text-neutral-900 flex gap-2 justify-center w-full">
                 <div class="flex">
-                    <select class="p-1 py-2 w-20 lg:w-36 bg-neutral-300 rounded-lg text-neutral-900" name="location"
-                        id="location">
+                    <select class="p-1 py-2 w-20 lg:w-36 bg-neutral-100 border-2 rounded-lg text-neutral-900"
+                        name="location" id="location">
                         <option value="">Select Location</option>
                         <?php
                         $locationlist = $propertyObj->fetchlocation();
@@ -152,8 +152,8 @@ $filteredProperties = array_map(function ($property) {
                 </div>
 
                 <div class="flex">
-                    <select class="p-1 py-2 w-20 md:w-36 bg-neutral-300 rounded-lg text-neutral-900" name="price"
-                        id="price">
+                    <select class="p-1 py-2 w-20 md:w-36 bg-neutral-100 rounded-lg border-2 text-neutral-900"
+                        name="price" id="price">
                         <option value="">Select Price</option>
                         <?php
                         $pricelist = $propertyObj->fetchprice();
@@ -169,8 +169,9 @@ $filteredProperties = array_map(function ($property) {
                 </div>
 
                 <div class="flex w-1/2 relative">
-                    <input placeholder="Search for a Unit" class="outline-0 p-1 py-2 bg-neutral-300 rounded-lg w-full"
-                        type="text" id="search" name="search" value="<?= htmlspecialchars($search) ?>">
+                    <input placeholder="Search for a Unit"
+                        class="outline-0 p-1 py-2 border-2 bg-neutral-100 rounded-lg w-full" type="text" id="search"
+                        name="search" value="<?= htmlspecialchars($search) ?>">
                     <button id="submit" type="submit" value="Search"
                         class="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer" value="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"

@@ -113,11 +113,11 @@ class Booking
                     $startDate->modify('+1 day'); // Add one day to the date
                 }
             }
-            if (count($disabledDates) > 0) {
-                return $disabledDates;
-            } else {
-                return null;
-            }
+            // if (count($disabledDates) > 0) {
+            return $disabledDates;
+            // } else {
+            //     return null;
+            // }
         } catch (Exception $e) {
             echo $e->getMessage();
         }

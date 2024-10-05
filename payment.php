@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                         <div class="flex-col gap-1 w-full flex">
                             <label for="date" class="text-xs">End Date</label>
-                            <input type="date" name="enddate" id="enddate" readonly
+                            <input type="text" name="enddate" id="enddate" readonly
                                 class="p-2 py-1 border-2 border-neutral-800/30 outline-none rounded-md flex-1" required>
                         </div>
                     </div>
@@ -263,22 +263,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         const enddate = document.getElementById('enddate');
         const sdate = document.getElementById('startdate');
 
-        // automatically calculate the end date
-        // sdate.addEventListener('input', () => {
-        //     let startDate = new Date(sdate.value);
-        //     let endDate = new Date(startDate);
-        //     endDate.setDate(startDate.getDate() + parseInt(day.value) || 1);
-        //     enddate.value = endDate.toISOString().split('T')[0];
-        // }
-        // )
-
-        // day.addEventListener('input', () => {
-        //     let startDate = new Date(sdate.value);
-        //     let endDate = new Date(startDate);
-        //     endDate.setDate(startDate.getDate() + parseInt(day.value) || 1);
-        //     enddate.value = endDate.toISOString().split('T')[0];
-        // }
-        // )
 
         // Update output for number of days and calculate total
         day.addEventListener('input', () => {
